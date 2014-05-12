@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.aboutmycode.openwith.app.settings.NumberPickerDialogPreference
         android:key="timeout"
         android:title="@string/timeout"
         app:min="1"
         android:max="120"
-        app:summaryKey="Launch default app in %s seconds"
+        app:summaryKey="@string/timeoutSummary"
         android:numeric="integer"
-        android:defaultValue="4"
-        android:maxLength="2" />
+        android:defaultValue="4" />
 
 </PreferenceScreen>
