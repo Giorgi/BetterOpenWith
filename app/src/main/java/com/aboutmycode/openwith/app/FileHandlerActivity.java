@@ -95,9 +95,16 @@ public class FileHandlerActivity extends ListActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                autoStart.cancel();
-                paused = true;
-                secondsTextView.setText("Paused");
+                if (paused) {
+                    configureTimer();
+                    pauseButton.setText("Pause");
+                } else {
+                    autoStart.cancel();
+                    pauseButton.setText("Resume");
+                }
+
+                paused = !paused;
+                showTimerStatus();
             }
         });
     }
@@ -151,32 +158,40 @@ public class FileHandlerActivity extends ListActivity {
 
         timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", 4);
 
-        if (paused){
-            secondsTextView.setText("Paused");
-        }else {
-            secondsTextView.setText(String.format("Launching in %s seconds", timeout - elapsed));
-        }
+        showTimerStatus();
 
         if (autoStart == null && !paused) {
-            autoStart = new Timer("AutoStart");
-            autoStart.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    elapsed++;
-
-                    if (elapsed == timeout) {
-                        startSelectedItem(getListView(), 0);
-                    } else {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                secondsTextView.setText(String.format("Launching in %s seconds", timeout - elapsed));
-                            }
-                        });
-                    }
-                }
-            }, 1000, 1000);
+            configureTimer();
         }
+    }
+
+    private void showTimerStatus() {
+        if (paused) {
+            secondsTextView.setText("Paused");
+        } else {
+            secondsTextView.setText(String.format("Launching in %s seconds", timeout - elapsed));
+        }
+    }
+
+    private void configureTimer() {
+        autoStart = new Timer("AutoStart");
+        autoStart.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                elapsed++;
+
+                if (elapsed == timeout) {
+                    startSelectedItem(getListView(), 0);
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            secondsTextView.setText(String.format("Launching in %s seconds", timeout - elapsed));
+                        }
+                    });
+                }
+            }
+        }, 1000, 1000);
     }
 
     @Override
