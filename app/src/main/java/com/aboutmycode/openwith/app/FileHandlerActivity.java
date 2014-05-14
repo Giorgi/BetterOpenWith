@@ -166,4 +166,13 @@ public class FileHandlerActivity extends ListActivity {
 
         pauseButton.setText(String.format("Pause Launch (%s sec.)", timeout - elapsed));
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (isFinishing()){
+            autoStart.cancel();
+        }
+    }
 }
