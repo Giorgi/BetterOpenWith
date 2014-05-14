@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,14 +22,17 @@ import java.util.TimerTask;
 
 
 public class FileHandlerActivity extends ListActivity {
-
-    private ResolveInfoAdapter adapter;
-    private Intent original = new Intent();
     private Timer autoStart;
+
     private Button pauseButton;
+    private TextView secondsTextView;
 
     private int elapsed;
     private int timeout;
+    private boolean paused;
+
+    private ResolveInfoAdapter adapter;
+    private Intent original = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class FileHandlerActivity extends ListActivity {
 
         if (savedInstanceState != null) {
             elapsed = savedInstanceState.getInt("elapsed", 0);
+            paused = savedInstanceState.getBoolean("paused", false);
         }
 
         setContentView(R.layout.file_handler);
@@ -85,12 +90,14 @@ public class FileHandlerActivity extends ListActivity {
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setItemChecked(0, true);
 
+        secondsTextView = (TextView) findViewById(R.id.secondsTextView);
         pauseButton = (Button) findViewById(R.id.pauseButton);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pauseButton.setText("Paused");
                 autoStart.cancel();
+                paused = true;
+                secondsTextView.setText("Paused");
             }
         });
     }
@@ -130,9 +137,10 @@ public class FileHandlerActivity extends ListActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt("elapsed", elapsed);
+        outState.putBoolean("paused", paused);
         super.onSaveInstanceState(outState);
 
-        if (isFinishing() || isChangingConfigurations()) {
+        if (isFinishing() || isChangingConfigurations() && autoStart != null) {
             autoStart.cancel();
         }
     }
@@ -143,7 +151,13 @@ public class FileHandlerActivity extends ListActivity {
 
         timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", 4);
 
-        if (autoStart == null) {
+        if (paused){
+            secondsTextView.setText("Paused");
+        }else {
+            secondsTextView.setText(String.format("Launching in %s seconds", timeout - elapsed));
+        }
+
+        if (autoStart == null && !paused) {
             autoStart = new Timer("AutoStart");
             autoStart.schedule(new TimerTask() {
                 @Override
@@ -156,22 +170,20 @@ public class FileHandlerActivity extends ListActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                pauseButton.setText(String.format("Pause Launch (%s sec.)", timeout - elapsed));
+                                secondsTextView.setText(String.format("Launching in %s seconds", timeout - elapsed));
                             }
                         });
                     }
                 }
             }, 1000, 1000);
         }
-
-        pauseButton.setText(String.format("Pause Launch (%s sec.)", timeout - elapsed));
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        if (isFinishing()){
+        if (isFinishing() && autoStart != null) {
             autoStart.cancel();
         }
     }
