@@ -5,7 +5,6 @@
     android:gravity="center_vertical"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:minHeight="?android:attr/listPreferredItemHeight"
     android:background="?android:attr/activatedBackgroundIndicator">
 
     <!-- Activity icon when presenting dialog
