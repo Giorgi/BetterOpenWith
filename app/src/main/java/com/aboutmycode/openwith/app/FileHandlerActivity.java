@@ -72,6 +72,9 @@ public class FileHandlerActivity extends ListActivity {
 
         adapter = new ResolveInfoAdapter(this, android.R.id.text1, list);
         setListAdapter(adapter);
+        ListView listView = getListView();
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listView.setItemChecked(0, true);
     }
 
     @Override
