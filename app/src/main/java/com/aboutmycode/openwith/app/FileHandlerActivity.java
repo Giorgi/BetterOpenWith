@@ -1,17 +1,15 @@
 package com.aboutmycode.openwith.app;
 
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,10 +25,20 @@ public class FileHandlerActivity extends ListActivity {
     private ResolveInfoAdapter adapter;
     private Intent original = new Intent();
     private Timer autoStart;
+    private Button pauseButton;
+
+    private int elapsed;
+    private int timeout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            elapsed = savedInstanceState.getInt("elapsed", 0);
+        }
+
+        setContentView(R.layout.file_handler);
         setTitle(getString(R.string.complete_action_with));
 
         Intent launchIntent = getIntent();
@@ -72,9 +80,19 @@ public class FileHandlerActivity extends ListActivity {
 
         adapter = new ResolveInfoAdapter(this, android.R.id.text1, list);
         setListAdapter(adapter);
+
         ListView listView = getListView();
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setItemChecked(0, true);
+
+        pauseButton = (Button) findViewById(R.id.pauseButton);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pauseButton.setText("Paused");
+                autoStart.cancel();
+            }
+        });
     }
 
     @Override
@@ -110,25 +128,42 @@ public class FileHandlerActivity extends ListActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt("elapsed", elapsed);
+        super.onSaveInstanceState(outState);
 
-        int timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", 4);
-
-        autoStart = new Timer("AutoStart");
-        autoStart.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                startSelectedItem(getListView(), 0);
-            }
-        }, timeout * 1000);
+        if (isFinishing() || isChangingConfigurations()) {
+            autoStart.cancel();
+        }
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        if (isFinishing()) {
-            autoStart.cancel();
+    protected void onStart() {
+        super.onStart();
+
+        timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", 4);
+
+        if (autoStart == null) {
+            autoStart = new Timer("AutoStart");
+            autoStart.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    elapsed++;
+
+                    if (elapsed == timeout) {
+                        startSelectedItem(getListView(), 0);
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                pauseButton.setText(String.format("Pause Launch (%s sec.)", timeout - elapsed));
+                            }
+                        });
+                    }
+                }
+            }, 1000, 1000);
         }
+
+        pauseButton.setText(String.format("Pause Launch (%s sec.)", timeout - elapsed));
     }
 }

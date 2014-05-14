@@ -13,4 +13,5 @@
     <string name="when_opening">When opening pdf file:</string>
     <string name="timeout">Default app launch time</string>
     <string name="timeoutSummary">Launch default app in %s seconds</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
