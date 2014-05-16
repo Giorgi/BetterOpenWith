@@ -56,13 +56,21 @@ public class FileHandlerActivity extends ListActivity {
         PackageManager packageManager = getPackageManager();
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
 
-        if (resInfo.size() < 1) {
+        //If only one app is found it is us so there is no other app.
+        if (resInfo.size() == 1) {
             Toast.makeText(this, "No application found to open the selected file", Toast.LENGTH_LONG).show();
             finish();
         }
 
-        if (resInfo.size() == 1) {
-            startIntentFromResolveInfo(resInfo.get(0));
+        //If there are two apps start the other one.
+        if (resInfo.size() == 2) {
+            ResolveInfo resolveInfo = resInfo.get(0);
+
+            if (resolveInfo.activityInfo.packageName.equals(getPackageName())) {
+                startIntentFromResolveInfo(resInfo.get(1));
+            } else {
+                startIntentFromResolveInfo(resolveInfo);
+            }
             finish();
         }
 
