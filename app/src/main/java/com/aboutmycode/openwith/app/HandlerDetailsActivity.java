@@ -2,6 +2,7 @@ package com.aboutmycode.openwith.app;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -114,7 +115,7 @@ public class HandlerDetailsActivity extends ListActivity {
 class ResolveInfoDetailsActivityViewBinder implements IBindView<ResolveInfoDisplay> {
 
     @Override
-    public View bind(View row, ResolveInfoDisplay item) {
+    public View bind(View row, ResolveInfoDisplay item, Context context) {
         ImageView image = (ImageView) row.findViewById(R.id.image);
         CheckedTextView checkedTextView = (CheckedTextView) row.findViewById(R.id.resolveCheckBox);
 

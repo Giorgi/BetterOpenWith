@@ -1,29 +1,25 @@
 package com.aboutmycode.openwith.app;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
+import com.aboutmycode.openwith.app.common.adapter.CommonAdapter;
+import com.aboutmycode.openwith.app.common.adapter.IBindView;
 import com.aboutmycode.openwith.app.settings.SettingsActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class MainActivity extends ListActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +32,7 @@ public class MainActivity extends ListActivity {
 
         items.add(pdf);
 
-        getListView().setAdapter(new HandleItemArrayAdapter(this, items));
+        getListView().setAdapter(new CommonAdapter<HandleItem>(this, items, R.layout.handler_types, new HandleItemViewBinder()));
     }
 
     @Override
@@ -63,6 +59,20 @@ public class MainActivity extends ListActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+}
+
+class HandleItemViewBinder implements IBindView<HandleItem> {
+
+    @Override
+    public View bind(View row, HandleItem item, Context context) {
+        TextView textView = (TextView) row.findViewById(R.id.label);
+        ImageView imageView = (ImageView) row.findViewById(R.id.icon);
+
+        textView.setText(item.getName());
+        imageView.setImageDrawable(context.getResources().getDrawable(item.getIcon()));
+
+        return row;
     }
 }
 
