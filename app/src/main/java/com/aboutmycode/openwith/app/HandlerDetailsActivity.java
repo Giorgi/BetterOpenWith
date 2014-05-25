@@ -43,7 +43,7 @@ public class HandlerDetailsActivity extends ListActivity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setIcon(R.drawable.ic_adobe_acrobat);
+        actionBar.setIcon(R.drawable.ic_adobe_acrobat_light);
 
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
