@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 /**
  * Created by Giorgi on 5/10/2014.
  */
-public class ResolveInfoDisplay {
+class ResolveInfoDisplay {
     private CharSequence displayLabel;
     private Drawable displayIcon;
     private ResolveInfo resolveInfo;

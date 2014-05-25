@@ -1,7 +1,9 @@
 package com.aboutmycode.openwith.app;
 
+import android.app.ActivityManager;
 import android.app.ListActivity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -9,10 +11,15 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.aboutmycode.openwith.app.common.adapter.CommonAdapter;
+import com.aboutmycode.openwith.app.common.adapter.IBindView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +38,7 @@ public class FileHandlerActivity extends ListActivity {
     private int timeout;
     private boolean paused;
 
-    private ResolveInfoAdapter adapter;
+    private CommonAdapter<ResolveInfoDisplay> adapter;
     private Intent original = new Intent();
 
     @Override
@@ -91,7 +98,7 @@ public class FileHandlerActivity extends ListActivity {
             list.add(resolveInfoDisplay);
         }
 
-        adapter = new ResolveInfoAdapter(this, android.R.id.text1, list);
+        adapter = new CommonAdapter<ResolveInfoDisplay>(this, list, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder());
         setListAdapter(adapter);
 
         ListView listView = getListView();
@@ -218,5 +225,41 @@ public class FileHandlerActivity extends ListActivity {
         if (isFinishing() && autoStart != null) {
             autoStart.cancel();
         }
+    }
+}
+
+class ResolveInfoDisplayFileHandlerViewBinder implements IBindView<ResolveInfoDisplay> {
+
+    @Override
+    public View bind(View row, ResolveInfoDisplay item, Context context) {
+        Object tag = row.getTag();
+        if (tag == null) {
+            final ViewHolder holder = new ViewHolder(row);
+            row.setTag(holder);
+
+            ActivityManager am = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
+
+            ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
+            lp.width = lp.height = am.getLauncherLargeIconSize();
+
+            tag = holder;
+        }
+
+        ViewHolder holder = (ViewHolder) tag;
+
+        holder.text.setText(item.getDisplayLabel());
+        holder.icon.setImageDrawable(item.getDisplayIcon());
+
+        return row;
+    }
+}
+
+class ViewHolder {
+    public TextView text;
+    public ImageView icon;
+
+    public ViewHolder(View view) {
+        text = (TextView) view.findViewById(android.R.id.text1);
+        icon = (ImageView) view.findViewById(R.id.icon);
     }
 }
