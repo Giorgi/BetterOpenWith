@@ -19,7 +19,7 @@ import com.aboutmycode.openwith.app.settings.SettingsActivity;
 import java.util.ArrayList;
 
 
-public class MainActivity extends ListActivity {
+public class HandlerListActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

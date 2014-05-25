@@ -126,7 +126,7 @@ public class FileHandlerActivity extends ListActivity {
         findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainScreen = new Intent(FileHandlerActivity.this, MainActivity.class);
+                Intent mainScreen = new Intent(FileHandlerActivity.this, HandlerListActivity.class);
                 mainScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(mainScreen);
             }
