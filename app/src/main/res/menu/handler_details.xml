@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.aboutmycode.openwith.app.HandlerDetailsActivity" >
+    <item
+        android:id="@+id/toggleMenu"
+        android:title="disable"
+        android:showAsAction="always"
+        android:actionLayout="@layout/master_switch"
+        />
+</menu>

@@ -14,4 +14,6 @@
     <string name="timeout">Default app launch time</string>
     <string name="timeoutSummary">Launch default app in %s seconds</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_handler_details">HandlerDetailsActivity</string>
+
 </resources>

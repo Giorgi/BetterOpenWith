@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.aboutmycode.openwith.app.common.layout.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingTop="3dip"
+    android:paddingBottom="3dip"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:paddingLeft="2dip"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:layout_width="34dip"
+        android:layout_height="34dip"
+        android:id="@+id/image">
+    </ImageView>
+
+    <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/resolveCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:gravity="center_vertical"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/image"
+        android:layout_alignBaseline="@id/image"
+        />
+</com.aboutmycode.openwith.app.common.layout.CheckableRelativeLayout>
