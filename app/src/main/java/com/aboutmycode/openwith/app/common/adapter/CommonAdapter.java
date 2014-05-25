@@ -37,6 +37,6 @@ public class CommonAdapter<T> extends ArrayAdapter<T> {
 
         T item = items.get(position);
 
-        return rowBinder.bind(rowView, item);
+        return rowBinder.bind(rowView, item, context);
     }
 }
