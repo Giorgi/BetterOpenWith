@@ -30,7 +30,7 @@ public class MainActivity extends ListActivity {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         ArrayList<HandleItem> items = new ArrayList<HandleItem>();
-        HandleItem pdf= new HandleItem();
+        HandleItem pdf = new HandleItem();
         pdf.setName("PDF Files");
         pdf.setIcon(R.drawable.ic_adobe_acrobat);
 
@@ -41,7 +41,8 @@ public class MainActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
-        super.onListItemClick(listView, view, position, id);
+        Intent intent = new Intent(this, HandlerDetailsActivity.class);
+        startActivity(intent);
     }
 
     @Override
