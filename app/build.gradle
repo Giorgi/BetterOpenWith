@@ -21,5 +21,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    // You must install or update the Support Repository through the SDK manager to use this dependency.
+    compile 'nl.qbusict:cupboard:2.0.1'
+    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }
