@@ -39,4 +39,14 @@ public class CommonAdapter<T> extends ArrayAdapter<T> {
 
         return rowBinder.bind(rowView, item, context);
     }
+
+    public void setData(List<T> data) {
+        clear();
+
+        if (data != null) {
+            for (int i = 0; i < data.size(); i++) {
+                add(data.get(i));
+            }
+        }
+    }
 }

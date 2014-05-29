@@ -1,8 +1,12 @@
 package com.aboutmycode.openwith.app;
 
 import android.app.ListActivity;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
+import android.content.res.Resources;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -10,29 +14,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.aboutmycode.openwith.app.common.adapter.CommonAdapter;
 import com.aboutmycode.openwith.app.common.adapter.IBindView;
+import com.aboutmycode.openwith.app.database.CupboardCursorLoader;
+import com.aboutmycode.openwith.app.database.CupboardSQLiteOpenHelper;
 import com.aboutmycode.openwith.app.settings.SettingsActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class HandlerListActivity extends ListActivity {
+public class HandlerListActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
+    private CommonAdapter<HandleItem> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        ArrayList<HandleItem> items = new ArrayList<HandleItem>();
-        HandleItem pdf = new HandleItem();
-        pdf.setName("PDF Files");
-        pdf.setIcon(R.drawable.ic_adobe_acrobat);
+        getLoaderManager().initLoader(0, null, this);
 
-        items.add(pdf);
-
-        getListView().setAdapter(new CommonAdapter<HandleItem>(this, items, R.layout.handler_types, new HandleItemViewBinder()));
+        adapter = new CommonAdapter<HandleItem>(this, new ArrayList<HandleItem>(), R.layout.handler_types, new HandleItemViewBinder());
+        getListView().setAdapter(adapter);
     }
 
     @Override
@@ -60,19 +66,34 @@ public class HandlerListActivity extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public Loader<List<HandleItem>> onCreateLoader(int loaderId, Bundle bundle) {
+        return new CupboardCursorLoader(this, new CupboardSQLiteOpenHelper(this));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<HandleItem>> objectLoader, List<HandleItem> items) {
+        adapter.setData(items);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<HandleItem>> objectLoader) {
+        adapter.setData(null);
+    }
 }
 
 class HandleItemViewBinder implements IBindView<HandleItem> {
-
     @Override
     public View bind(View row, HandleItem item, Context context) {
         TextView textView = (TextView) row.findViewById(R.id.label);
         ImageView imageView = (ImageView) row.findViewById(R.id.icon);
 
-        textView.setText(item.getName());
-        imageView.setImageDrawable(context.getResources().getDrawable(item.getIcon()));
+        Resources resources = context.getResources();
+
+        textView.setText(resources.getString(resources.getIdentifier(item.getNameResource(), "string", R.class.getPackage().getName())));
+        imageView.setImageDrawable(resources.getDrawable(resources.getIdentifier(item.getDarkIconResource(), "drawable", R.class.getPackage().getName())));
 
         return row;
     }
 }
-
