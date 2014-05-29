@@ -44,6 +44,8 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
         Intent intent = new Intent(this, HandlerDetailsActivity.class);
+        HandleItem item = adapter.getItem(position);
+        intent.putExtra("id", item.getId());
         startActivity(intent);
     }
 
