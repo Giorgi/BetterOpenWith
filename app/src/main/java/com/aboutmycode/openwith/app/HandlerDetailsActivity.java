@@ -6,6 +6,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -36,6 +37,8 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private CheckBox skipListCheckBox;
     private Switch masterSwitch;
+    private HandleItem item;
+    private CupboardCursorLoader loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,22 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         if (checkedTextView.isChecked()) {
             listView.setItemChecked(position, false);
         }
-        skipListCheckBox.setEnabled(listView.getCheckedItemCount() > 0);
+
+        boolean defaultSelected = listView.getCheckedItemCount() > 0;
+        skipListCheckBox.setEnabled(defaultSelected);
+
+        if (defaultSelected) {
+            ResolveInfoDisplay adapterItem = adapter.getItem(position);
+            ActivityInfo activityInfo = adapterItem.getResolveInfo().activityInfo;
+
+            item.setPackageName(activityInfo.applicationInfo.packageName);
+            item.setClassName(activityInfo.name);
+        } else {
+            item.setPackageName("");
+            item.setClassName("");
+        }
+
+        loader.update(item);
     }
 
     @Override
@@ -85,12 +103,13 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
     @Override
     public Loader<List<HandleItem>> onCreateLoader(int loaderId, Bundle bundle) {
-        return new CupboardCursorLoader(this, new CupboardSQLiteOpenHelper(this), "_id=?", bundle.getLong("id"));
+        loader = new CupboardCursorLoader(this, new CupboardSQLiteOpenHelper(this), "_id=?", bundle.getLong("id"));
+        return loader;
     }
 
     @Override
     public void onLoadFinished(Loader<List<HandleItem>> listLoader, List<HandleItem> handleItems) {
-        HandleItem item = handleItems.get(0);
+        item = handleItems.get(0);
 
         //region skip list checkbox
         skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
