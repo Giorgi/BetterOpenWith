@@ -111,7 +111,12 @@ public class FileHandlerActivity extends ListActivity {
             index++;
 
             if (info.activityInfo.packageName.equals(item.getPackageName()) && info.activityInfo.name.equals(item.getClassName())) {
-                checked = index;
+                if (item.isSkipList()) {
+                    startIntentFromResolveInfo(info);
+                    return;
+                } else {
+                    checked = index;
+                }
             }
 
             ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
@@ -179,7 +184,9 @@ public class FileHandlerActivity extends ListActivity {
     }
 
     private void startIntentFromResolveInfo(ResolveInfo resolveInfo) {
-        autoStart.cancel();
+        if (autoStart != null) {
+            autoStart.cancel();
+        }
 
         ActivityInfo ai = resolveInfo.activityInfo;
 
