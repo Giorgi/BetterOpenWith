@@ -12,6 +12,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -85,6 +86,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         masterSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                masterSwitch.setChecked(true);
                 Toast.makeText(HandlerDetailsActivity.this, "toggled", Toast.LENGTH_LONG).show();
             }
         });
@@ -117,7 +119,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         //region skip list checkbox
         skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
-        skipListCheckBox.setEnabled(item.getPackageName() != null);
+        skipListCheckBox.setEnabled(!TextUtils.isEmpty(item.getPackageName()));
         skipListCheckBox.setChecked(item.isSkipList());
         skipListCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
