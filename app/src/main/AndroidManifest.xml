@@ -48,6 +48,7 @@
                     android:pathPattern=".*\\.pdf"
                     android:scheme="https" />
             </intent-filter>
+            <meta-data android:name="id" android:value="1" />
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.VideoFileHandlerActivity"

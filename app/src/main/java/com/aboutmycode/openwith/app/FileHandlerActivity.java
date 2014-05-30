@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -20,12 +21,15 @@ import android.widget.Toast;
 
 import com.aboutmycode.openwith.app.common.adapter.CommonAdapter;
 import com.aboutmycode.openwith.app.common.adapter.IBindView;
+import com.aboutmycode.openwith.app.database.CupboardSQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 
 public class FileHandlerActivity extends ListActivity {
@@ -60,7 +64,18 @@ public class FileHandlerActivity extends ListActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(launchIntent.getData(), launchIntent.getType());
 
+        int id = -1;
+
         PackageManager packageManager = getPackageManager();
+        try {
+            ActivityInfo activityInfo = packageManager.getActivityInfo(getComponentName(), PackageManager.GET_META_DATA | PackageManager.GET_ACTIVITIES);
+            id = activityInfo.metaData.getInt("id", -1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        HandleItem item = getHandleItem(id);
+
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
 
         //If only one app is found it is us so there is no other app.
@@ -85,15 +100,24 @@ public class FileHandlerActivity extends ListActivity {
 
         List<ResolveInfoDisplay> list = new ArrayList<ResolveInfoDisplay>();
 
-        for (ResolveInfo item : resInfo) {
-            if (item.activityInfo.packageName.equals(getPackageName())) {
+        int checked = -1;
+        int index = -1;
+
+        for (ResolveInfo info : resInfo) {
+            if (info.activityInfo.packageName.equals(getPackageName())) {
                 continue;
             }
 
+            index++;
+
+            if (info.activityInfo.packageName.equals(item.getPackageName()) && info.activityInfo.name.equals(item.getClassName())) {
+                checked = index;
+            }
+
             ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
-            resolveInfoDisplay.setDisplayLabel(item.loadLabel(packageManager));
-            resolveInfoDisplay.setDisplayIcon(item.loadIcon(packageManager));
-            resolveInfoDisplay.setResolveInfo(item);
+            resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
+            resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
+            resolveInfoDisplay.setResolveInfo(info);
 
             list.add(resolveInfoDisplay);
         }
@@ -103,7 +127,10 @@ public class FileHandlerActivity extends ListActivity {
 
         ListView listView = getListView();
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        listView.setItemChecked(0, true);
+
+        if (checked >= 0) {
+            listView.setItemChecked(checked, true);
+        }
 
         secondsTextView = (TextView) findViewById(R.id.secondsTextView);
         pauseButton = (Button) findViewById(R.id.pauseButton);
@@ -133,15 +160,21 @@ public class FileHandlerActivity extends ListActivity {
         });
     }
 
-    @Override
-    protected void onListItemClick(ListView listView, View v, int position, long id) {
-        startSelectedItem(listView, position);
+    private HandleItem getHandleItem(int id) {
+        CupboardSQLiteOpenHelper dbHelper = new CupboardSQLiteOpenHelper(this);
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        HandleItem item = cupboard().withDatabase(database).get(HandleItem.class, id);
+
+        database.close();
+        dbHelper.close();
+        return item;
     }
 
-    private void startSelectedItem(ListView listView, int position) {
-        ResolveInfoDisplay item = (ResolveInfoDisplay) listView.getItemAtPosition(position);
-
+    @Override
+    protected void onListItemClick(ListView listView, View v, int position, long id) {
+        ResolveInfoDisplay item = adapter.getItem(position);
         ResolveInfo resolveInfo = item.getResolveInfo();
+
         startIntentFromResolveInfo(resolveInfo);
     }
 
@@ -205,7 +238,8 @@ public class FileHandlerActivity extends ListActivity {
                 elapsed++;
 
                 if (elapsed == timeout) {
-                    startSelectedItem(getListView(), 0);
+                    ResolveInfoDisplay item = adapter.getItem(getListView().getCheckedItemPosition());
+                    startIntentFromResolveInfo(item.getResolveInfo());
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
