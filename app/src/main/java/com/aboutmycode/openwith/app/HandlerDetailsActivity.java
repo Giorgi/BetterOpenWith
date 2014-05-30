@@ -109,12 +109,23 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
     @Override
     public void onLoadFinished(Loader<List<HandleItem>> listLoader, List<HandleItem> handleItems) {
+        if (loader == null) {
+            loader = (CupboardCursorLoader) listLoader;
+        }
+
         item = handleItems.get(0);
 
         //region skip list checkbox
         skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
         skipListCheckBox.setEnabled(item.getPackageName() != null);
         skipListCheckBox.setChecked(item.isSkipList());
+        skipListCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                item.setSkipList(skipListCheckBox.isChecked());
+                loader.update(item);
+            }
+        });
         //endregion
 
         //region ActionBar and title
