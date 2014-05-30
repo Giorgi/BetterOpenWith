@@ -245,8 +245,11 @@ public class FileHandlerActivity extends ListActivity {
                 elapsed++;
 
                 if (elapsed == timeout) {
-                    ResolveInfoDisplay item = adapter.getItem(getListView().getCheckedItemPosition());
-                    startIntentFromResolveInfo(item.getResolveInfo());
+                    int checkedItemPosition = getListView().getCheckedItemPosition();
+                    if (checkedItemPosition >= 0) {
+                        ResolveInfoDisplay item = adapter.getItem(checkedItemPosition);
+                        startIntentFromResolveInfo(item.getResolveInfo());
+                    }
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
