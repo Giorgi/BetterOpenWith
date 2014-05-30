@@ -138,9 +138,20 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         List<ResolveInfoDisplay> list = new ArrayList<ResolveInfoDisplay>();
 
-        for (ResolveInfo info : resInfo) {
+        int checked = -1;
+        boolean subtract = false;
+
+        for (int i = 0, resInfoSize = resInfo.size(); i < resInfoSize; i++) {
+            ResolveInfo info = resInfo.get(i);
             if (info.activityInfo.packageName.equals(getPackageName())) {
+                if (checked < 0) {
+                    subtract = true;
+                }
                 continue;
+            }
+
+            if (info.activityInfo.packageName.equals(item.getPackageName()) && info.activityInfo.name.equals(item.getClassName())) {
+                checked = i;
             }
 
             ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
@@ -153,6 +164,11 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         adapter = new CommonAdapter<ResolveInfoDisplay>(this, list, R.layout.resolve_info_checkable, new ResolveInfoDetailsActivityViewBinder());
         setListAdapter(adapter);
+
+        if (checked >= 0) {
+            checked -= subtract ? 1 : 0;
+            getListView().setItemChecked(checked, true);
+        }
         //endregion
     }
 
