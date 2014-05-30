@@ -2,6 +2,7 @@ package com.aboutmycode.openwith.app.database;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.aboutmycode.openwith.app.HandleItem;
@@ -58,6 +59,8 @@ public class CupboardCursorLoader extends AbstractListLoader<HandleItem> {
     }
 
     public void update(HandleItem item){
-        cupboard().withDatabase(db.getWritableDatabase()).put(item);
+        SQLiteDatabase database = db.getWritableDatabase();
+        cupboard().withDatabase(database).put(item);
+        database.close();
     }
 }
