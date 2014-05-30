@@ -56,4 +56,8 @@ public class CupboardCursorLoader extends AbstractListLoader<HandleItem> {
         db.close();
         return result;
     }
+
+    public void update(HandleItem item){
+        cupboard().withDatabase(db.getWritableDatabase()).put(item);
+    }
 }
