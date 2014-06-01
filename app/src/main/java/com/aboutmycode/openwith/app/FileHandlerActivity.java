@@ -155,10 +155,13 @@ public class FileHandlerActivity extends ListActivity {
             }
         });
 
+        final long finalId = id;
+
         findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainScreen = new Intent(FileHandlerActivity.this, HandlerListActivity.class);
+                Intent mainScreen = new Intent(FileHandlerActivity.this, HandlerDetailsActivity.class);
+                mainScreen.putExtra("id", finalId);
                 mainScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(mainScreen);
             }
