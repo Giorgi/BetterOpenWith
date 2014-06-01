@@ -162,7 +162,6 @@ public class FileHandlerActivity extends ListActivity {
             public void onClick(View view) {
                 Intent mainScreen = new Intent(FileHandlerActivity.this, HandlerDetailsActivity.class);
                 mainScreen.putExtra("id", finalId);
-                mainScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(mainScreen);
             }
         });

@@ -97,6 +97,10 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
+            Intent upIntent = new Intent(this, HandlerListActivity.class);
+            upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            upIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(upIntent);
             finish();
             return true;
         }
