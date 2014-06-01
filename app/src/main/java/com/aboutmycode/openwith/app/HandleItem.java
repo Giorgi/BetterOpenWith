@@ -7,6 +7,8 @@ public class HandleItem {
     private String darkIconResource;
     private String lightIconResource;
 
+    private String appComponentName;
+
     private String intentData;
     private String intentType;
 
@@ -103,5 +105,13 @@ public class HandleItem {
 
     public void setSkipList(boolean skipList) {
         this.skipList = skipList;
+    }
+
+    public String getAppComponentName() {
+        return appComponentName;
+    }
+
+    public void setAppComponentName(String appComponentName) {
+        this.appComponentName = appComponentName;
     }
 }

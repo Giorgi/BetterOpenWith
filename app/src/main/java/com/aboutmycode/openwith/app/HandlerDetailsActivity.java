@@ -3,6 +3,7 @@ package com.aboutmycode.openwith.app;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.LoaderManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
@@ -81,13 +82,21 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         getMenuInflater().inflate(R.menu.handler_details, menu);
 
         masterSwitch = (Switch) menu.findItem(R.id.toggleMenu).getActionView().findViewById(R.id.toggleSwitch);
-        masterSwitch.setChecked(true);
+        if (item != null) {
+            masterSwitch.setChecked(item.isEnabled());
+        }
 
         masterSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                masterSwitch.setChecked(true);
-                Toast.makeText(HandlerDetailsActivity.this, "toggled", Toast.LENGTH_LONG).show();
+                boolean checked = masterSwitch.isChecked();
+                item.setEnabled(checked);
+                loader.update(item);
+
+                PackageManager packageManager = getPackageManager();
+                int state = checked ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+                ComponentName component = new ComponentName(HandlerDetailsActivity.this, item.getAppComponentName());
+                packageManager.setComponentEnabledSetting(component, state, PackageManager.DONT_KILL_APP);
             }
         });
         return true;
@@ -120,6 +129,10 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         }
 
         item = handleItems.get(0);
+
+        if (masterSwitch != null) {
+            masterSwitch.setChecked(item.isEnabled());
+        }
 
         //region skip list checkbox
         skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
