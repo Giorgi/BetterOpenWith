@@ -22,7 +22,8 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.aboutmycode.openwith.app.common.adapter.CommonAdapter;
 import com.aboutmycode.openwith.app.common.adapter.IBindView;
@@ -41,11 +42,13 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     private Switch masterSwitch;
     private HandleItem item;
     private CupboardCursorLoader loader;
+    private ViewFlipper flipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.handler_details);
+        flipper = (ViewFlipper) findViewById(R.id.view_flipper);
 
         getLoaderManager().initLoader(1, getIntent().getExtras(), this);
 
@@ -83,7 +86,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         masterSwitch = (Switch) menu.findItem(R.id.toggleMenu).getActionView().findViewById(R.id.toggleSwitch);
         if (item != null) {
-            masterSwitch.setChecked(item.isEnabled());
+            initializeMasterSwitch();
         }
 
         masterSwitch.setOnClickListener(new View.OnClickListener() {
@@ -97,9 +100,22 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
                 int state = checked ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
                 ComponentName component = new ComponentName(HandlerDetailsActivity.this, item.getAppComponentName());
                 packageManager.setComponentEnabledSetting(component, state, PackageManager.DONT_KILL_APP);
+
+                flipper.showNext();
             }
         });
         return true;
+    }
+
+    private void initializeMasterSwitch() {
+        boolean enabled = item.isEnabled();
+        masterSwitch.setChecked(enabled);
+
+        if (enabled) {
+            flipper.setDisplayedChild(0);
+        } else {
+            flipper.setDisplayedChild(1);
+        }
     }
 
     @Override
@@ -131,7 +147,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         item = handleItems.get(0);
 
         if (masterSwitch != null) {
-            masterSwitch.setChecked(item.isEnabled());
+            initializeMasterSwitch();
         }
 
         //region skip list checkbox
@@ -150,12 +166,16 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         //region ActionBar and title
         Resources resources = getResources();
 
-        setTitle(resources.getString(resources.getIdentifier(item.getNameResource(), "string", R.class.getPackage().getName())));
+        String title = resources.getString(resources.getIdentifier(item.getNameResource(), "string", R.class.getPackage().getName()));
+        setTitle(title);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setIcon(resources.getDrawable(resources.getIdentifier(item.getLightIconResource(), "drawable", R.class.getPackage().getName())));
         //endregion
+
+        TextView disabledTextView = (TextView) findViewById(R.id.disabledTextView);
+        disabledTextView.setText(String.format("%s will not be handled with Auto Open With", title));
 
         //region application list
         Intent intent = new Intent(Intent.ACTION_VIEW);

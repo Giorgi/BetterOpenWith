@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_flipper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="10dp"
-    android:paddingBottom="5dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Select Default App"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <include
-        layout="@android:layout/list_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_above="@+id/skipListCheckBox"
-        android:layout_below="@+id/textView" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start default app without showing list"
-        android:id="@+id/skipListCheckBox"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Select Default App"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</RelativeLayout>
+        <include
+            layout="@android:layout/list_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/skipListCheckBox"
+            android:layout_below="@+id/textView" />
+
+        <CheckBox
+            android:id="@+id/skipListCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Start default app without showing list" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/disabledTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Pdf Files will not be handled with Auto Open With"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center" />
+    </LinearLayout>
+</ViewFlipper>
