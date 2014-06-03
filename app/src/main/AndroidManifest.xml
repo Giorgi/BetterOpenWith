@@ -162,6 +162,7 @@
                 <data android:pathPattern=".*\\.midi" />
                 <data android:pathPattern=".*\\.mpa" />
             </intent-filter>
+            <meta-data android:name="id" android:value="2" />
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.AudioStreamHandlerActivity"
