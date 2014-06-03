@@ -1,9 +1,12 @@
 package com.aboutmycode.openwith.app;
 
+import nl.qbusict.cupboard.annotation.Ignore;
+
 public class HandleItem {
     private long _id;
 
     private String nameResource;
+    private transient String name;
     private String darkIconResource;
     private String lightIconResource;
 
@@ -113,5 +116,13 @@ public class HandleItem {
 
     public void setAppComponentName(String appComponentName) {
         this.appComponentName = appComponentName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

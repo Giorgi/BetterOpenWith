@@ -24,6 +24,8 @@ import com.aboutmycode.openwith.app.database.CupboardSQLiteOpenHelper;
 import com.aboutmycode.openwith.app.settings.SettingsActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -76,6 +78,12 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
     @Override
     public void onLoadFinished(Loader<List<HandleItem>> objectLoader, List<HandleItem> items) {
+        Collections.sort(items, new Comparator<HandleItem>() {
+            @Override
+            public int compare(HandleItem item, HandleItem item2) {
+                return item.getName().compareTo(item2.getName());
+            }
+        });
         adapter.setData(items);
     }
 
@@ -93,7 +101,7 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
 
         Resources resources = context.getResources();
 
-        textView.setText(resources.getString(resources.getIdentifier(item.getNameResource(), "string", R.class.getPackage().getName())));
+        textView.setText(item.getName());
         imageView.setImageDrawable(resources.getDrawable(resources.getIdentifier(item.getDarkIconResource(), "drawable", R.class.getPackage().getName())));
 
         return row;

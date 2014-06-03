@@ -1,11 +1,13 @@
 package com.aboutmycode.openwith.app.database;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.aboutmycode.openwith.app.HandleItem;
+import com.aboutmycode.openwith.app.R;
 import com.aboutmycode.openwith.app.common.AbstractListLoader;
 
 import java.util.AbstractList;
@@ -40,7 +42,7 @@ public class CupboardCursorLoader extends AbstractListLoader<HandleItem> {
     @Override
     protected List<HandleItem> buildList() {
         DatabaseCompartment.QueryBuilder<HandleItem> query = cupboard().withDatabase(db.getReadableDatabase())
-                                                                .query(HandleItem.class);
+                .query(HandleItem.class);
 
         if (criteria != null) {
             query = query.withSelection(criteria, String.valueOf(id));
@@ -50,7 +52,10 @@ public class CupboardCursorLoader extends AbstractListLoader<HandleItem> {
 
         List<HandleItem> result = new ArrayList<HandleItem>();
 
+        Resources resources = super.getContext().getResources();
+
         for (HandleItem handleItem : iterable) {
+            handleItem.setName(resources.getString(resources.getIdentifier(handleItem.getNameResource(), "string", R.class.getPackage().getName())));
             result.add(handleItem);
         }
         iterable.close();
@@ -58,7 +63,7 @@ public class CupboardCursorLoader extends AbstractListLoader<HandleItem> {
         return result;
     }
 
-    public void update(HandleItem item){
+    public void update(HandleItem item) {
         SQLiteDatabase database = db.getWritableDatabase();
         cupboard().withDatabase(database).put(item);
         database.close();

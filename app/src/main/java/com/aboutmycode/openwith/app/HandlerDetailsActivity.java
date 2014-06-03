@@ -179,7 +179,14 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         //region application list
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.parse(item.getIntentData()), item.getIntentType());
+        String intentData = item.getIntentData();
+
+        if (TextUtils.isEmpty(intentData)) {
+            intent.setType(item.getIntentType());
+        } else {
+            intent.setDataAndType(Uri.parse(intentData), item.getIntentType());
+        }
+
 
         PackageManager packageManager = getPackageManager();
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
