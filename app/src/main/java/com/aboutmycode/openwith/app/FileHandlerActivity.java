@@ -306,6 +306,6 @@ class ViewHolder {
 
     public ViewHolder(View view) {
         text = (TextView) view.findViewById(android.R.id.text1);
-        icon = (ImageView) view.findViewById(R.id.icon);
+        icon = (ImageView) view.findViewById(R.id.targetIcon);
     }
 }

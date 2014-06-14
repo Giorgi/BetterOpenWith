@@ -9,7 +9,7 @@
 
     <!-- Activity icon when presenting dialog
          Size will be filled in by ResolverActivity -->
-    <ImageView android:id="@+id/icon"
+    <ImageView android:id="@+id/targetIcon"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="12dp"

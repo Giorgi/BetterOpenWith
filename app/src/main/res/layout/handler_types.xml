@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/targetIcon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </ImageView>
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_marginRight="5dp"
+        android:baselineAlignBottom="false"
+        android:src="@drawable/ic_adobe_acrobat"></ImageView>
 
     <TextView
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@+id/label"
-        android:textAppearance="?android:textAppearanceMedium" >
-    </TextView>
+        android:layout_toRightOf="@id/targetIcon"
+        android:gravity="center_vertical"
+        android:text="label goes here"
+        android:textAppearance="?android:textAppearanceMedium"></TextView>
 
-</LinearLayout>
+    <TextView
+        android:id="@id/selectedAppLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label"
+        android:layout_alignLeft="@id/label"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+</RelativeLayout>
