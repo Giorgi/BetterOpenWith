@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Resources;
-import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.aboutmycode.openwith.app.common.adapter.CommonAdapter;
@@ -37,10 +36,15 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        getLoaderManager().initLoader(0, null, this);
-
         adapter = new CommonAdapter<HandleItem>(this, new ArrayList<HandleItem>(), R.layout.handler_types, new HandleItemViewBinder());
         getListView().setAdapter(adapter);
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     @Override
@@ -97,12 +101,23 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
     @Override
     public View bind(View row, HandleItem item, Context context) {
         TextView textView = (TextView) row.findViewById(R.id.label);
-        ImageView imageView = (ImageView) row.findViewById(R.id.icon);
+        TextView selectedAppTextView = (TextView) row.findViewById(R.id.selectedAppLabel);
+        ImageView imageView = (ImageView) row.findViewById(R.id.targetIcon);
 
         Resources resources = context.getResources();
 
         textView.setText(item.getName());
-        imageView.setImageDrawable(resources.getDrawable(resources.getIdentifier(item.getDarkIconResource(), "drawable", R.class.getPackage().getName())));
+        Drawable drawable = resources.getDrawable(resources.getIdentifier(item.getDarkIconResource(), "drawable", R.class.getPackage().getName()));
+        //textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+        imageView.setImageDrawable(drawable);
+
+        Drawable selectedAppIcon = item.getSelectedAppIcon();
+        if (selectedAppIcon != null) {
+            selectedAppTextView.setText(item.getSelectedAppLabel());
+
+            selectedAppIcon.setBounds(0, 0, 32, 32);
+            selectedAppTextView.setCompoundDrawables(selectedAppIcon, null, null, null);
+        }
 
         return row;
     }

@@ -1,6 +1,6 @@
 package com.aboutmycode.openwith.app;
 
-import nl.qbusict.cupboard.annotation.Ignore;
+import android.graphics.drawable.Drawable;
 
 public class HandleItem {
     private long _id;
@@ -19,6 +19,18 @@ public class HandleItem {
 
     private String packageName;
     private String className;
+
+    private transient String selectedAppLabel;
+    private transient Drawable selectedAppIcon;
+
+    public String getSelectedAppLabel() {
+        return selectedAppLabel;
+    }
+
+    public void setSelectedAppLabel(String selectedAppLabel) {
+        this.selectedAppLabel = selectedAppLabel;
+    }
+
     private boolean installed;
     private boolean skipList;
 
@@ -124,5 +136,13 @@ public class HandleItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Drawable getSelectedAppIcon() {
+        return selectedAppIcon;
+    }
+
+    public void setSelectedAppIcon(Drawable selectedAppIcon) {
+        this.selectedAppIcon = selectedAppIcon;
     }
 }
