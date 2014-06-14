@@ -15,9 +15,9 @@ import java.util.List;
 abstract public class AbstractListLoader<T> extends AsyncTaskLoader<List<T>> {
     abstract protected List<T> buildList();
 
-    List<T> lastList = null;
+    private List<T> lastList = null;
 
-    public AbstractListLoader(Context context) {
+    protected AbstractListLoader(Context context) {
         super(context);
     }
 

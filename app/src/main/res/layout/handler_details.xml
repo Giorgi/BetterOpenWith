@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="Select Preferred App"
+            android:text="@string/select_preferred_app"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <include
@@ -46,7 +46,6 @@
             android:id="@+id/disabledTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:text="Pdf Files will not be handled with Auto Open With"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center" />

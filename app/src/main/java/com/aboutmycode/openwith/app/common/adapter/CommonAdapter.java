@@ -15,7 +15,7 @@ public class CommonAdapter<T> extends ArrayAdapter<T> {
 
     private final Context context;
     private final List<T> items;
-    private int layout;
+    private final int layout;
     private final IBindView<T> rowBinder;
 
     public CommonAdapter(Context context, List<T> items, int layout, IBindView<T> rowBinder) {
@@ -44,8 +44,8 @@ public class CommonAdapter<T> extends ArrayAdapter<T> {
         clear();
 
         if (data != null) {
-            for (int i = 0; i < data.size(); i++) {
-                add(data.get(i));
+            for (T aData : data) {
+                add(aData);
             }
         }
     }

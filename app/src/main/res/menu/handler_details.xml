@@ -4,7 +4,7 @@
     tools:context="com.aboutmycode.openwith.app.HandlerDetailsActivity" >
     <item
         android:id="@+id/toggleMenu"
-        android:title="disable"
+        android:title="@string/disable"
         android:showAsAction="always"
         android:actionLayout="@layout/master_switch"
         />

@@ -135,6 +135,8 @@ public class FileHandlerActivity extends ListActivity {
 
         if (checked >= 0) {
             listView.setItemChecked(checked, true);
+        } else {
+            listView.setItemChecked(0, true);
         }
 
         secondsTextView = (TextView) findViewById(R.id.secondsTextView);
@@ -144,10 +146,10 @@ public class FileHandlerActivity extends ListActivity {
             public void onClick(View view) {
                 if (paused) {
                     configureTimer();
-                    pauseButton.setText("Pause");
+                    pauseButton.setText(getString(R.string.pause));
                 } else {
                     autoStart.cancel();
-                    pauseButton.setText("Resume");
+                    pauseButton.setText(getString(R.string.resume));
                 }
 
                 paused = !paused;
@@ -233,9 +235,9 @@ public class FileHandlerActivity extends ListActivity {
 
     private void showTimerStatus() {
         if (paused) {
-            secondsTextView.setText("Paused");
+            secondsTextView.setText(getString(R.string.paused));
         } else {
-            secondsTextView.setText(String.format("Launching in %s seconds", timeout - elapsed));
+            secondsTextView.setText(String.format(getString(R.string.launching_in), timeout - elapsed));
         }
     }
 
@@ -256,7 +258,7 @@ public class FileHandlerActivity extends ListActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            secondsTextView.setText(String.format("Launching in %s seconds", timeout - elapsed));
+                            secondsTextView.setText(String.format(getString(R.string.launching_in), timeout - elapsed));
                         }
                     });
                 }
@@ -283,7 +285,7 @@ class ResolveInfoDisplayFileHandlerViewBinder implements IBindView<ResolveInfoDi
             final ViewHolder holder = new ViewHolder(row);
             row.setTag(holder);
 
-            ActivityManager am = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
+            ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 
             ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
             lp.width = lp.height = am.getLauncherLargeIconSize();

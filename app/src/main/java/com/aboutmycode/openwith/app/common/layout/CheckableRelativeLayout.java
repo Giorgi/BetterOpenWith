@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-public class CheckableRelativeLayout extends RelativeLayout implements Checkable {
+class CheckableRelativeLayout extends RelativeLayout implements Checkable {
 
     /**
      * Interface definition for a callback to be invoked when the checked state of this View is
@@ -33,7 +33,7 @@ public class CheckableRelativeLayout extends RelativeLayout implements Checkable
     private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
 
     private boolean isChecked = false;
-    ArrayList<Checkable> checkableViews = new ArrayList<Checkable>(8);
+    private final ArrayList<Checkable> checkableViews = new ArrayList<Checkable>(8);
 
     private OnCheckedChangeListener mOnCheckedChangeListener;
 
