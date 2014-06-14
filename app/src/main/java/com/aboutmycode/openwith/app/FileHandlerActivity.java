@@ -236,8 +236,10 @@ public class FileHandlerActivity extends ListActivity {
     private void showTimerStatus() {
         if (paused) {
             secondsTextView.setText(getString(R.string.paused));
+            pauseButton.setText(getString(R.string.resume));
         } else {
             secondsTextView.setText(String.format(getString(R.string.launching_in), timeout - elapsed));
+            pauseButton.setText(getString(R.string.pause));
         }
     }
 
