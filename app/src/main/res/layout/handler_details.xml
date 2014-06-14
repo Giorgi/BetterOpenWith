@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="Select Default App"
+            android:text="Select Preferred App"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <include
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Start default app without showing list" />
+            android:text="Start preffered app without showing list" />
 
     </RelativeLayout>
 
