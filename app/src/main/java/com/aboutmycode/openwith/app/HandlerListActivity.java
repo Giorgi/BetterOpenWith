@@ -108,11 +108,13 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
 
         textView.setText(item.getName());
         Drawable drawable = resources.getDrawable(resources.getIdentifier(item.getDarkIconResource(), "drawable", R.class.getPackage().getName()));
-        //textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         imageView.setImageDrawable(drawable);
 
         Drawable selectedAppIcon = item.getSelectedAppIcon();
-        if (selectedAppIcon != null) {
+        if (selectedAppIcon == null) {
+            selectedAppTextView.setText("Preferred app not configured.");
+            selectedAppTextView.setCompoundDrawables(null, null, null, null);
+        } else {
             selectedAppTextView.setText(item.getSelectedAppLabel());
 
             selectedAppIcon.setBounds(0, 0, 32, 32);
