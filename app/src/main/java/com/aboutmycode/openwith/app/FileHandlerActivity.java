@@ -135,6 +135,7 @@ public class FileHandlerActivity extends ListActivity {
 
         if (checked >= 0) {
             listView.setItemChecked(checked, true);
+            listView.setSelection(checked);
         } else {
             listView.setItemChecked(0, true);
         }
