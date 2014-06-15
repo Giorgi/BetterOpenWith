@@ -77,6 +77,7 @@
                 <data android:pathPattern=".*\\.mpg" />
                 <data android:pathPattern=".*\\.mpeg" />
                 <data android:pathPattern=".*\\.mkv" />
+                <data android:pathPattern=".*\\.mp4" />
                 <data android:pathPattern=".*\\.mov" />
                 <data android:pathPattern=".*\\.ogg" />
                 <data android:pathPattern=".*\\.wmv" />
@@ -89,6 +90,7 @@
                 <data android:pathPattern=".*\\.webm" />
                 <data android:pathPattern=".*\\.rm" />
             </intent-filter>
+            <meta-data android:name="id" android:value="4" />
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.VideoStreamHandlerActivity"

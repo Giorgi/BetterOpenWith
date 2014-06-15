@@ -2,5 +2,6 @@
 <resources>
     <string name="pdf">PDF Files</string>
     <string name="audio">Audio Files</string>
+    <string name="video">Video Files</string>
     <string name="audio_stream">Audio Stream</string>
 </resources>
