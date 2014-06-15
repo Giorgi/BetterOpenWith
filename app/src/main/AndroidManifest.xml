@@ -177,6 +177,7 @@
                 <data android:scheme="https" />
                 <data android:mimeType="audio/*" />
             </intent-filter>
+            <meta-data android:name="id" android:value="3" />
         </activity-alias>
 
         <activity
