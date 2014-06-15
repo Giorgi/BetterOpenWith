@@ -134,6 +134,7 @@
                 <data android:pathPattern=".*\\.bmp" />
                 <data android:pathPattern=".*\\.webp" />
             </intent-filter>
+            <meta-data android:name="id" android:value="6" />
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.AudioFileHandlerActivity"
