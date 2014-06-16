@@ -4,6 +4,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nl.qbusict/cupboard/2.0.1/b0169597ee271fc13fcbe0de94817e80cea2a614/cupboard-2.0.1.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nl.qbusict/cupboard/2.0.1/ce5113e6c52cd126ac0c1c33e7ac4e6084556a07/cupboard-2.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
