@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-class CheckableRelativeLayout extends RelativeLayout implements Checkable {
+public class CheckableRelativeLayout extends RelativeLayout implements Checkable {
 
     /**
      * Interface definition for a callback to be invoked when the checked state of this View is
