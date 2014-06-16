@@ -58,8 +58,11 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
-        CheckedTextView checkedTextView = (CheckedTextView) view.findViewById(R.id.resolveCheckBox);
-        if (checkedTextView.isChecked()) {
+        ResolveInfoDisplay adapterItem = adapter.getItem(position);
+        ActivityInfo activityInfo = adapterItem.getResolveInfo().activityInfo;
+
+        if (activityInfo.name.equals(item.getClassName())){
+            //We clicked on already checked item
             listView.setItemChecked(position, false);
         }
 
@@ -67,9 +70,6 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         skipListCheckBox.setEnabled(defaultSelected);
 
         if (defaultSelected) {
-            ResolveInfoDisplay adapterItem = adapter.getItem(position);
-            ActivityInfo activityInfo = adapterItem.getResolveInfo().activityInfo;
-
             item.setPackageName(activityInfo.applicationInfo.packageName);
             item.setClassName(activityInfo.name);
         } else {
