@@ -2,11 +2,13 @@ package com.aboutmycode.openwith.app;
 
 import android.app.ListActivity;
 import android.app.LoaderManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -72,7 +74,30 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
+
+        if (id == R.id.action_feedback) {
+            SendFeedbackEmail();
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void SendFeedbackEmail() {
+        String address = "android@aboutmycode.com";
+        String subject = "Feedback for Better Open With";
+        Uri mailto = Uri.fromParts("mailto", address, null);
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, mailto);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        try {
+            startActivity(emailIntent);
+        } catch (ActivityNotFoundException e) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_EMAIL, address);
+            intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+            startActivity(intent);
+        }
     }
 
     @Override
