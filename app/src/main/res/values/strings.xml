@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Auto Open With</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -19,5 +18,5 @@
     <string name="disable">disable</string>
     <string name="select_preferred_app">Select Preferred App</string>
     <string name="action_feedback">Send feedback</string>
-
+    <string name="crashToast">Please send the error report by clicking send in your email client</string>
 </resources>

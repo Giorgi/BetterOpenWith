@@ -22,5 +22,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'nl.qbusict:cupboard:2.0.1'
+    compile 'ch.acra:acra:4.5.0'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }
