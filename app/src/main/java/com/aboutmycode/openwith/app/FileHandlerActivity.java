@@ -1,7 +1,7 @@
 package com.aboutmycode.openwith.app;
 
+import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -32,7 +34,7 @@ import java.util.TimerTask;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 
-public class FileHandlerActivity extends ListActivity {
+public class FileHandlerActivity extends Activity implements AdapterView.OnItemClickListener {
     private Timer autoStart;
 
     private Button pauseButton;
@@ -44,6 +46,7 @@ public class FileHandlerActivity extends ListActivity {
 
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private Intent original = new Intent();
+    private AbsListView adapterView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class FileHandlerActivity extends ListActivity {
 
         setContentView(R.layout.file_handler);
         setTitle(getString(R.string.complete_action_with));
+
+        findViewById(R.id.listInclude).setVisibility(View.GONE);
 
         Intent launchIntent = getIntent();
 
@@ -128,17 +133,19 @@ public class FileHandlerActivity extends ListActivity {
         }
 
         adapter = new CommonAdapter<ResolveInfoDisplay>(this, list, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder());
-        setListAdapter(adapter);
+        adapterView = (AbsListView) findViewById(R.id.gridView);
+        adapterView.setAdapter(adapter);
 
-        ListView listView = getListView();
-        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        adapterView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         if (checked >= 0) {
-            listView.setItemChecked(checked, true);
-            listView.setSelection(checked);
+            adapterView.setItemChecked(checked, true);
+            adapterView.setSelection(checked);
         } else {
-            listView.setItemChecked(0, true);
+            adapterView.setItemChecked(0, true);
         }
+
+        adapterView.setOnItemClickListener(this);
 
         secondsTextView = (TextView) findViewById(R.id.secondsTextView);
         pauseButton = (Button) findViewById(R.id.pauseButton);
@@ -181,7 +188,7 @@ public class FileHandlerActivity extends ListActivity {
     }
 
     @Override
-    protected void onListItemClick(ListView listView, View v, int position, long id) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         ResolveInfoDisplay item = adapter.getItem(position);
         ResolveInfo resolveInfo = item.getResolveInfo();
 
@@ -252,7 +259,7 @@ public class FileHandlerActivity extends ListActivity {
                 elapsed++;
 
                 if (elapsed == timeout) {
-                    int checkedItemPosition = getListView().getCheckedItemPosition();
+                    int checkedItemPosition = adapterView.getCheckedItemPosition();
                     if (checkedItemPosition >= 0) {
                         ResolveInfoDisplay item = adapter.getItem(checkedItemPosition);
                         startIntentFromResolveInfo(item.getResolveInfo());

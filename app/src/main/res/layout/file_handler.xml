@@ -7,10 +7,18 @@
 
     <include
         layout="@android:layout/list_content"
+        android:id="@+id/listInclude"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_above="@+id/action_container" />
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:numColumns="2" />
 
     <LinearLayout
         android:layout_width="match_parent"
