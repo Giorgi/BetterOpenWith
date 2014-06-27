@@ -196,6 +196,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
         </activity>
+        <activity android:name=".AboutActivity" android:label="@string/action_about"></activity>
     </application>
 
 </manifest>
