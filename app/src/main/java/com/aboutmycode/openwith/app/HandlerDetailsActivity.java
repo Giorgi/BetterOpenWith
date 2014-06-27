@@ -175,7 +175,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         //endregion
 
         TextView disabledTextView = (TextView) findViewById(R.id.disabledTextView);
-        disabledTextView.setText(String.format("%s will not be handled with Auto Open With", title));
+        disabledTextView.setText(String.format("%s will not be handled with %s", title, getString(R.string.app_name)));
 
         //region application list
         Intent intent = new Intent(Intent.ACTION_VIEW);

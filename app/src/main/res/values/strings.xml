@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Auto Open With</string>
+    <string name="app_name">Better Open With</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_file_handler">Auto Open With</string>
+    <string name="title_activity_file_handler">Better Open With</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="complete_action_with">Complete Action With</string>
     <string name="timeout">Default app launch time</string>
