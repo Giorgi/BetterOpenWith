@@ -11,6 +11,6 @@
         android:max="120"
         app:summaryKey="@string/timeoutSummary"
         android:numeric="integer"
-        android:defaultValue="4" />
+        android:defaultValue="5" />
 
 </PreferenceScreen>
