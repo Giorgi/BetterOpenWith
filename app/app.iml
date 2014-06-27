@@ -63,6 +63,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="sqliteassethelper-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="cupboard-2.0.1" level="project" />
+    <orderEntry type="library" exported="" name="acra-4.5.0" level="project" />
   </component>
 </module>
 
