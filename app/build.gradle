@@ -8,12 +8,33 @@ android {
         minSdkVersion 15
         targetSdkVersion 19
         versionCode 1
-        versionName "1.0"
+        versionName "0.2 Beta"
     }
+
+    final Console console = System.console();
+    if (console != null) {
+        // Building from console
+        signingConfigs {
+            release {
+                storeFile file(console.readLine("Enter keystore path: "))
+                storePassword console.readLine("Enter keystore password: ")
+                keyAlias console.readLine("Enter alias key: ")
+                keyPassword console.readLine("Enter key password: ")
+            }
+        }
+    } else {
+        // Building from IDE's "Run" button
+        signingConfigs {
+            release {
+            }
+        }
+    }
+
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
     }
 }
