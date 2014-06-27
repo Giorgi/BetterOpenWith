@@ -41,13 +41,12 @@
             android:layout_weight="5"
             android:text="@string/pause" />
 
-        <Button
+        <ImageButton
             android:id="@+id/settingsButton"
             style="?android:buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:drawableLeft="@drawable/ic_action_settings"
-            android:text="@string/settings" />
+            android:src="@drawable/ic_action_settings" />
     </LinearLayout>
 </LinearLayout>
