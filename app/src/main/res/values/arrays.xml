@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="layouts">
+        <item>@string/list</item>
+        <item>@string/grid</item>
+    </string-array>
+    <string-array name="layout_values">
+        <item>@string/listValue</item>
+        <item>@string/gridValue</item>
+    </string-array>
+    <string name="listValue">0</string>
+    <string name="gridValue">1</string>
+</resources>
