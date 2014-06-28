@@ -29,4 +29,10 @@
     <string name="list">List</string>
     <string name="grid">Grid</string>
     <string name="layout_summary">Available apps will be displayed as %s</string>
+    <string name="select_columns">Select number of columns</string>
+    <string name="column_number">Number of columns in grid</string>
+    <string name="iconOnly">Show app icon only without name</string>
+    <string name="textSize">Text size</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
 </resources>

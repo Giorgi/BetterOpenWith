@@ -16,11 +16,31 @@
         android:key="pref_key_popup_layout_group"
         android:title="@string/popup_options">
         <com.aboutmycode.openwith.app.settings.WorkingListPreference
-            android:key="layout"
-            android:title="@string/layout"
+            android:defaultValue="@string/listValue"
             android:entries="@array/layouts"
             android:entryValues="@array/layout_values"
+            android:key="layout"
             android:summary="@string/layout_summary"
-            android:defaultValue="@string/listValue"/>
+            android:title="@string/layout" />
+        <com.aboutmycode.openwith.app.settings.NumberPickerDialogPreference
+            android:defaultValue="@integer/default_columns"
+            android:dialogMessage="@string/select_columns"
+            android:key="gridColumns"
+            android:max="10"
+            android:numeric="integer"
+            android:title="@string/column_number"
+            app:min="1"
+            app:summaryKey="%s" />
+        <CheckBoxPreference
+            android:key="iconOnly"
+            android:title="@string/iconOnly"
+            android:defaultValue="false"/>
+        <com.aboutmycode.openwith.app.settings.WorkingListPreference
+            android:key="size"
+            android:title="@string/textSize"
+            android:summary="%s"
+            android:entries="@array/sizes"
+            android:entryValues="@array/size_values"
+            android:defaultValue="@string/smallValue"/>
     </PreferenceCategory>
 </PreferenceScreen>

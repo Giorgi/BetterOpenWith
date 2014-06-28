@@ -10,4 +10,15 @@
     </string-array>
     <string name="listValue">0</string>
     <string name="gridValue">1</string>
+
+    <string-array name="sizes">
+        <item>@string/small</item>
+        <item>@string/medium</item>
+    </string-array>
+    <string-array name="size_values">
+        <item>@string/smallValue</item>
+        <item>@string/mediumValue</item>
+    </string-array>
+    <string name="smallValue">0</string>
+    <string name="mediumValue">1</string>
 </resources>
