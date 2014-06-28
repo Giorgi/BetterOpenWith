@@ -21,4 +21,15 @@
     </string-array>
     <string name="smallValue">0</string>
     <string name="mediumValue">1</string>
+
+    <string-array name="themes">
+        <item>@string/light</item>
+        <item>@string/dark</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>@string/lightValue</item>
+        <item>@string/darkValue</item>
+    </string-array>
+    <string name="lightValue">0</string>
+    <string name="darkValue">1</string>
 </resources>
