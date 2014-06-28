@@ -6,11 +6,11 @@
     <com.aboutmycode.openwith.app.settings.NumberPickerDialogPreference
         android:key="timeout"
         android:title="@string/timeout"
-        android:dialogMessage="Set time before default app will be launched"
+        android:dialogMessage="@string/set_time_message"
         app:min="1"
         android:max="120"
         app:summaryKey="@string/timeoutSummary"
         android:numeric="integer"
-        android:defaultValue="5" />
+        android:defaultValue="@integer/default_timeout" />
 
 </PreferenceScreen>

@@ -232,7 +232,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
     protected void onStart() {
         super.onStart();
 
-        timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", 4);
+        timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", getResources().getInteger(R.integer.default_timeout));
 
         showTimerStatus();
 
