@@ -5,9 +5,11 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -56,11 +60,33 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
             elapsed = savedInstanceState.getInt("elapsed", 0);
             paused = savedInstanceState.getBoolean("paused", false);
         }
+        Resources resources = getResources();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        boolean isLight;
+
+        if (preferences.getString("theme", resources.getString(R.string.lightValue)).equals(resources.getString(R.string.lightValue))) {
+            isLight = true;
+            setTheme(android.R.style.Theme_Holo_Light_Dialog);
+        } else {
+            isLight = false;
+            setTheme(android.R.style.Theme_Holo_Dialog);
+        }
 
         setContentView(R.layout.file_handler);
         setTitle(getString(R.string.complete_action_with));
 
-        findViewById(R.id.listInclude).setVisibility(View.GONE);
+        View list = findViewById(R.id.listInclude);
+        View grid = findViewById(R.id.gridView);
+
+        if (preferences.getString("layout", resources.getString(R.string.listValue)).equals(resources.getString(R.string.listValue))) {
+            grid.setVisibility(View.GONE);
+            adapterView = (AbsListView) findViewById(android.R.id.list);
+        } else {
+            list.setVisibility(View.GONE);
+            adapterView = (AbsListView) grid;
+            ((GridView) grid).setNumColumns(preferences.getInt("gridColumns", resources.getInteger(R.integer.default_columns)));
+        }
 
         Intent launchIntent = getIntent();
 
@@ -103,7 +129,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
 
         Collections.sort(resInfo, new ResolveInfo.DisplayNameComparator(packageManager));
 
-        List<ResolveInfoDisplay> list = new ArrayList<ResolveInfoDisplay>();
+        List<ResolveInfoDisplay> data = new ArrayList<ResolveInfoDisplay>();
 
         int checked = -1;
         int index = -1;
@@ -129,11 +155,10 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
             resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
             resolveInfoDisplay.setResolveInfo(info);
 
-            list.add(resolveInfoDisplay);
+            data.add(resolveInfoDisplay);
         }
 
-        adapter = new CommonAdapter<ResolveInfoDisplay>(this, list, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder());
-        adapterView = (AbsListView) findViewById(R.id.gridView);
+        adapter = new CommonAdapter<ResolveInfoDisplay>(this, data, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder(this));
         adapterView.setAdapter(adapter);
 
         adapterView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -167,7 +192,11 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
 
         final long finalId = id;
 
-        findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
+        ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+
+        settingsButton.setImageResource(isLight ? R.drawable.ic_action_settings_dark : R.drawable.ic_action_settings);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainScreen = new Intent(FileHandlerActivity.this, HandlerDetailsActivity.class);
@@ -287,6 +316,18 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
 }
 
 class ResolveInfoDisplayFileHandlerViewBinder implements IBindView<ResolveInfoDisplay> {
+    private boolean hideText;
+    private boolean smallText;
+
+    ResolveInfoDisplayFileHandlerViewBinder(Context context) {
+        Context applicationContext = context.getApplicationContext();
+
+        Resources resources = applicationContext.getResources();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+
+        hideText = preferences.getBoolean("iconOnly", false);
+        smallText = !preferences.getString("size", resources.getString(R.string.mediumValue)).equals(resources.getString(R.string.mediumValue));
+    }
 
     @Override
     public View bind(View row, ResolveInfoDisplay item, Context context) {
@@ -304,6 +345,17 @@ class ResolveInfoDisplayFileHandlerViewBinder implements IBindView<ResolveInfoDi
         }
 
         ViewHolder holder = (ViewHolder) tag;
+
+        if (hideText) {
+            holder.text.setVisibility(View.GONE);
+        }
+
+        if (smallText) {
+            holder.text.setTextAppearance(context, android.R.style.TextAppearance_Small);
+        } else {
+            holder.text.setTextAppearance(context, android.R.style.TextAppearance_Medium);
+        }
+
 
         holder.text.setText(item.getDisplayLabel());
         holder.icon.setImageDrawable(item.getDisplayIcon());

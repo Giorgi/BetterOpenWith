@@ -5,7 +5,7 @@
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:showAsAction="ifRoom"
-        android:icon="@drawable/ic_action_settings" />
+        android:icon="@drawable/ic_action_app_settings" />
     <item
         android:id="@+id/action_feedback"
         android:title="@string/action_feedback"
