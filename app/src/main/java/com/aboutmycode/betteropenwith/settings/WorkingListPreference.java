@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app.settings;
+package com.aboutmycode.betteropenwith.settings;
 
 import android.content.Context;
 import android.preference.ListPreference;

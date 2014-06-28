@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app.database;
+package com.aboutmycode.betteropenwith.database;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +11,9 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.aboutmycode.openwith.app.HandleItem;
-import com.aboutmycode.openwith.app.R;
-import com.aboutmycode.openwith.app.common.AbstractListLoader;
+import com.aboutmycode.betteropenwith.HandleItem;
+import com.aboutmycode.betteropenwith.R;
+import com.aboutmycode.betteropenwith.common.AbstractListLoader;
 
 import java.util.ArrayList;
 import java.util.List;

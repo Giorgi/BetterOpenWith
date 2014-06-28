@@ -1,10 +1,8 @@
-package com.aboutmycode.openwith.app.database;
+package com.aboutmycode.betteropenwith.database;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-import com.aboutmycode.openwith.app.HandleItem;
+import com.aboutmycode.betteropenwith.HandleItem;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;

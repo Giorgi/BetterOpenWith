@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app.common.adapter;
+package com.aboutmycode.betteropenwith.common.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

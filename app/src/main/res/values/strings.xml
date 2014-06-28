@@ -38,4 +38,5 @@
     <string name="theme">Theme</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
+    <string name="action_all_apps">All my apps</string>
 </resources>

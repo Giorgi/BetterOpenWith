@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app;
+package com.aboutmycode.betteropenwith;
 
 import android.app.ListActivity;
 import android.app.LoaderManager;
@@ -18,11 +18,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.aboutmycode.openwith.app.common.adapter.CommonAdapter;
-import com.aboutmycode.openwith.app.common.adapter.IBindView;
-import com.aboutmycode.openwith.app.database.CupboardCursorLoader;
-import com.aboutmycode.openwith.app.database.CupboardSQLiteOpenHelper;
-import com.aboutmycode.openwith.app.settings.SettingsActivity;
+import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
+import com.aboutmycode.betteropenwith.common.adapter.IBindView;
+import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
+import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
+import com.aboutmycode.betteropenwith.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,9 +66,6 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
@@ -77,10 +74,19 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
         if (id == R.id.action_feedback) {
             SendFeedbackEmail();
+            return true;
         }
 
         if (id == R.id.action_about) {
             Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.action_all_apps) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://search?q=pub:Giorgi Dalakishvili"));
+
             startActivity(intent);
             return true;
         }

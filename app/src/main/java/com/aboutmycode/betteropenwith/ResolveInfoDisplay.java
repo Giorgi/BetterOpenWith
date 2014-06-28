@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app;
+package com.aboutmycode.betteropenwith;
 
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;

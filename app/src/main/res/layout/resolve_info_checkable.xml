@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.aboutmycode.openwith.app.common.layout.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.aboutmycode.betteropenwith.common.layout.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:paddingTop="3dip"
     android:paddingBottom="3dip"
@@ -29,4 +29,4 @@
         android:layout_toRightOf="@id/image"
         android:layout_alignBaseline="@id/image"
         />
-</com.aboutmycode.openwith.app.common.layout.CheckableRelativeLayout>
+</com.aboutmycode.betteropenwith.common.layout.CheckableRelativeLayout>

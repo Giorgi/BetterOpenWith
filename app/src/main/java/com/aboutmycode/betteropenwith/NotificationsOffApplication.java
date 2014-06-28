@@ -1,10 +1,9 @@
-package com.aboutmycode.openwith.app;
+package com.aboutmycode.betteropenwith;
 
 import android.app.Application;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 
 import org.acra.ACRA;
 import org.acra.ReportField;

@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app.common.layout;
+package com.aboutmycode.betteropenwith.common.layout;
 
 /**
  * Created by Giorgi on 5/25/2014.

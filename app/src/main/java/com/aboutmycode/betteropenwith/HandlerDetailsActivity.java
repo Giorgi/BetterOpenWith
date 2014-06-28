@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app;
+package com.aboutmycode.betteropenwith;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
@@ -25,10 +25,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.aboutmycode.openwith.app.common.adapter.CommonAdapter;
-import com.aboutmycode.openwith.app.common.adapter.IBindView;
-import com.aboutmycode.openwith.app.database.CupboardCursorLoader;
-import com.aboutmycode.openwith.app.database.CupboardSQLiteOpenHelper;
+import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
+import com.aboutmycode.betteropenwith.common.adapter.IBindView;
+import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
+import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;

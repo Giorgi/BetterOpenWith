@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aboutmycode.openwith.app" >
+    package="com.aboutmycode.betteropenwith">
 
     <application
         android:allowBackup="true"
@@ -18,14 +18,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.aboutmycode.openwith.app.FileHandlerActivity"
+            android:name=".FileHandlerActivity"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_file_handler"
             android:theme="@android:style/Theme.Holo.Dialog" />
 
         <activity-alias
             android:name="com.aboutmycode.openwith.app.PdfFileHandlerActivity"
-            android:targetActivity="com.aboutmycode.openwith.app.FileHandlerActivity" >
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -53,7 +53,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.VideoFileHandlerActivity"
-            android:targetActivity="com.aboutmycode.openwith.app.FileHandlerActivity" >
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -95,7 +95,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.VideoStreamHandlerActivity"
-            android:targetActivity="com.aboutmycode.openwith.app.FileHandlerActivity" >
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -110,7 +110,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.ImageFileHandlerActivity"
-            android:targetActivity="com.aboutmycode.openwith.app.FileHandlerActivity" >
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -139,7 +139,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.AudioFileHandlerActivity"
-            android:targetActivity="com.aboutmycode.openwith.app.FileHandlerActivity" >
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -171,7 +171,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.AudioStreamHandlerActivity"
-            android:targetActivity="com.aboutmycode.openwith.app.FileHandlerActivity" >
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -186,10 +186,10 @@
         </activity-alias>
 
         <activity
-            android:name="com.aboutmycode.openwith.app.settings.SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name="com.aboutmycode.openwith.app.HandlerDetailsActivity"
+            android:name=".HandlerDetailsActivity"
             android:label="@string/title_activity_handler_details"
             android:parentActivityName=".HandlerListActivity" >
             <meta-data

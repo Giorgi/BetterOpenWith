@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app.settings;
+package com.aboutmycode.betteropenwith.settings;
 
 import android.app.Activity;
 import android.os.Bundle;

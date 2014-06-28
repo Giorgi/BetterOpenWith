@@ -1,4 +1,4 @@
-package com.aboutmycode.openwith.app.settings;
+package com.aboutmycode.betteropenwith.settings;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.aboutmycode.openwith.app.R;
+import com.aboutmycode.betteropenwith.R;
 
 public class NumberPickerDialogPreference extends DialogPreference {
     private static final int DEFAULT_MIN_VALUE = 0;

@@ -5,7 +5,7 @@
     <PreferenceCategory
         android:key="pref_key_popup_layout_group"
         android:title="@string/popup_options">
-        <com.aboutmycode.openwith.app.settings.NumberPickerDialogPreference
+        <com.aboutmycode.betteropenwith.settings.NumberPickerDialogPreference
             android:defaultValue="@integer/default_timeout"
             android:dialogMessage="@string/set_time_message"
             android:key="timeout"
@@ -14,14 +14,14 @@
             android:title="@string/timeout"
             app:min="1"
             app:summaryKey="@string/timeoutSummary" />
-        <com.aboutmycode.openwith.app.settings.WorkingListPreference
+        <com.aboutmycode.betteropenwith.settings.WorkingListPreference
             android:defaultValue="@string/listValue"
             android:entries="@array/layouts"
             android:entryValues="@array/layout_values"
             android:key="layout"
             android:summary="@string/layout_summary"
             android:title="@string/layout" />
-        <com.aboutmycode.openwith.app.settings.NumberPickerDialogPreference
+        <com.aboutmycode.betteropenwith.settings.NumberPickerDialogPreference
             android:defaultValue="@integer/default_columns"
             android:dialogMessage="@string/select_columns"
             android:key="gridColumns"
@@ -34,14 +34,14 @@
             android:key="iconOnly"
             android:title="@string/iconOnly"
             android:defaultValue="false"/>
-        <com.aboutmycode.openwith.app.settings.WorkingListPreference
+        <com.aboutmycode.betteropenwith.settings.WorkingListPreference
             android:key="size"
             android:title="@string/textSize"
             android:summary="%s"
             android:entries="@array/sizes"
             android:entryValues="@array/size_values"
             android:defaultValue="@string/mediumValue"/>
-        <com.aboutmycode.openwith.app.settings.WorkingListPreference
+        <com.aboutmycode.betteropenwith.settings.WorkingListPreference
             android:key="theme"
             android:title="@string/theme"
             android:summary="%s"
