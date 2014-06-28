@@ -23,4 +23,5 @@
     <string name="version">Version %s</string>
     <string name="copyright">Copyright</string>
     <string name="rights">All rights reserved</string>
+    <string name="start_preferred">Start preferred app without showing list</string>
 </resources>

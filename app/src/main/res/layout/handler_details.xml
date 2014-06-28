@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Start preffered app without showing list" />
+            android:text="@string/start_preferred" />
 
     </RelativeLayout>
 
