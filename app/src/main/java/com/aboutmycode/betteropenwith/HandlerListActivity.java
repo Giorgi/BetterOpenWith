@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
@@ -140,9 +141,11 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
         TextView textView = (TextView) row.findViewById(R.id.label);
         TextView selectedAppTextView = (TextView) row.findViewById(R.id.selectedAppLabel);
         ImageView imageView = (ImageView) row.findViewById(R.id.targetIcon);
+        Switch toggle = (Switch) row.findViewById(R.id.toggleSwitch);
 
         Resources resources = context.getResources();
 
+        toggle.setChecked(item.isEnabled());
         textView.setText(item.getName());
         Drawable drawable = resources.getDrawable(resources.getIdentifier(item.getDarkIconResource(), "drawable", R.class.getPackage().getName()));
         imageView.setImageDrawable(drawable);
