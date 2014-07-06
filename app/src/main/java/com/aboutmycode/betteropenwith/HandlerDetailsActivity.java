@@ -200,7 +200,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         PackageManager packageManager = getPackageManager();
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
 
-        if (resInfo.size() != 0) {
+        if (resInfo.size() == 1) {
             hideSwitch = true;
             invalidateOptionsMenu();
             flipper.setDisplayedChild(2);
