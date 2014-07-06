@@ -39,4 +39,5 @@
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="action_all_apps">All my apps</string>
+    <string name="no_app">No app found to handle %s</string>
 </resources>

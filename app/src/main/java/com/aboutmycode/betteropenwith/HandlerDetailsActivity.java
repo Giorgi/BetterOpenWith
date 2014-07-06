@@ -43,6 +43,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     private HandleItem item;
     private CupboardCursorLoader loader;
     private ViewFlipper flipper;
+    private boolean hideSwitch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         ResolveInfoDisplay adapterItem = adapter.getItem(position);
         ActivityInfo activityInfo = adapterItem.getResolveInfo().activityInfo;
 
-        if (activityInfo.name.equals(item.getClassName())){
+        if (activityInfo.name.equals(item.getClassName())) {
             //We clicked on already checked item
             listView.setItemChecked(position, false);
         }
@@ -84,7 +85,11 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.handler_details, menu);
 
-        masterSwitch = (Switch) menu.findItem(R.id.toggleMenu).getActionView().findViewById(R.id.toggleSwitch);
+        MenuItem menuItem = menu.findItem(R.id.toggleMenu);
+
+        menuItem.setVisible(!hideSwitch);
+
+        masterSwitch = (Switch) menuItem.getActionView().findViewById(R.id.toggleSwitch);
         if (item != null) {
             initializeMasterSwitch();
         }
@@ -101,7 +106,11 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
                 ComponentName component = new ComponentName(HandlerDetailsActivity.this, item.getAppComponentName());
                 packageManager.setComponentEnabledSetting(component, state, PackageManager.DONT_KILL_APP);
 
-                flipper.showNext();
+                if (checked) {
+                    flipper.setDisplayedChild(0);
+                } else {
+                    flipper.setDisplayedChild(1);
+                }
             }
         });
         return true;
@@ -111,7 +120,9 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         boolean enabled = item.isEnabled();
         masterSwitch.setChecked(enabled);
 
-        if (enabled) {
+        if (hideSwitch) {
+            flipper.setDisplayedChild(2);
+        } else if (enabled) {
             flipper.setDisplayedChild(0);
         } else {
             flipper.setDisplayedChild(1);
@@ -146,10 +157,6 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         item = handleItems.get(0);
 
-        if (masterSwitch != null) {
-            initializeMasterSwitch();
-        }
-
         //region skip list checkbox
         skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
         skipListCheckBox.setEnabled(!TextUtils.isEmpty(item.getPackageName()));
@@ -177,6 +184,9 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         TextView disabledTextView = (TextView) findViewById(R.id.disabledTextView);
         disabledTextView.setText(String.format("%s will not be handled with %s", title, getString(R.string.app_name)));
 
+        TextView noAppsTextView = (TextView) findViewById(R.id.noAppsTextView);
+        noAppsTextView.setText(String.format(getString(R.string.no_app), title));
+
         //region application list
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String intentData = item.getIntentData();
@@ -187,9 +197,19 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
             intent.setDataAndType(Uri.parse(intentData), item.getIntentType());
         }
 
-
         PackageManager packageManager = getPackageManager();
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
+
+        if (resInfo.size() != 0) {
+            hideSwitch = true;
+            invalidateOptionsMenu();
+            flipper.setDisplayedChild(2);
+            return;
+        }
+
+        if (masterSwitch != null) {
+            initializeMasterSwitch();
+        }
 
         Collections.sort(resInfo, new ResolveInfo.DisplayNameComparator(packageManager));
 

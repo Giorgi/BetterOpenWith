@@ -50,4 +50,18 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/noAppsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No app found to handle Pdf Files"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center" />
+    </LinearLayout>
 </ViewFlipper>
