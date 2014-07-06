@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
-    android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight">
 
     <ImageView
@@ -13,7 +12,8 @@
         android:layout_alignParentStart="false"
         android:layout_marginRight="5dp"
         android:baselineAlignBottom="false"
-        android:src="@drawable/ic_adobe_acrobat"></ImageView>
+        android:src="@drawable/ic_adobe_acrobat"
+        android:layout_centerVertical="true"></ImageView>
 
     <TextView
         android:id="@+id/label"
@@ -22,7 +22,8 @@
         android:layout_toRightOf="@id/targetIcon"
         android:gravity="center_vertical"
         android:text="label goes here"
-        android:textAppearance="?android:textAppearanceMedium"></TextView>
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_alignBottom="@+id/targetIcon"></TextView>
 
     <TextView
         android:id="@id/selectedAppLabel"
@@ -33,12 +34,29 @@
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false" />
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/toggleSwitch"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:id="@+id/editImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignBottom="@+id/targetIcon" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/toggleSwitch"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_action_edit"
+        android:soundEffectsEnabled="true"
+        android:clickable="true"
+        android:onClick="editClicked"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="false" />
 </RelativeLayout>

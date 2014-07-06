@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
@@ -40,7 +41,8 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         adapter = new CommonAdapter<HandleItem>(this, new ArrayList<HandleItem>(), R.layout.handler_types, new HandleItemViewBinder());
-        getListView().setAdapter(adapter);
+        ListView listView = getListView();
+        listView.setAdapter(adapter);
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -132,6 +134,10 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     @Override
     public void onLoaderReset(Loader<List<HandleItem>> objectLoader) {
         adapter.setData(null);
+    }
+
+    public void editClicked(View view) {
+        Toast.makeText(this,"edit",Toast.LENGTH_LONG).show();
     }
 }
 
