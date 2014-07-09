@@ -6,4 +6,5 @@
     <string name="images">Images</string>
     <string name="video_stream">Video Stream</string>
     <string name="audio_stream">Audio Stream</string>
+    <string name="browser">Browser</string>
 </resources>

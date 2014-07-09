@@ -1,0 +1,2 @@
+INSERT INTO "main"."HandleItem" ("_id","darkIconResource","nameResource","lightIconResource","intentData","enabled","skipList","appComponentName")
+VALUES (7,'ic_action_browser','browser','ic_action_browser_light','http://example.com',1,0,'com.aboutmycode.betteropenwith.app.BrowserHandlerActivity')
