@@ -92,7 +92,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
 
         original = makeMyIntent();
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Intent intent = new Intent(launchIntent.getAction());
         intent.setDataAndType(launchIntent.getData(), launchIntent.getType());
 
         int id = -1;

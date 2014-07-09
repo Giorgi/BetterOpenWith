@@ -144,6 +144,15 @@
                 <data android:pathPattern=".*\\.webp" />
             </intent-filter>
 
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.OPENABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+
             <meta-data
                 android:name="id"
                 android:value="6" />
