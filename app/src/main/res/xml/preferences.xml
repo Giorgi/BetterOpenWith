@@ -33,6 +33,8 @@
         <CheckBoxPreference
             android:key="iconOnly"
             android:title="@string/iconOnly"
+            android:summaryOff="@string/iconOnlyOff"
+            android:summaryOn="@string/iconOnlyOn"
             android:defaultValue="false"/>
         <com.aboutmycode.betteropenwith.settings.WorkingListPreference
             android:key="size"
