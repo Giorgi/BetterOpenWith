@@ -149,7 +149,7 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
 
         Drawable selectedAppIcon = item.getSelectedAppIcon();
         if (selectedAppIcon == null) {
-            selectedAppTextView.setText("Preferred app not configured.");
+            selectedAppTextView.setText(context.getString(R.string.no_preferred_app));
             selectedAppTextView.setCompoundDrawables(null, null, null, null);
         } else {
             selectedAppTextView.setText(item.getSelectedAppLabel());
