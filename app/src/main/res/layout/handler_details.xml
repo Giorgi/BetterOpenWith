@@ -24,15 +24,37 @@
             layout="@android:layout/list_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/editTimeoutButton"
+            android:layout_below="@+id/selectedAppLabel"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:id="@+id/timeoutTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_above="@+id/skipListCheckBox"
-            android:layout_below="@+id/selectedAppLabel" />
+            android:layout_alignBottom="@+id/editTimeoutButton"
+            android:layout_alignTop="@+id/editTimeoutButton"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Countdown time for this fileType: 5 seconds" />
+
+        <ImageButton
+            android:id="@+id/editTimeoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/skipListCheckBox"
+            android:layout_toRightOf="@id/timeoutTextView"
+            android:background="?android:attr/selectableItemBackground"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/ic_action_edit" />
 
         <CheckBox
             android:id="@+id/skipListCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:text="@string/start_preferred" />
 
     </RelativeLayout>
@@ -46,9 +68,9 @@
             android:id="@+id/disabledTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Pdf Files will not be handled with Auto Open With"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:gravity="center" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,8 +82,8 @@
             android:id="@+id/noAppsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="No app found to handle Pdf Files"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:gravity="center" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 </ViewFlipper>
