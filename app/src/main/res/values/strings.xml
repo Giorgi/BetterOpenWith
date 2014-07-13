@@ -43,4 +43,7 @@
     <string name="no_preferred_app">Preferred app not configured</string>
     <string name="iconOnlyOff">Select not to see app names</string>
     <string name="iconOnlyOn">Deselect to see app names and icons</string>
+    <string name="countdown_time">Countdown time for this filetype: %s seconds</string>
+    <string name="custom_countdown">Custom countdown time</string>
+    <string name="use_default_timeout">Use default countdown time: %s seconds</string>
 </resources>

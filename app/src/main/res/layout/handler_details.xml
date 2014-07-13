@@ -48,7 +48,8 @@
             android:layout_toRightOf="@id/timeoutTextView"
             android:background="?android:attr/selectableItemBackground"
             android:soundEffectsEnabled="true"
-            android:src="@drawable/ic_action_edit" />
+            android:src="@drawable/ic_action_edit"
+            android:onClick="editTimeoutClicked"/>
 
         <CheckBox
             android:id="@+id/skipListCheckBox"

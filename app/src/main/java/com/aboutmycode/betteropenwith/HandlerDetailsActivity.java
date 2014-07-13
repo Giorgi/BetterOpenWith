@@ -1,6 +1,8 @@
 package com.aboutmycode.betteropenwith;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.ComponentName;
@@ -13,6 +15,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -157,7 +160,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         item = handleItems.get(0);
 
-        //region skip list checkbox
+        //region skip list checkbox and timeout
         skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
         skipListCheckBox.setEnabled(!TextUtils.isEmpty(item.getPackageName()));
         skipListCheckBox.setChecked(item.isSkipList());
@@ -168,10 +171,13 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
                 loader.update(item);
             }
         });
+
+        Resources resources = getResources();
+        setTimeoutText(resources);
+
         //endregion
 
         //region ActionBar and title
-        Resources resources = getResources();
 
         String title = resources.getString(resources.getIdentifier(item.getNameResource(), "string", R.class.getPackage().getName()));
         setTitle(title);
@@ -249,9 +255,37 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         //endregion
     }
 
+    private void setTimeoutText(Resources resources) {
+        TextView timeoutTextView = (TextView) findViewById(R.id.timeoutTextView);
+
+        int timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", resources.getInteger(R.integer.default_timeout));
+
+        if (item.isUseGlobalTimeout()) {
+            timeoutTextView.setText(String.format(getString(R.string.countdown_time), timeout));
+        } else {
+            timeoutTextView.setText(String.format(getString(R.string.countdown_time), item.getCustomTimeout()));
+        }
+    }
+
     @Override
     public void onLoaderReset(Loader<List<HandleItem>> listLoader) {
+    }
 
+    public void editTimeoutClicked(View view) {
+        FragmentManager fm = getFragmentManager();
+        TimeoutDialogFragment editNameDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout());
+        editNameDialog.show(fm, "TimeoutDialogFragment");
+    }
+
+    public void timeoutChanged(boolean useGlobal, int timeout) {
+        item.setUseGlobalTimeout(useGlobal);
+        if (!useGlobal) {
+            item.setCustomTimeout(timeout);
+        }
+
+        loader.update(item);
+
+        setTimeoutText(getResources());
     }
 }
 

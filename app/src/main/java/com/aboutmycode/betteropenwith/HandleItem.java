@@ -23,6 +23,12 @@ public class HandleItem {
     private transient String selectedAppLabel;
     private transient Drawable selectedAppIcon;
 
+    private boolean installed;
+    private boolean skipList;
+
+    private boolean useGlobalTimeout;
+    private int customTimeout;
+
     public String getSelectedAppLabel() {
         return selectedAppLabel;
     }
@@ -30,9 +36,6 @@ public class HandleItem {
     public void setSelectedAppLabel(String selectedAppLabel) {
         this.selectedAppLabel = selectedAppLabel;
     }
-
-    private boolean installed;
-    private boolean skipList;
 
     public long getId() {
         return _id;
@@ -144,5 +147,21 @@ public class HandleItem {
 
     public void setSelectedAppIcon(Drawable selectedAppIcon) {
         this.selectedAppIcon = selectedAppIcon;
+    }
+
+    public boolean isUseGlobalTimeout() {
+        return useGlobalTimeout;
+    }
+
+    public void setUseGlobalTimeout(boolean useGlobalTimeout) {
+        this.useGlobalTimeout = useGlobalTimeout;
+    }
+
+    public int getCustomTimeout() {
+        return customTimeout;
+    }
+
+    public void setCustomTimeout(int customTimeout) {
+        this.customTimeout = customTimeout;
     }
 }
