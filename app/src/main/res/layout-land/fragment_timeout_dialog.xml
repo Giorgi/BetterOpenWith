@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="10"
+    tools:context="com.aboutmycode.betteropenwith.TimeoutDialogFragment">
+
+    <TextView
+        android:id="@+id/text_dialog_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dip"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:visibility="gone">
+    </TextView>
+
+    <NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="center_horizontal" />
+
+    <CheckBox
+        android:id="@+id/useDefault"
+        android:layout_width="0dp"
+        android:layout_weight="7"
+        android:layout_height="wrap_content"
+        android:text="Use default countdown time: X seconds"
+        android:layout_gravity="center_vertical" />
+</LinearLayout>
