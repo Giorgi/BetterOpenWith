@@ -51,6 +51,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private Intent original = new Intent();
     private AbsListView adapterView;
+    private HandleItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +106,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
             e.printStackTrace();
         }
 
-        HandleItem item = getHandleItem(id);
+        item = getHandleItem(id);
 
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
 
@@ -261,7 +262,11 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
     protected void onStart() {
         super.onStart();
 
-        timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", getResources().getInteger(R.integer.default_timeout));
+        if (item.isUseGlobalTimeout()) {
+            timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", getResources().getInteger(R.integer.default_timeout));
+        } else {
+            timeout = item.getCustomTimeout();
+        }
 
         showTimerStatus();
 
