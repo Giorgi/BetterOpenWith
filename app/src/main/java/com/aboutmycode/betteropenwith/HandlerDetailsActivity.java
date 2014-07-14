@@ -188,7 +188,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         //endregion
 
         TextView disabledTextView = (TextView) findViewById(R.id.disabledTextView);
-        disabledTextView.setText(String.format("%s will not be handled with %s", title, getString(R.string.app_name)));
+        disabledTextView.setText(String.format(getString(R.string.not_handled), title, getString(R.string.app_name)));
 
         TextView noAppsTextView = (TextView) findViewById(R.id.noAppsTextView);
         noAppsTextView.setText(String.format(getString(R.string.no_app), title));

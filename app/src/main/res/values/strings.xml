@@ -46,4 +46,6 @@
     <string name="countdown_time">Countdown time for this filetype: %s seconds</string>
     <string name="custom_countdown">Custom countdown time</string>
     <string name="use_default_timeout">Use default countdown time: %s seconds</string>
+    <string name="custom_countdown_description">Set time before preferred app will be launched only for this filetype. You can change the default countdown time in the general settings.</string>
+    <string name="not_handled">%1$s will not be handled with %2$s</string>
 </resources>

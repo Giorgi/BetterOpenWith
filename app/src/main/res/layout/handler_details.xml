@@ -37,8 +37,7 @@
             android:layout_alignTop="@+id/editTimeoutButton"
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="Countdown time for this fileType: 5 seconds" />
+            android:paddingRight="5dp" />
 
         <ImageButton
             android:id="@+id/editTimeoutButton"
