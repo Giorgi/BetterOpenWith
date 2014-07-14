@@ -1,16 +1,26 @@
 package com.aboutmycode.betteropenwith;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +39,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import it.gmariotti.changelibs.library.view.ChangeLogListView;
 
 public class HandlerListActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
     private CommonAdapter<HandleItem> adapter;
@@ -41,6 +52,28 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         adapter = new CommonAdapter<HandleItem>(this, new ArrayList<HandleItem>(), R.layout.handler_types, new HandleItemViewBinder());
         getListView().setAdapter(adapter);
         getLoaderManager().initLoader(0, null, this);
+
+        try {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            int lastVersion = preferences.getInt("version", -1);
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+
+            if (lastVersion >= 0 && packageInfo.versionCode > lastVersion) {
+                ChangelogDialogFragment dialogStandardFragment = new ChangelogDialogFragment();
+                FragmentManager fm = getFragmentManager();
+                Fragment prev = fm.findFragmentByTag("ChangelogDialogFragment");
+                if (prev != null) {
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.remove(prev);
+                }
+
+                dialogStandardFragment.show(fm, "ChangelogDialogFragment");
+            }
+
+            preferences.edit().putInt("version", packageInfo.versionCode).commit();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

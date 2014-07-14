@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog bulletedList="true">
+    <changelogversion changeDate="14 July, 2014" versionName="0.4 Beta">
+        <changelogtext>
+            [b]New![/b] Added Browser handling
+        </changelogtext>
+        <changelogtext>[b]New![/b] You can now override timeout for filetypes
+        </changelogtext>
+        <changelogtext>
+            Minor other improvements
+        </changelogtext>
+    </changelogversion>
+    <changelogversion changeDate="6 July, 2014" versionName="0.3.1 Beta">
+        <changelogtext>Initial Release</changelogtext>
+    </changelogversion>
+</changelog>
