@@ -2,11 +2,14 @@ package com.aboutmycode.betteropenwith;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.ActivityInfo;
@@ -28,6 +31,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.aboutmycode.betteropenwith.common.YesNoDialogFragment;
+import com.aboutmycode.betteropenwith.common.YesNoListener;
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
 import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
@@ -38,7 +43,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class HandlerDetailsActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
+public class HandlerDetailsActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
 
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private CheckBox skipListCheckBox;
@@ -101,22 +106,34 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
             @Override
             public void onClick(View view) {
                 boolean checked = masterSwitch.isChecked();
-                item.setEnabled(checked);
-                loader.update(item);
-
-                PackageManager packageManager = getPackageManager();
-                int state = checked ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-                ComponentName component = new ComponentName(HandlerDetailsActivity.this, item.getAppComponentName());
-                packageManager.setComponentEnabledSetting(component, state, PackageManager.DONT_KILL_APP);
-
                 if (checked) {
-                    flipper.setDisplayedChild(0);
-                } else {
-                    flipper.setDisplayedChild(1);
+                    toggleHandlerState(checked);
+                }else{
+                    masterSwitch.setChecked(true);
+                    FragmentManager fm = getFragmentManager();
+                    String message = String.format(getString(R.string.confirm_disable), getTitle(), getString(R.string.app_name));
+                    YesNoDialogFragment yesNoDialogFragment = YesNoDialogFragment.newInstance(message);
+                    yesNoDialogFragment.show(fm, "YesNoDialogFragment");
                 }
             }
         });
         return true;
+    }
+
+    private void toggleHandlerState(boolean enabled) {
+        item.setEnabled(enabled);
+        loader.update(item);
+
+        PackageManager packageManager = getPackageManager();
+        int state = enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+        ComponentName component = new ComponentName(this, item.getAppComponentName());
+        packageManager.setComponentEnabledSetting(component, state, PackageManager.DONT_KILL_APP);
+
+        if (enabled) {
+            flipper.setDisplayedChild(0);
+        } else {
+            flipper.setDisplayedChild(1);
+        }
     }
 
     private void initializeMasterSwitch() {
@@ -287,10 +304,15 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         setTimeoutText(getResources());
     }
+
+    @Override
+    public void yesClicked() {
+        toggleHandlerState(false);
+        masterSwitch.setChecked(false);
+    }
 }
 
 class ResolveInfoDetailsActivityViewBinder implements IBindView<ResolveInfoDisplay> {
-
     @Override
     public View bind(View row, ResolveInfoDisplay item, Context context) {
         ImageView image = (ImageView) row.findViewById(R.id.image);

@@ -44,10 +44,11 @@ public class TimeoutDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_timeout_dialog, null);
+        final Activity activity = getActivity();
+        View view = activity.getLayoutInflater().inflate(R.layout.fragment_timeout_dialog, null);
 
         Resources resources = getResources();
-        int globalTimeout = PreferenceManager.getDefaultSharedPreferences(getActivity()).getInt("timeout", resources.getInteger(R.integer.default_timeout));
+        int globalTimeout = PreferenceManager.getDefaultSharedPreferences(activity).getInt("timeout", resources.getInteger(R.integer.default_timeout));
 
         int pickerValue = timeout;
 
@@ -75,12 +76,12 @@ public class TimeoutDialogFragment extends DialogFragment {
 
         ((TextView) view.findViewById(R.id.text_dialog_message)).setText(getString(R.string.custom_countdown_description));
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(activity)
                 .setTitle(this.getString(R.string.custom_countdown))
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                ((HandlerDetailsActivity) getActivity()).timeoutChanged(useDefaultCheckbox.isChecked(), picker.getValue());
+                                ((HandlerDetailsActivity) activity).timeoutChanged(useDefaultCheckbox.isChecked(), picker.getValue());
                             }
                         }
                 ).setNegativeButton(android.R.string.cancel,
