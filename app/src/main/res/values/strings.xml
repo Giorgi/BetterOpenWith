@@ -41,7 +41,7 @@
     <string name="action_all_apps">All my apps</string>
     <string name="no_app">No app found to handle %s</string>
     <string name="no_preferred_app">Preferred app not configured</string>
-    <string name="iconOnlyOff">Select not to see app names</string>
+    <string name="iconOnlyOff">Select to hide app names</string>
     <string name="iconOnlyOn">Deselect to see app names and icons</string>
     <string name="countdown_time">Countdown time for this filetype: %s seconds</string>
     <string name="custom_countdown">Custom countdown time</string>
