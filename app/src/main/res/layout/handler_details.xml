@@ -72,7 +72,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Pdf Files will not be handled with Auto Open With"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
@@ -86,7 +85,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="No app found to handle Pdf Files"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 </ViewFlipper>

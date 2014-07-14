@@ -18,7 +18,7 @@ import org.acra.sender.ReportSenderException;
         mailTo = "android@aboutmycode.com",
         mode = ReportingInteractionMode.TOAST,
         resToastText = R.string.crashToast)
-public class NotificationsOffApplication extends Application {
+public class BetterOpenWithApplication extends Application {
     @Override
     public void onCreate() {
         ACRA.init(this);
