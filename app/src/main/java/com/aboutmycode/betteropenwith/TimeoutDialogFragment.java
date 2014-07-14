@@ -14,7 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-public class TimeoutDialogFragment extends DialogFragment  {
+public class TimeoutDialogFragment extends DialogFragment {
     private static final String ARG_PARAM_USE_DEFAULT = "param1";
     private static final String ARG_PARAM_TIMEOUT = "param2";
 
@@ -46,17 +46,23 @@ public class TimeoutDialogFragment extends DialogFragment  {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_timeout_dialog, null);
 
+        Resources resources = getResources();
+        int globalTimeout = PreferenceManager.getDefaultSharedPreferences(getActivity()).getInt("timeout", resources.getInteger(R.integer.default_timeout));
+
+        int pickerValue = timeout;
+
+        if (timeout == -1) {
+            pickerValue = globalTimeout;
+        }
+
         final NumberPicker picker = (NumberPicker) view.findViewById(R.id.numberPicker);
         picker.setMinValue(1);
         picker.setMaxValue(120);
-        picker.setValue(timeout);
-
-        Resources resources = getResources();
-        int timeout = PreferenceManager.getDefaultSharedPreferences(getActivity()).getInt("timeout", resources.getInteger(R.integer.default_timeout));
+        picker.setValue(pickerValue);
 
         final CheckBox useDefaultCheckbox = (CheckBox) view.findViewById(R.id.useDefault);
         useDefaultCheckbox.setChecked(useDefault);
-        useDefaultCheckbox.setText(String.format(getString(R.string.use_default_timeout), timeout));
+        useDefaultCheckbox.setText(String.format(getString(R.string.use_default_timeout), globalTimeout));
 
         picker.setEnabled(!useDefault);
 
@@ -67,14 +73,14 @@ public class TimeoutDialogFragment extends DialogFragment  {
             }
         });
 
-        ((TextView) view.findViewById(R.id.text_dialog_message)).setText("Set time before preferred app will be launched only for this filetype. You can change the default countdown time in the general settings.");
+        ((TextView) view.findViewById(R.id.text_dialog_message)).setText(getString(R.string.custom_countdown_description));
 
         return new AlertDialog.Builder(getActivity())
                 .setTitle(this.getString(R.string.custom_countdown))
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                ((HandlerDetailsActivity)getActivity()).timeoutChanged(useDefaultCheckbox.isChecked(), picker.getValue());
+                                ((HandlerDetailsActivity) getActivity()).timeoutChanged(useDefaultCheckbox.isChecked(), picker.getValue());
                             }
                         }
                 ).setNegativeButton(android.R.string.cancel,
