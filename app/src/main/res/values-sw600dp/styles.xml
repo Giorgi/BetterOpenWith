@@ -5,12 +5,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="actions" parent="android:TextAppearance.Small">
+    <style name="actions" parent="android:TextAppearance.Medium">
     </style>
 
     <style name="timeoutButton">
-        <item name="android:scaleX">.9</item>
-        <item name="android:scaleY">.9</item>
+        <item name="android:scaleX">1</item>
+        <item name="android:scaleY">1</item>
     </style>
 
 </resources>

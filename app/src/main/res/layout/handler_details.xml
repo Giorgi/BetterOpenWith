@@ -37,7 +37,8 @@
             android:layout_alignTop="@+id/editTimeoutButton"
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp" />
+            android:paddingRight="5dp"
+            style="@style/actions" />
 
         <ImageButton
             android:id="@+id/editTimeoutButton"
@@ -48,16 +49,16 @@
             android:background="?android:attr/selectableItemBackground"
             android:soundEffectsEnabled="true"
             android:src="@drawable/ic_action_edit"
-            android:scaleX=".9" android:scaleY=".9"
-            android:onClick="editTimeoutClicked" />
+            android:onClick="editTimeoutClicked"
+            style="@style/timeoutButton" />
 
         <CheckBox
             android:id="@+id/skipListCheckBox"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_alignParentBottom="true"
             android:text="@string/start_preferred"
-            style="@android:style/TextAppearance.Small" />
+            style="@style/actions" />
 
     </RelativeLayout>
 
