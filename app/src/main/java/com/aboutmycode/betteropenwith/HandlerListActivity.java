@@ -58,7 +58,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
             int lastVersion = preferences.getInt("version", -1);
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
 
-            if (lastVersion >= 0 && packageInfo.versionCode > lastVersion) {
+            if (packageInfo.versionCode > lastVersion) {
                 ChangelogDialogFragment dialogStandardFragment = new ChangelogDialogFragment();
                 FragmentManager fm = getFragmentManager();
                 Fragment prev = fm.findFragmentByTag("ChangelogDialogFragment");
@@ -180,12 +180,24 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
         Drawable drawable = resources.getDrawable(resources.getIdentifier(item.getDarkIconResource(), "drawable", R.class.getPackage().getName()));
         imageView.setImageDrawable(drawable);
 
+        if (!item.isEnabled()) {
+            selectedAppTextView.setText(context.getString(R.string.turned_off));
+            selectedAppTextView.setCompoundDrawables(null, null, null, null);
+            return row;
+        }
+
         Drawable selectedAppIcon = item.getSelectedAppIcon();
         if (selectedAppIcon == null) {
             selectedAppTextView.setText(context.getString(R.string.no_preferred_app));
             selectedAppTextView.setCompoundDrawables(null, null, null, null);
         } else {
-            selectedAppTextView.setText(item.getSelectedAppLabel());
+            int timeout = PreferenceManager.getDefaultSharedPreferences(context).getInt("timeout", resources.getInteger(R.integer.default_timeout));
+
+            if (!item.isUseGlobalTimeout()) {
+                timeout = item.getCustomTimeout();
+            }
+
+            selectedAppTextView.setText(String.format(context.getString(R.string.app_seconds), item.getSelectedAppLabel(), timeout));
 
             selectedAppIcon.setBounds(0, 0, 32, 32);
             selectedAppTextView.setCompoundDrawables(selectedAppIcon, null, null, null);
