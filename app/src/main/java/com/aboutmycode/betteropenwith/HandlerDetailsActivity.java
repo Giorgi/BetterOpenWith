@@ -87,6 +87,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         }
 
         loader.update(item);
+        setResult(RESULT_OK);
     }
 
     @Override
@@ -123,6 +124,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     private void toggleHandlerState(boolean enabled) {
         item.setEnabled(enabled);
         loader.update(item);
+        setResult(RESULT_OK);
 
         PackageManager packageManager = getPackageManager();
         int state = enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
@@ -186,6 +188,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
             public void onClick(View view) {
                 item.setSkipList(skipListCheckBox.isChecked());
                 loader.update(item);
+                setResult(RESULT_OK);
             }
         });
 
@@ -301,6 +304,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         }
 
         loader.update(item);
+        setResult(RESULT_OK);
 
         setTimeoutText(getResources());
     }

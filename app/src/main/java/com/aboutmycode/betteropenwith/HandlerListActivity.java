@@ -49,6 +49,8 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
+        getLoaderManager().initLoader(0, null, this);
+
         adapter = new CommonAdapter<HandleItem>(this, new ArrayList<HandleItem>(), R.layout.handler_types, new HandleItemViewBinder());
         getListView().setAdapter(adapter);
 
@@ -78,7 +80,6 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     @Override
     protected void onStart() {
         super.onStart();
-        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
@@ -86,7 +87,14 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         Intent intent = new Intent(this, HandlerDetailsActivity.class);
         HandleItem item = adapter.getItem(position);
         intent.putExtra("id", item.getId());
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            getLoaderManager().restartLoader(0, null, this);
+        }
     }
 
     @Override
