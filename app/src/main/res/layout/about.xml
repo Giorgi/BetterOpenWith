@@ -15,10 +15,13 @@
     </TextView>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/changelog"
         android:onClick="viewChangelog"
         android:id="@+id/button"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="?android:attr/selectableItemBackground"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textStyle="bold" />
 </LinearLayout>
