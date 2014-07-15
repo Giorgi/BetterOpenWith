@@ -51,7 +51,6 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
         adapter = new CommonAdapter<HandleItem>(this, new ArrayList<HandleItem>(), R.layout.handler_types, new HandleItemViewBinder());
         getListView().setAdapter(adapter);
-        getLoaderManager().initLoader(0, null, this);
 
         try {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -79,7 +78,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     @Override
     protected void onStart() {
         super.onStart();
-        getLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
