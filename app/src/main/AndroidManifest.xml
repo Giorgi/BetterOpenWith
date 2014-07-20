@@ -223,7 +223,7 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".HandlerDetailsActivity"
-            android:label="@string/title_activity_handler_details"
+            android:label=""
             android:parentActivityName=".HandlerListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
