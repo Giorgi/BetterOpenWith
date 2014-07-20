@@ -21,10 +21,9 @@
         android:layout_height="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:gravity="center_vertical"
-        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checkMark="@drawable/btn_star_holo_light"
         android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
         android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/image"
         android:layout_alignBaseline="@id/image"
