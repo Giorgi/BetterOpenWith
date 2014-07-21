@@ -108,7 +108,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
 
         item = getHandleItem(id);
 
-        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
+        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
         //If only one app is found it is us so there is no other app.
         if (resInfo.size() == 1) {
@@ -236,7 +236,13 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         intent.setComponent(new ComponentName(ai.applicationInfo.packageName, ai.name));
 
-        startActivity(intent);
+        try {
+            startActivity(intent);
+        } catch (SecurityException e) {
+            intent.setComponent(null);
+            intent.setPackage(ai.packageName);
+            startActivity(intent);
+        }
         finish();
     }
 

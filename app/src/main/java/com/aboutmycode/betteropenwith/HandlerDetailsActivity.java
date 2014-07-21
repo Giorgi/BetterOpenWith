@@ -224,7 +224,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         }
 
         PackageManager packageManager = getPackageManager();
-        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
+        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
         if (resInfo.size() == 1) {
             hideSwitch = true;

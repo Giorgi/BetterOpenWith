@@ -75,7 +75,7 @@ public class CupboardCursorLoader extends AbstractListLoader<HandleItem> {
                 }
 
                 PackageManager packageManager = getContext().getPackageManager();
-                List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, 0);
+                List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
                 if (resInfo.size() == 1) {
                     handleItem.setSelectedAppLabel(resInfo.get(0).loadLabel(packageManager).toString());
