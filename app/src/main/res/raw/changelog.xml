@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="22 July, 2014" versionName="0.8.2 Beta">
+        <changelogtext>
+            [b]Bug fix![/b] Fixed app crash which was occurring when opening Google+ links
+        </changelogtext>
+        <changelogtext>
+            UI changes
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="15 July, 2014" versionName="0.8.1 Beta">
         <changelogtext>
             [b]New![/b] Added Browser handling
