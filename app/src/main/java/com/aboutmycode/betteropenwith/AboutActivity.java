@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -69,5 +71,18 @@ public class AboutActivity extends Activity {
         }
 
         dialogStandardFragment.show(fm, "ChangelogDialogFragment");
+    }
+
+    public void rateApp(View view) {
+        Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
+        startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+    }
+
+    public void shareApp(View view) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_text));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, String.format("https://play.google.com/store/apps/details?id=%s", getPackageName()));
+        startActivity(shareIntent);
     }
 }

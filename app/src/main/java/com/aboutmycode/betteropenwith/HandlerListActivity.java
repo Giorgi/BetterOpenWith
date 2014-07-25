@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
@@ -99,9 +100,22 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem actionItem = menu.findItem(R.id.action_share);
+        ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
+        actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
+        actionProvider.setShareIntent(createShareIntent());
+        
         return true;
+    }
+
+    private Intent createShareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_text));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, String.format("https://play.google.com/store/apps/details?id=%s", getPackageName()));
+        return shareIntent;
     }
 
     @Override
@@ -114,6 +128,12 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
         if (id == R.id.action_feedback) {
             SendFeedbackEmail();
+            return true;
+        }
+
+        if (id == R.id.action_rate) {
+            Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
+            startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
             return true;
         }
 
