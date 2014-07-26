@@ -34,14 +34,14 @@ public class AboutActivity extends Activity {
         }
 
         String creditText = "<b>Thanks to reddit's oroboros74, who <a href=\"http://www.reddit.com/r/Android/comments/24okaq/what_apps_would_you_like_to_have_that_dont_exist/ch96jid\">came up with the idea</a> for this app!</b>";
-        Spanned text = Html.fromHtml("    <img src=\"ic_launcher.png\"/>\n" +
+        Spanned text = Html.fromHtml("    <img src=\"ic_launcher.png\"/>" +
                         "<h3>Better Open With</h3>\n" +
                         String.format(String.format("    <p>%s</p>\n", getString(R.string.version)), version) +
                         String.format("    <p>%s<sup>©</sup> 2014 <a href=\"mailto:android@aboutmycode.com?subject=Better Open With\">Giorgi Dalakishvili</a>. %s</p>", getString(R.string.copyright),
                                 getString(R.string.rights) +
-                                        "<div>" +
+                                        "<p>" +
                                         creditText +
-                                        "</div>"
+                                        "</p>"
                         ),
 
                 new Html.ImageGetter() {
