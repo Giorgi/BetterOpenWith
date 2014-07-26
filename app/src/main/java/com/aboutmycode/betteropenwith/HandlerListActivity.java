@@ -23,6 +23,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -44,16 +45,27 @@ import it.gmariotti.changelibs.library.view.ChangeLogListView;
 
 public class HandlerListActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
     private CommonAdapter<HandleItem> adapter;
+    private View overlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.handler_list);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         getLoaderManager().initLoader(0, null, this);
 
         adapter = new CommonAdapter<HandleItem>(this, new ArrayList<HandleItem>(), R.layout.handler_types, new HandleItemViewBinder());
         getListView().setAdapter(adapter);
+
+        overlay = findViewById(R.id.rateOverlay);
+
+        overlay.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
         try {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -95,6 +107,16 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             getLoaderManager().restartLoader(0, null, this);
+
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+            boolean showRate = preferences.getBoolean("showRate", true);
+            int count = preferences.getInt("launch", 0);
+            preferences.edit().putInt("launch", count++).apply();
+
+            if (showRate && (count == 5 || count == 20 || count == 50)) {
+                overlay.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -106,7 +128,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
         actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
         actionProvider.setShareIntent(createShareIntent());
-        
+
         return true;
     }
 
@@ -114,6 +136,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_text));
+        shareIntent.putExtra(Intent.EXTRA_TITLE, "New Android App");
         shareIntent.putExtra(Intent.EXTRA_TEXT, String.format("https://play.google.com/store/apps/details?id=%s", getPackageName()));
         return shareIntent;
     }
@@ -132,8 +155,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         }
 
         if (id == R.id.action_rate) {
-            Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
-            startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+            rateApp();
             return true;
         }
 
@@ -152,6 +174,11 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void rateApp() {
+        Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
+        startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
     }
 
     private void SendFeedbackEmail() {
@@ -191,6 +218,22 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     @Override
     public void onLoaderReset(Loader<List<HandleItem>> objectLoader) {
         adapter.setData(null);
+    }
+
+    private void saveShowRate() {
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+        editor.putBoolean("showRate", false);
+        editor.apply();
+    }
+
+    public void rateNowClicked(View view) {
+        rateApp();
+        saveShowRate();
+        overlay.setVisibility(View.GONE);
+    }
+
+    public void closeRateClicked(View view) {
+        overlay.setVisibility(View.GONE);
     }
 }
 
