@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="29 July, 2014" versionName="1.0">
+        <changelogtext>
+            First public release. Hooray!
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="22 July, 2014" versionName="0.8.2 Beta">
         <changelogtext>
             [b]Bug fix![/b] Fixed app crash which was occurring when opening Google+ links
