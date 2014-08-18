@@ -1,8 +1,5 @@
 package com.aboutmycode.betteropenwith;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -18,9 +15,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -41,8 +38,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import it.gmariotti.changelibs.library.view.ChangeLogListView;
 
 public class HandlerListActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
     private CommonAdapter<HandleItem> adapter;
@@ -151,7 +146,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         }
 
         if (id == R.id.action_feedback) {
-            SendFeedbackEmail();
+            sendFeedbackEmail();
             return true;
         }
 
@@ -194,12 +189,26 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         }
     }
 
-    private void SendFeedbackEmail() {
+    private void sendFeedbackEmail() {
         String address = "android@aboutmycode.com";
         String subject = "Feedback for Better Open With";
+
+        String text = System.getProperty("line.separator");
+        text = text + "Sent from: " + getDeviceName() + System.getProperty("line.separator");
+        text = text + "Android version: " + Build.VERSION.RELEASE + System.getProperty("line.separator");
+        text = text + "Android OS: " + Build.DISPLAY;
+        try {
+            text = text + "Application Version: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName + System.getProperty("line.separator");
+        } catch (PackageManager.NameNotFoundException e) {
+
+        }
+        text = text + System.getProperty("line.separator");
+
         Uri mailto = Uri.fromParts("mailto", address, null);
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, mailto);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, text);
+
         try {
             startActivity(emailIntent);
         } catch (ActivityNotFoundException e) {
@@ -207,8 +216,31 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
             intent.setType("text/plain");
             intent.putExtra(Intent.EXTRA_EMAIL, address);
             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            emailIntent.putExtra(Intent.EXTRA_TEXT, text);
 
             startActivity(intent);
+        }
+    }
+
+    public String getDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        if (model.startsWith(manufacturer)) {
+            return capitalize(model);
+        } else {
+            return capitalize(manufacturer) + " " + model;
+        }
+    }
+
+    private String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
         }
     }
 
