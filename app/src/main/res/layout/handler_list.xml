@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1">
+
+    <include
+        layout="@android:layout/list_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/rateOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:baselineAligned="false"
+        android:clickable="false"
+        android:visibility="gone"
+        android:background="@color/transparent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/rateButton"
+            android:textColor="@color/chglib_background_default_divider_color"
+            android:text="@string/like"
+            android:textSize="18sp"></TextView>
+
+        <Button
+            android:id="@id/rateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:onClick="rateNowClicked"
+            android:textColor="@color/chglib_background_default_divider_color"
+            android:text="@string/rateBanner" />
+
+        <ImageButton
+            android:id="@+id/closeRateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:onClick="closeRateClicked"
+            android:src="@drawable/ic_action_cancel" />
+
+    </RelativeLayout>
+
+</FrameLayout>

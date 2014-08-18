@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -32,14 +34,14 @@ public class AboutActivity extends Activity {
         }
 
         String creditText = "<b>Thanks to reddit's oroboros74, who <a href=\"http://www.reddit.com/r/Android/comments/24okaq/what_apps_would_you_like_to_have_that_dont_exist/ch96jid\">came up with the idea</a> for this app!</b>";
-        Spanned text = Html.fromHtml("    <img src=\"ic_launcher.png\"/>\n" +
+        Spanned text = Html.fromHtml("    <img src=\"ic_launcher.png\"/>" +
                         "<h3>Better Open With</h3>\n" +
                         String.format(String.format("    <p>%s</p>\n", getString(R.string.version)), version) +
                         String.format("    <p>%s<sup>©</sup> 2014 <a href=\"mailto:android@aboutmycode.com?subject=Better Open With\">Giorgi Dalakishvili</a>. %s</p>", getString(R.string.copyright),
                                 getString(R.string.rights) +
-                                        "<div>" +
+                                        "<p>" +
                                         creditText +
-                                        "</div>"
+                                        "</p>"
                         ),
 
                 new Html.ImageGetter() {
@@ -69,5 +71,18 @@ public class AboutActivity extends Activity {
         }
 
         dialogStandardFragment.show(fm, "ChangelogDialogFragment");
+    }
+
+    public void rateApp(View view) {
+        Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
+        startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+    }
+
+    public void shareApp(View view) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_text));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, String.format("https://play.google.com/store/apps/details?id=%s", getPackageName()));
+        startActivity(shareIntent);
     }
 }
