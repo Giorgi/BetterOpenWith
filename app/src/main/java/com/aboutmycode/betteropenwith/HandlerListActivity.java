@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
@@ -166,19 +167,31 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         }
 
         if (id == R.id.action_all_apps) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://search?q=pub:Giorgi Dalakishvili"));
-
-            startActivity(intent);
+            allApps();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void allApps() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://search?q=pub:Giorgi Dalakishvili"));
+
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, getString(R.string.play_store), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void rateApp() {
-        Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
-        startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+        try {
+            Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
+            startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, getString(R.string.play_store), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void SendFeedbackEmail() {

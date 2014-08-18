@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -16,6 +17,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Giorgi on 6/27/2014.
@@ -74,8 +76,12 @@ public class AboutActivity extends Activity {
     }
 
     public void rateApp(View view) {
-        Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
-        startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+        try {
+            Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
+            startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, getString(R.string.play_store), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void shareApp(View view) {

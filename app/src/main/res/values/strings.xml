@@ -56,4 +56,5 @@
     <string name="rate_me">Rate Me!</string>
     <string name="like">Like the app?</string>
     <string name="rateBanner">Rate Now</string>
+    <string name="play_store">Cannot start Play Store</string>
 </resources>
