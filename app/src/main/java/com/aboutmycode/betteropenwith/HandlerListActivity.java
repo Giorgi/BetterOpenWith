@@ -196,11 +196,10 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         String text = System.getProperty("line.separator");
         text = text + "Sent from: " + getDeviceName() + System.getProperty("line.separator");
         text = text + "Android version: " + Build.VERSION.RELEASE + System.getProperty("line.separator");
-        text = text + "Android OS: " + Build.DISPLAY;
+        text = text + "Android OS: " + Build.DISPLAY + System.getProperty("line.separator");
         try {
             text = text + "Application Version: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName + System.getProperty("line.separator");
         } catch (PackageManager.NameNotFoundException e) {
-
         }
         text = text + System.getProperty("line.separator");
 
