@@ -35,8 +35,8 @@ import com.aboutmycode.betteropenwith.common.YesNoDialogFragment;
 import com.aboutmycode.betteropenwith.common.YesNoListener;
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
-import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
+import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,7 +49,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     private CheckBox skipListCheckBox;
     private Switch masterSwitch;
     private HandleItem item;
-    private CupboardCursorLoader loader;
+    private HandleItemLoader loader;
     private ViewFlipper flipper;
     private boolean hideSwitch = false;
 
@@ -167,14 +167,14 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
     @Override
     public Loader<List<HandleItem>> onCreateLoader(int loaderId, Bundle bundle) {
-        loader = new CupboardCursorLoader(this, new CupboardSQLiteOpenHelper(this), "_id=?", bundle.getLong("id"));
+        loader = new HandleItemLoader(this, new CupboardSQLiteOpenHelper(this), "_id=?", bundle.getLong("id"));
         return loader;
     }
 
     @Override
     public void onLoadFinished(Loader<List<HandleItem>> listLoader, List<HandleItem> handleItems) {
         if (loader == null) {
-            loader = (CupboardCursorLoader) listLoader;
+            loader = (HandleItemLoader) listLoader;
         }
 
         item = handleItems.get(0);

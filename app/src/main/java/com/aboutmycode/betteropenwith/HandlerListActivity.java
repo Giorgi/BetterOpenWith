@@ -29,8 +29,8 @@ import android.widget.Toast;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
-import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
+import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 import com.aboutmycode.betteropenwith.settings.SettingsActivity;
 
 import java.util.ArrayList;
@@ -216,7 +216,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
     @Override
     public Loader<List<HandleItem>> onCreateLoader(int loaderId, Bundle bundle) {
-        return new CupboardCursorLoader(this, new CupboardSQLiteOpenHelper(this));
+        return new HandleItemLoader(this, new CupboardSQLiteOpenHelper(this));
     }
 
     @Override
