@@ -3,13 +3,13 @@ package com.aboutmycode.betteropenwith;
 /**
  * Created by Giorgi on 8/22/2014.
  */
-public class SpinnerItem {
+public class SpinnerSite {
     private long id;
     private int icon;
     private String url;
     private String title;
 
-    public SpinnerItem(String title, int icon, long id, String url) {
+    public SpinnerSite(String title, int icon, long id, String url) {
         this.title = title;
         this.icon = icon;
         this.id = id;

@@ -179,25 +179,10 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         item = handleItems.get(0);
 
-        //region skip list checkbox and timeout
-        skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
-        skipListCheckBox.setEnabled(!TextUtils.isEmpty(item.getPackageName()));
-        skipListCheckBox.setChecked(item.isSkipList());
-        skipListCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                item.setSkipList(skipListCheckBox.isChecked());
-                loader.update(item);
-                setResult(RESULT_OK);
-            }
-        });
-
-        Resources resources = getResources();
-        setTimeoutText(resources);
-
-        //endregion
+        setAppLaunchDetails(item);
 
         //region ActionBar and title
+        Resources resources = getResources();
 
         String title = resources.getString(resources.getIdentifier(item.getNameResource(), "string", R.class.getPackage().getName()));
         setTitle(title);
@@ -213,7 +198,28 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         TextView noAppsTextView = (TextView) findViewById(R.id.noAppsTextView);
         noAppsTextView.setText(String.format(getString(R.string.no_app), title));
 
-        //region application list
+        loadApps(item);
+    }
+
+    protected void setAppLaunchDetails(ItemBase item) {
+        Resources resources = getResources();
+
+        skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
+        skipListCheckBox.setEnabled(!TextUtils.isEmpty(item.getPackageName()));
+        skipListCheckBox.setChecked(item.isSkipList());
+        skipListCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HandlerDetailsActivity.this.item.setSkipList(skipListCheckBox.isChecked());
+                loader.update(HandlerDetailsActivity.this.item);
+                setResult(RESULT_OK);
+            }
+        });
+
+        setTimeoutText(resources);
+    }
+
+    protected void loadApps(ItemBase item) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String intentData = item.getIntentData();
 
@@ -272,7 +278,6 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
             checked -= subtract ? 1 : 0;
             getListView().setItemChecked(checked, true);
         }
-        //endregion
     }
 
     private void setTimeoutText(Resources resources) {
