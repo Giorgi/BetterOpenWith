@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Debug;
+import android.util.DebugUtils;
 
 import org.acra.ACRA;
 import org.acra.ReportField;
@@ -21,9 +23,12 @@ import org.acra.sender.ReportSenderException;
 public class BetterOpenWithApplication extends Application {
     @Override
     public void onCreate() {
-        ACRA.init(this);
-        EnhancedMailSender mailSender = new EnhancedMailSender(this);
-        ACRA.getErrorReporter().setReportSender(mailSender);
+        if (!Debug.isDebuggerConnected()) {
+            ACRA.init(this);
+
+            EnhancedMailSender mailSender = new EnhancedMailSender(this);
+            ACRA.getErrorReporter().setReportSender(mailSender);
+        }
 
         super.onCreate();
 
