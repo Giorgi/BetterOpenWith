@@ -61,6 +61,7 @@ public class CupboardCursorLoader extends AbstractListLoader<HandleItem> {
             handleItem.setName(resources.getString(resources.getIdentifier(handleItem.getNameResource(), "string", R.class.getPackage().getName())));
             result.add(handleItem);
 
+            //If there is a selected app for handle item load details for that app.
             if (!TextUtils.isEmpty(handleItem.getPackageName())) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setPackage(handleItem.getPackageName());
