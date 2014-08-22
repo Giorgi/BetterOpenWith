@@ -15,7 +15,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -66,7 +65,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         try {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             int lastVersion = preferences.getInt("version", -1);
-            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            PackageInfo packageInfo = Utils.getCurrentPackageInfo(this);
 
             if (packageInfo.versionCode > lastVersion) {
                 ChangelogDialogFragment dialogStandardFragment = new ChangelogDialogFragment();
@@ -193,14 +192,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         String address = "android@aboutmycode.com";
         String subject = "Feedback for Better Open With";
 
-        String text = "Sent from: " + getDeviceName() + System.getProperty("line.separator");
-        text = text + "Android version: " + Build.VERSION.RELEASE + System.getProperty("line.separator");
-        text = text + "Android OS: " + Build.DISPLAY + System.getProperty("line.separator");
-        try {
-            text = text + "Application Version: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName + System.getProperty("line.separator");
-        } catch (PackageManager.NameNotFoundException e) {
-        }
-        text = text + System.getProperty("line.separator");
+        String text = Utils.getDeviceInfo(this);
 
         Uri mailto = Uri.fromParts("mailto", address, null);
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, mailto);
@@ -217,28 +209,6 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
             intent.putExtra(Intent.EXTRA_TEXT, text);
 
             startActivity(intent);
-        }
-    }
-
-    public String getDeviceName() {
-        String manufacturer = Build.MANUFACTURER;
-        String model = Build.MODEL;
-        if (model.startsWith(manufacturer)) {
-            return capitalize(model);
-        } else {
-            return capitalize(manufacturer) + " " + model;
-        }
-    }
-
-    private String capitalize(String s) {
-        if (s == null || s.length() == 0) {
-            return "";
-        }
-        char first = s.charAt(0);
-        if (Character.isUpperCase(first)) {
-            return s;
-        } else {
-            return Character.toUpperCase(first) + s.substring(1);
         }
     }
 

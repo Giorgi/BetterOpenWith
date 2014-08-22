@@ -29,7 +29,7 @@ public class AboutActivity extends Activity {
 
         String version = "";
         try {
-            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            PackageInfo pInfo = Utils.getCurrentPackageInfo(this);
             version = pInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
