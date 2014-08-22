@@ -92,9 +92,11 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
-        Intent intent = new Intent(this, HandlerDetailsActivity.class);
         HandleItem item = adapter.getItem(position);
+
+        Intent intent = DetailActivityFactory.getDetailsActivity(item.getId(), this);
         intent.putExtra("id", item.getId());
+
         startActivityForResult(intent, 1);
     }
 
@@ -287,5 +289,15 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
         }
 
         return row;
+    }
+}
+
+class DetailActivityFactory {
+    public static Intent getDetailsActivity(long id, Context context) {
+        if (id == 7) {
+            return new Intent(context, BrowserDetailsActivity.class);
+        } else {
+            return new Intent(context, HandlerDetailsActivity.class);
+        }
     }
 }

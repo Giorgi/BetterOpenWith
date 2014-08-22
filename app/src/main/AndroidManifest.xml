@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aboutmycode.betteropenwith">
+    package="com.aboutmycode.betteropenwith" >
 
     <application
         android:name=".BetterOpenWithApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".HandlerListActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
 
         <activity-alias
             android:name="com.aboutmycode.openwith.app.PdfFileHandlerActivity"
-            android:targetActivity=".FileHandlerActivity">
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -56,7 +56,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.VideoFileHandlerActivity"
-            android:targetActivity=".FileHandlerActivity">
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -101,7 +101,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.VideoStreamHandlerActivity"
-            android:targetActivity=".FileHandlerActivity">
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -112,13 +112,14 @@
                 <data android:scheme="https" />
                 <data android:mimeType="video/*" />
             </intent-filter>
+
             <meta-data
                 android:name="id"
                 android:value="5" />
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.ImageFileHandlerActivity"
-            android:targetActivity=".FileHandlerActivity">
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -150,7 +151,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.AudioFileHandlerActivity"
-            android:targetActivity=".FileHandlerActivity">
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -185,7 +186,7 @@
         </activity-alias>
         <activity-alias
             android:name="com.aboutmycode.openwith.app.AudioStreamHandlerActivity"
-            android:targetActivity=".FileHandlerActivity">
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -196,13 +197,14 @@
                 <data android:scheme="https" />
                 <data android:mimeType="audio/*" />
             </intent-filter>
+
             <meta-data
                 android:name="id"
                 android:value="3" />
         </activity-alias>
         <activity-alias
-            android:name="com.aboutmycode.betteropenwith.app.BrowserHandlerActivity"
-            android:targetActivity=".FileHandlerActivity">
+            android:name=".app.BrowserHandlerActivity"
+            android:targetActivity=".FileHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -212,11 +214,11 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
             </intent-filter>
+
             <meta-data
                 android:name="id"
                 android:value="7" />
         </activity-alias>
-
 
         <activity
             android:name=".settings.SettingsActivity"
@@ -224,14 +226,22 @@
         <activity
             android:name=".HandlerDetailsActivity"
             android:label=""
-            android:parentActivityName=".HandlerListActivity">
+            android:parentActivityName=".HandlerListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/action_about"></activity>
+            android:label="@string/action_about" />
+        <activity
+            android:name=".BrowserDetailsActivity"
+            android:label=""
+            android:parentActivityName=".HandlerListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
     </application>
 
 </manifest>
