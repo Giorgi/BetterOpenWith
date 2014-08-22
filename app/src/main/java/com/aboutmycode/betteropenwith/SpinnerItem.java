@@ -3,15 +3,17 @@ package com.aboutmycode.betteropenwith;
 /**
  * Created by Giorgi on 8/22/2014.
  */
-public class SpinnerNavItem {
+public class SpinnerItem {
     private long id;
     private int icon;
     private String url;
     private String title;
 
-    public SpinnerNavItem(String title, int icon) {
+    public SpinnerItem(String title, int icon, long id, String url) {
         this.title = title;
         this.icon = icon;
+        this.id = id;
+        this.url = url;
     }
 
     public long getId() {

@@ -6,21 +6,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.aboutmycode.betteropenwith.R;
-
 import java.util.ArrayList;
 
 public class BrowserDetailsActivity extends HandlerDetailsActivity implements ActionBar.OnNavigationListener {
 
     private ActionBar actionBar;
-    private ArrayList<SpinnerNavItem> navSpinner;
+    private ArrayList<SpinnerItem> navSpinner;
     private SiteNavigationAdapter adapter;
 
     @Override
@@ -31,14 +28,15 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
-        navSpinner = new ArrayList<SpinnerNavItem>();
-        navSpinner.add(new SpinnerNavItem("All sites", 0));
-        navSpinner.add(new SpinnerNavItem("Youtube", R.drawable.youtube));
-        navSpinner.add(new SpinnerNavItem("Twitter", R.drawable.twitter));
-        navSpinner.add(new SpinnerNavItem("Facebook", R.drawable.facebook));
-        navSpinner.add(new SpinnerNavItem("Google+", R.drawable.googleplusred));
-        navSpinner.add(new SpinnerNavItem("Reddit", R.drawable.reddit));
-        navSpinner.add(new SpinnerNavItem("Wikipedia", R.drawable.wikipedia));
+        navSpinner = new ArrayList<SpinnerItem>();
+        navSpinner.add(new SpinnerItem("All sites", 0, 0, "http://aboutmycode.com"));
+        navSpinner.add(new SpinnerItem("Youtube", R.drawable.youtube, 0, "http://youtube.com/"));
+        navSpinner.add(new SpinnerItem("Twitter", R.drawable.twitter, 0, "http://twitter.com/"));
+        navSpinner.add(new SpinnerItem("Facebook", R.drawable.facebook, 0, "http://facebook.com/"));
+        navSpinner.add(new SpinnerItem("Play Store", R.drawable.play_store, 0, "https://play.google.com/store/apps/details?id=com.aboutmycode.betteropenwith"));
+        navSpinner.add(new SpinnerItem("Google+", R.drawable.google_plus_red, 0, "https://plus.google.com/communities/110383670951588070492"));
+        navSpinner.add(new SpinnerItem("Reddit", R.drawable.reddit, 0, "http://www.reddit.com/r/android"));
+        navSpinner.add(new SpinnerItem("Wikipedia", R.drawable.wikipedia, 0, "http://en.wikipedia.org/wiki/Android"));
 
         adapter = new SiteNavigationAdapter(getApplicationContext(), navSpinner);
 
@@ -61,22 +59,22 @@ class SiteNavigationAdapter extends BaseAdapter {
 
     private ImageView imgIcon;
     private TextView txtTitle;
-    private ArrayList<SpinnerNavItem> spinnerNavItem;
+    private ArrayList<SpinnerItem> spinnerItem;
     private Context context;
 
-    public SiteNavigationAdapter(Context context, ArrayList<SpinnerNavItem> spinnerNavItem) {
-        this.spinnerNavItem = spinnerNavItem;
+    public SiteNavigationAdapter(Context context, ArrayList<SpinnerItem> spinnerItem) {
+        this.spinnerItem = spinnerItem;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return spinnerNavItem.size();
+        return spinnerItem.size();
     }
 
     @Override
     public Object getItem(int index) {
-        return spinnerNavItem.get(index);
+        return spinnerItem.get(index);
     }
 
     @Override
@@ -94,9 +92,9 @@ class SiteNavigationAdapter extends BaseAdapter {
         imgIcon = (ImageView) convertView.findViewById(R.id.imgIcon);
         txtTitle = (TextView) convertView.findViewById(R.id.txtTitle);
 
-        imgIcon.setImageResource(spinnerNavItem.get(position).getIcon());
+        imgIcon.setImageResource(spinnerItem.get(position).getIcon());
         imgIcon.setVisibility(View.GONE);
-        txtTitle.setText(spinnerNavItem.get(position).getTitle());
+        txtTitle.setText(spinnerItem.get(position).getTitle());
         return convertView;
     }
 
@@ -110,8 +108,8 @@ class SiteNavigationAdapter extends BaseAdapter {
         imgIcon = (ImageView) convertView.findViewById(R.id.imgIcon);
         txtTitle = (TextView) convertView.findViewById(R.id.txtTitle);
 
-        int icon = spinnerNavItem.get(position).getIcon();
-        txtTitle.setText(spinnerNavItem.get(position).getTitle());
+        int icon = spinnerItem.get(position).getIcon();
+        txtTitle.setText(spinnerItem.get(position).getTitle());
 
         if (icon != 0) {
             imgIcon.setVisibility(View.VISIBLE);
