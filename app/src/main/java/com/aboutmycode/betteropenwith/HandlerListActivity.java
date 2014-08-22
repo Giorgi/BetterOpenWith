@@ -193,8 +193,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         String address = "android@aboutmycode.com";
         String subject = "Feedback for Better Open With";
 
-        String text = System.getProperty("line.separator");
-        text = text + "Sent from: " + getDeviceName() + System.getProperty("line.separator");
+        String text = "Sent from: " + getDeviceName() + System.getProperty("line.separator");
         text = text + "Android version: " + Build.VERSION.RELEASE + System.getProperty("line.separator");
         text = text + "Android OS: " + Build.DISPLAY + System.getProperty("line.separator");
         try {
@@ -215,7 +214,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
             intent.setType("text/plain");
             intent.putExtra(Intent.EXTRA_EMAIL, address);
             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-            emailIntent.putExtra(Intent.EXTRA_TEXT, text);
+            intent.putExtra(Intent.EXTRA_TEXT, text);
 
             startActivity(intent);
         }
