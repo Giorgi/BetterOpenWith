@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
@@ -25,6 +26,8 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
     private ActionBar actionBar;
     private ArrayList<SpinnerSite> navSpinner;
     private SiteNavigationAdapter adapter;
+    private Site site;
+    private CupboardCursorLoader<Site> loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,11 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
     }
 
     @Override
+    protected void onListItemClick(ListView listView, View view, int position, long id) {
+        super.onListItemClick(listView, position, site, loader);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.browser_details, menu);
         return true;
@@ -63,37 +71,33 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
 
         Bundle extras = new Bundle();
         extras.putLong("id", itemId);
-        getLoaderManager().initLoader(2, extras, new SiteLoaderCallbacks(this));
+        getLoaderManager().initLoader(2, extras, new SiteLoaderCallbacks());
 
         return true;
     }
-}
 
-class SiteLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<Site>> {
-    Context context;
+    class SiteLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<Site>> {
+        @Override
+        public Loader<List<Site>> onCreateLoader(int id, Bundle bundle) {
+            loader = new CupboardCursorLoader<Site>(BrowserDetailsActivity.this, new CupboardSQLiteOpenHelper(BrowserDetailsActivity.this),
+                    Site.class, "_id=?", bundle.getLong("id"));
+            return loader;
+        }
 
-    SiteLoaderCallbacks(Context context) {
-        this.context = context;
-    }
+        @Override
+        public void onLoadFinished(Loader<List<Site>> listLoader, List<Site> sites) {
+            Site site = sites.get(0);
 
-    @Override
-    public Loader<List<Site>> onCreateLoader(int id, Bundle bundle) {
-        return new CupboardCursorLoader<Site>(context, new CupboardSQLiteOpenHelper(context), Site.class, "_id=?", bundle.getLong("id"));
-    }
+            BrowserDetailsActivity browserDetailsActivity = BrowserDetailsActivity.this;
+            browserDetailsActivity.site = site;
+            browserDetailsActivity.setAppLaunchDetails(site);
+            browserDetailsActivity.loadApps(site);
+        }
 
-    @Override
-    public void onLoadFinished(Loader<List<Site>> listLoader, List<Site> sites) {
-        Site site = sites.get(0);
+        @Override
+        public void onLoaderReset(Loader<List<Site>> listLoader) {
 
-        HandlerDetailsActivity loaderContext = (HandlerDetailsActivity) context;
-
-        loaderContext.setAppLaunchDetails(site);
-        loaderContext.loadApps(site);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Site>> listLoader) {
-
+        }
     }
 }
 

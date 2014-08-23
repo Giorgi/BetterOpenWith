@@ -1,15 +1,11 @@
 package com.aboutmycode.betteropenwith;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.ActivityInfo;
@@ -35,6 +31,7 @@ import com.aboutmycode.betteropenwith.common.YesNoDialogFragment;
 import com.aboutmycode.betteropenwith.common.YesNoListener;
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
+import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 
@@ -67,6 +64,10 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
+        onListItemClick(listView, position, item, loader);
+    }
+
+    protected <T extends ItemBase> void onListItemClick(ListView listView, int position, T item, CupboardCursorLoader<T> loader) {
         ResolveInfoDisplay adapterItem = adapter.getItem(position);
         ActivityInfo activityInfo = adapterItem.getResolveInfo().activityInfo;
 

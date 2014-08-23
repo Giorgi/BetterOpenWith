@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Debug;
-import android.util.DebugUtils;
 
 import org.acra.ACRA;
 import org.acra.ReportField;
