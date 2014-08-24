@@ -85,7 +85,7 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
 
         Bundle extras = new Bundle();
         extras.putLong("id", itemId);
-        getLoaderManager().initLoader(2, extras, new SiteLoaderCallbacks());
+        getLoaderManager().restartLoader(2, extras, new SiteLoaderCallbacks());
 
         return true;
     }
