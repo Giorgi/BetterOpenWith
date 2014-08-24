@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
-import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,22 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
-        super.onListItemClick(listView, position, site, loader);
+        onListItemClick(listView, position, site, loader);
+    }
+
+    @Override
+    protected void skipChanged(boolean skipList) {
+        updateSkipList(skipList, site, loader);
+    }
+
+    @Override
+    protected void timeoutChanged(boolean useGlobal, int timeout) {
+        updateTimeout(useGlobal, timeout, site, loader);
+    }
+
+    @Override
+    public void editTimeoutClicked(View view) {
+        showTimeoutDialog(site);
     }
 
     @Override
@@ -86,6 +100,9 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
 
         @Override
         public void onLoadFinished(Loader<List<Site>> listLoader, List<Site> sites) {
+            if (loader == null) {
+                loader = (CupboardCursorLoader<Site>) listLoader;
+            }
             Site site = sites.get(0);
 
             BrowserDetailsActivity browserDetailsActivity = BrowserDetailsActivity.this;

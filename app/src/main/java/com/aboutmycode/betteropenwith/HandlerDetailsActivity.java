@@ -110,7 +110,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
                 boolean checked = masterSwitch.isChecked();
                 if (checked) {
                     toggleHandlerState(checked);
-                }else{
+                } else {
                     masterSwitch.setChecked(true);
                     FragmentManager fm = getFragmentManager();
                     String message = String.format(getString(R.string.confirm_disable), getTitle(), getString(R.string.app_name));
@@ -202,6 +202,10 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         loadApps(item);
     }
 
+    @Override
+    public void onLoaderReset(Loader<List<HandleItem>> listLoader) {
+    }
+
     protected void setAppLaunchDetails(ItemBase item) {
         Resources resources = getResources();
 
@@ -211,13 +215,11 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         skipListCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HandlerDetailsActivity.this.item.setSkipList(skipListCheckBox.isChecked());
-                loader.update(HandlerDetailsActivity.this.item);
-                setResult(RESULT_OK);
+                skipChanged(skipListCheckBox.isChecked());
             }
         });
 
-        setTimeoutText(resources);
+        setTimeoutText(resources, item);
     }
 
     protected void loadApps(ItemBase item) {
@@ -281,7 +283,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         }
     }
 
-    private void setTimeoutText(Resources resources) {
+    private void setTimeoutText(Resources resources, ItemBase item) {
         TextView timeoutTextView = (TextView) findViewById(R.id.timeoutTextView);
 
         int timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", resources.getInteger(R.integer.default_timeout));
@@ -293,17 +295,31 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         }
     }
 
-    @Override
-    public void onLoaderReset(Loader<List<HandleItem>> listLoader) {
-    }
-
     public void editTimeoutClicked(View view) {
-        FragmentManager fm = getFragmentManager();
-        TimeoutDialogFragment editNameDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout());
-        editNameDialog.show(fm, "TimeoutDialogFragment");
+        showTimeoutDialog(item);
     }
 
-    public void timeoutChanged(boolean useGlobal, int timeout) {
+    protected void showTimeoutDialog(ItemBase item) {
+        FragmentManager fm = getFragmentManager();
+        TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout());
+        editTimeoutDialog.show(fm, "TimeoutDialogFragment");
+    }
+
+    protected void skipChanged(boolean skipList) {
+        updateSkipList(skipList, item, loader);
+    }
+
+    protected <T extends ItemBase> void updateSkipList(boolean skipList, T item, CupboardCursorLoader<T> loader) {
+        item.setSkipList(skipListCheckBox.isChecked());
+        loader.update(item);
+        setResult(RESULT_OK);
+    }
+
+    protected void timeoutChanged(boolean useGlobal, int timeout) {
+        updateTimeout(useGlobal, timeout, item, loader);
+    }
+
+    protected <T extends ItemBase> void updateTimeout(boolean useGlobal, int timeout, T item, CupboardCursorLoader<T> loader) {
         item.setUseGlobalTimeout(useGlobal);
         if (!useGlobal) {
             item.setCustomTimeout(timeout);
@@ -312,7 +328,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         loader.update(item);
         setResult(RESULT_OK);
 
-        setTimeoutText(getResources());
+        setTimeoutText(getResources(), item);
     }
 
     @Override
