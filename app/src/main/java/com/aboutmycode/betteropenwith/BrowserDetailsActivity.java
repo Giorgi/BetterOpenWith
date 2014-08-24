@@ -91,6 +91,8 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
     @Override
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
         if (itemId == 0) {
+            site = null;
+            loadData();
             return true;
         }
 

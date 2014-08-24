@@ -56,10 +56,14 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         setContentView(R.layout.handler_details);
         flipper = (ViewFlipper) findViewById(R.id.view_flipper);
 
-        getLoaderManager().initLoader(1, getIntent().getExtras(), this);
+        loadData();
 
         ListView listView = getListView();
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    }
+
+    protected void loadData() {
+        getLoaderManager().restartLoader(1, getIntent().getExtras(), this);
     }
 
     @Override
