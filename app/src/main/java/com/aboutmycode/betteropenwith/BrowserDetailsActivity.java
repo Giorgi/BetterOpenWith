@@ -52,7 +52,11 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
-        onListItemClick(listView, position, site, loader);
+        if (site == null) {
+            super.onListItemClick(listView, view, position, id);
+        } else {
+            onListItemClick(listView, position, site, loader);
+        }
     }
 
     @Override
@@ -62,12 +66,20 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
 
     @Override
     protected void timeoutChanged(boolean useGlobal, int timeout) {
-        updateTimeout(useGlobal, timeout, site, loader);
+        if (site == null) {
+            super.timeoutChanged(useGlobal, timeout);
+        } else {
+            updateTimeout(useGlobal, timeout, site, loader);
+        }
     }
 
     @Override
     public void editTimeoutClicked(View view) {
-        showTimeoutDialog(site);
+        if (site == null) {
+            super.editTimeoutClicked(view);
+        } else {
+            showTimeoutDialog(site);
+        }
     }
 
     @Override
