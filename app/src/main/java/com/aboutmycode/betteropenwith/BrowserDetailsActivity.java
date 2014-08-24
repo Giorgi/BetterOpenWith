@@ -39,12 +39,11 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
         navSpinner = new ArrayList<SpinnerSite>();
         navSpinner.add(new SpinnerSite("All sites", 0, 0, "http://aboutmycode.com"));
         navSpinner.add(new SpinnerSite("Youtube", R.drawable.youtube, 1, "http://youtube.com/"));
-        navSpinner.add(new SpinnerSite("Twitter", R.drawable.twitter, 0, "http://twitter.com/"));
-        navSpinner.add(new SpinnerSite("Facebook", R.drawable.facebook, 0, "http://facebook.com/"));
-        navSpinner.add(new SpinnerSite("Play Store", R.drawable.play_store, 0, "https://play.google.com/store/apps/details?id=com.aboutmycode.betteropenwith"));
-        navSpinner.add(new SpinnerSite("Google+", R.drawable.google_plus_red, 0, "https://plus.google.com/communities/110383670951588070492"));
-        navSpinner.add(new SpinnerSite("Reddit", R.drawable.reddit, 0, "http://www.reddit.com/r/android"));
-        navSpinner.add(new SpinnerSite("Wikipedia", R.drawable.wikipedia, 0, "http://en.wikipedia.org/wiki/Android"));
+        navSpinner.add(new SpinnerSite("Twitter", R.drawable.twitter, 2, "http://twitter.com/"));
+        navSpinner.add(new SpinnerSite("Play Store", R.drawable.play_store, 4, "https://play.google.com/store/apps/details?id=com.aboutmycode.betteropenwith"));
+        navSpinner.add(new SpinnerSite("Google+", R.drawable.google_plus_red, 5, "https://plus.google.com/communities/110383670951588070492"));
+        navSpinner.add(new SpinnerSite("Reddit", R.drawable.reddit, 6, "http://www.reddit.com/r/android"));
+        navSpinner.add(new SpinnerSite("Wikipedia", R.drawable.wikipedia, 7, "http://en.wikipedia.org/wiki/Android"));
 
         adapter = new SiteNavigationAdapter(getApplicationContext(), navSpinner);
 
