@@ -156,7 +156,7 @@ class SiteNavigationAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.site_navigation_item, null);
+            convertView = inflater.inflate(R.layout.site_navigation_item, parent, false);
         }
 
         imgIcon = (ImageView) convertView.findViewById(R.id.imgIcon);
@@ -172,7 +172,7 @@ class SiteNavigationAdapter extends BaseAdapter {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.site_navigation_item, null);
+            convertView = inflater.inflate(R.layout.site_navigation_item, parent, false);
         }
 
         imgIcon = (ImageView) convertView.findViewById(R.id.imgIcon);
