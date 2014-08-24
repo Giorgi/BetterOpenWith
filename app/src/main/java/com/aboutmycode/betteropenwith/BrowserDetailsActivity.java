@@ -83,12 +83,6 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.browser_details, menu);
-        return true;
-    }
-
-    @Override
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
         if (itemId == 0) {
             site = null;
