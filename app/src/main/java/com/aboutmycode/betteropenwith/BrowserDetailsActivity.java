@@ -71,7 +71,11 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
 
     @Override
     protected void skipChanged(boolean skipList) {
-        updateSkipList(skipList, site, loader);
+        if (site == null) {
+            super.skipChanged(skipList);
+        } else {
+            updateSkipList(skipList, site, loader);
+        }
     }
 
     @Override

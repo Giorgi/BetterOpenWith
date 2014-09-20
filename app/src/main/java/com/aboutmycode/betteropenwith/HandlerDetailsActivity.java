@@ -321,7 +321,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     }
 
     protected <T extends ItemBase> void updateSkipList(boolean skipList, T item, CupboardCursorLoader<T> loader) {
-        item.setSkipList(skipListCheckBox.isChecked());
+        item.setSkipList(skipList);
         loader.update(item);
         setResult(RESULT_OK);
     }
