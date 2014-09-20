@@ -9,11 +9,32 @@ public class SpinnerSite {
     private String url;
     private String title;
 
+    public SpinnerSite(long id) {
+        this.id = id;
+    }
+
     public SpinnerSite(String title, int icon, long id, String url) {
         this.title = title;
         this.icon = icon;
         this.id = id;
         this.url = url;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SpinnerSite that = (SpinnerSite) o;
+
+        if (id != that.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
     }
 
     public long getId() {

@@ -144,6 +144,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     }
 
     private void initializeMasterSwitch() {
+        if (item == null) return;
         boolean enabled = item.isEnabled();
         masterSwitch.setChecked(enabled);
 
@@ -203,7 +204,13 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         TextView noAppsTextView = (TextView) findViewById(R.id.noAppsTextView);
         noAppsTextView.setText(String.format(getString(R.string.no_app), title));
 
-        loadApps(item);
+        if (shouldLoadApps()) {
+            loadApps(item);
+        }
+    }
+
+    protected boolean shouldLoadApps() {
+        return true;
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -47,7 +48,11 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
 
         adapter = new SiteNavigationAdapter(getApplicationContext(), navSpinner);
 
+        long id = getIntent().getLongExtra("siteId", 0);
+        int selectedIndex = navSpinner.indexOf(new SpinnerSite(id));
+
         actionBar.setListNavigationCallbacks(adapter, this);
+        actionBar.setSelectedNavigationItem(selectedIndex);
     }
 
     @Override
@@ -57,6 +62,11 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
         } else {
             onListItemClick(listView, position, site, loader);
         }
+    }
+
+    @Override
+    protected boolean shouldLoadApps() {
+        return getActionBar().getSelectedNavigationIndex() == 0;
     }
 
     @Override

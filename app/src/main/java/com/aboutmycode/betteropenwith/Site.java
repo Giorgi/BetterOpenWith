@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 public class Site extends ItemBase {
     private String name;
     private String iconResource;
+    private String domain;
 
     public String getName() {
         return name;
@@ -25,4 +26,11 @@ public class Site extends ItemBase {
         this.iconResource = iconResource;
     }
 
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
 }
