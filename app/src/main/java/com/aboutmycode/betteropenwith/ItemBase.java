@@ -6,13 +6,21 @@ package com.aboutmycode.betteropenwith;
 public class ItemBase {
     long _id;
     private String appComponentName;
+
     private String intentData;
     private String intentType;
+
     private boolean enabled;
+
     private String packageName;
     private String className;
+
+    private String lastPackageName;
+    private String lastClassName;
+
     private boolean installed;
     private boolean skipList;
+
     private boolean useGlobalTimeout;
     private int customTimeout;
 
@@ -102,5 +110,21 @@ public class ItemBase {
 
     public void setCustomTimeout(int customTimeout) {
         this.customTimeout = customTimeout;
+    }
+
+    public String getLastPackageName() {
+        return lastPackageName;
+    }
+
+    public void setLastPackageName(String lastPackageName) {
+        this.lastPackageName = lastPackageName;
+    }
+
+    public String getLastClassName() {
+        return lastClassName;
+    }
+
+    public void setLastClassName(String lastClassName) {
+        this.lastClassName = lastClassName;
     }
 }

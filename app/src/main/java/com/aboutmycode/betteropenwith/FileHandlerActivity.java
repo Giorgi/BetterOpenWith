@@ -13,6 +13,7 @@ import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -142,6 +143,12 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
                 }
             }
 
+            //if preferred app isn't set select the last used app
+            if (TextUtils.isEmpty(item.getPackageName()) &&
+                    info.activityInfo.packageName.equals(item.getLastPackageName()) && info.activityInfo.name.equals(item.getLastClassName())) {
+                checked = index;
+            }
+
             ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
             resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
             resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
@@ -246,10 +253,23 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        ResolveInfoDisplay item = adapter.getItem(position);
-        ResolveInfo resolveInfo = item.getResolveInfo();
+        ResolveInfo resolveInfo = adapter.getItem(position).getResolveInfo();
 
+        updateLastApp(item, resolveInfo.activityInfo);
         startIntentFromResolveInfo(resolveInfo);
+    }
+
+    protected void updateLastApp(ItemBase item, ActivityInfo activityInfo) {
+        item.setLastClassName(activityInfo.name);
+        item.setLastPackageName(activityInfo.applicationInfo.packageName);
+
+        CupboardSQLiteOpenHelper dbHelper = new CupboardSQLiteOpenHelper(this);
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+
+        cupboard().withDatabase(database).put(item);
+
+        database.close();
+        dbHelper.close();
     }
 
     private void startIntentFromResolveInfo(ResolveInfo resolveInfo) {
