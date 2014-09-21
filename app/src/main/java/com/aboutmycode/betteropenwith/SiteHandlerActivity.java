@@ -24,7 +24,11 @@ public class SiteHandlerActivity extends FileHandlerActivity {
     @Override
     protected Intent getDetailsScreenIntent(ItemBase item) {
         Intent browserDetailsIntent = new Intent(this, BrowserDetailsActivity.class);
-        browserDetailsIntent.putExtra("siteId", item.getId());
+        if (item instanceof Site) {
+            browserDetailsIntent.putExtra("siteId", item.getId());
+        } else {
+            browserDetailsIntent.putExtra("siteId", 0);
+        }
 
         return browserDetailsIntent;
     }
@@ -51,7 +55,7 @@ public class SiteHandlerActivity extends FileHandlerActivity {
             }
         }
 
-        return sites.get(0);
+        return super.getCurrentItem(intent);
     }
 
     private List<Site> getSites() {
