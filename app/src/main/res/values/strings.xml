@@ -57,4 +57,10 @@
     <string name="like">Like the app?</string>
     <string name="rateBanner">Rate Now</string>
     <string name="play_store">Cannot start Play Store</string>
+    <string name="general_options">General Options</string>
+    <string name="appLanguage">Select Application Language</string>
+    <string name="language">Language</string>
+    <string name="systemLocale">System Default</string>
+    <string name="restartTitle">Restart required</string>
+    <string name="localeRestart">The selected language will be applied when the application is restarted.</string>
 </resources>
