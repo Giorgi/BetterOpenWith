@@ -56,4 +56,11 @@
     <string name="rate_me">Valutami!</string>
     <string name="like">Ti piace l\'app?</string>
     <string name="rateBanner">Valuta ora</string>
+    <string name="play_store">Impossibile avviare il Play Store</string>
+    <string name="general_options">Opzioni generali</string>
+    <string name="appLanguage">Seleziona Lingua Applicazione</string>
+    <string name="language">Lingua</string>
+    <string name="systemLocale">Default di sistema</string>
+    <string name="restartTitle">Necessario riavvio</string>
+    <string name="localeRestart">La lingua selezonata sarà applicata dopo il riavvio dell\'applicazione</string>
 </resources>

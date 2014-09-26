@@ -56,4 +56,11 @@
     <string name="rate_me">قيم البرنامج</string>
     <string name="like">أحب هذا التطبيق</string>
     <string name="rateBanner">قيم التطبيق</string>
+    <string name="play_store">لا يمكن تشغل متجر جوجل</string>
+    <string name="general_options">الإعدادات العامة</string>
+    <string name="appLanguage">لغة البرنامج</string>
+    <string name="language">اللغة</string>
+    <string name="systemLocale">الوضع الإفتراضي</string>
+    <string name="restartTitle">يتطلب إعادة تشغيل البرنامج</string>
+    <string name="localeRestart">اللغة المُختارة سوف تعمل عند إعادة تشغيل البرنامج</string>
 </resources>
