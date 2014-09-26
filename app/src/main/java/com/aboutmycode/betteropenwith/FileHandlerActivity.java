@@ -169,16 +169,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (paused) {
-                    configureTimer();
-                    pauseButton.setText(getString(R.string.pause));
-                } else {
-                    autoStart.cancel();
-                    pauseButton.setText(getString(R.string.resume));
-                }
-
-                paused = !paused;
-                showTimerStatus();
+                toggleTimer();
             }
         });
 
@@ -189,11 +180,36 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent detailsScreenIntent = getDetailsScreenIntent(FileHandlerActivity.this.item);
-                detailsScreenIntent.putExtra("id", getItemId());
-                startActivity(detailsScreenIntent);
+                pauseTimer();
+                showTimerStatus();
+
+                launchDetailsActivity();
             }
         });
+    }
+
+    private void launchDetailsActivity() {
+        Intent detailsScreenIntent = getDetailsScreenIntent(this.item);
+        detailsScreenIntent.putExtra("id", getItemId());
+        startActivity(detailsScreenIntent);
+    }
+
+    private void toggleTimer() {
+        if (paused) {
+            configureTimer();
+            pauseButton.setText(getString(R.string.pause));
+            paused = false;
+        } else {
+            pauseTimer();
+        }
+
+        showTimerStatus();
+    }
+
+    private void pauseTimer() {
+        autoStart.cancel();
+        pauseButton.setText(getString(R.string.resume));
+        paused = true;
     }
 
     protected Intent getDetailsScreenIntent(ItemBase item) {
@@ -211,7 +227,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         return item;
     }
 
-    protected ItemBase getCurrentItem(Intent intent){
+    protected ItemBase getCurrentItem(Intent intent) {
         long id = getItemId();
 
         return getHandleItem(id);
