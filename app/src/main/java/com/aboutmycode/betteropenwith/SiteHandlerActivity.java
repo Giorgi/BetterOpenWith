@@ -1,6 +1,7 @@
 package com.aboutmycode.betteropenwith;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
