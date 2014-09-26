@@ -12,6 +12,7 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class HandlerListActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
     private CommonAdapter<HandleItem> adapter;
@@ -45,8 +47,11 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.handler_list);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        setSelectedLocale();
+
+        setContentView(R.layout.handler_list);
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -83,6 +88,24 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setSelectedLocale() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String language = preferences.getString("pref_lang", "null");
+
+        if ("null".equalsIgnoreCase(language)) {
+            language = Locale.getDefault().getLanguage();
+        }
+
+        Locale locale = new Locale(language);
+
+        Resources resources = getBaseContext().getResources();
+        Configuration config = resources.getConfiguration();
+        config.locale = locale;
+
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     @Override

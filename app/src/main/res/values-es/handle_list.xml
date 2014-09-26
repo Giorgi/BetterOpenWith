@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="pdf">Archivos PDF</string>
+    <string name="audio">Archivos audio</string>
+    <string name="video">Videos</string>
+    <string name="images">Imagenes</string>
+    <string name="video_stream">Reproducir videos online</string>
+    <string name="audio_stream">Reproducir audios online</string>
+    <string name="browser">Navegador web</string>
+</resources>

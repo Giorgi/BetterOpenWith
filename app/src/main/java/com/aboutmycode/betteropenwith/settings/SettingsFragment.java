@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
 import com.aboutmycode.betteropenwith.R;
+import com.aboutmycode.betteropenwith.common.YesNoDialogFragment;
 
 import java.util.prefs.Preferences;
 
@@ -45,6 +46,17 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         if (key.equals("layout")) {
             toggleColumnsPreference(preferences);
+        }
+
+        if ("pref_lang".equals(key)) {
+            Activity activity = getActivity();
+
+            if (activity == null) {
+                return;
+            }
+
+            YesNoDialogFragment dialog = YesNoDialogFragment.newInstance(activity.getString(R.string.restartTitle), activity.getString(R.string.localeRestart), false);
+            dialog.show(getFragmentManager(), "Dialog");
         }
     }
 

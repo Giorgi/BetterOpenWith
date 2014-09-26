@@ -118,7 +118,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
                     masterSwitch.setChecked(true);
                     FragmentManager fm = getFragmentManager();
                     String message = String.format(getString(R.string.confirm_disable), getTitle(), getString(R.string.app_name));
-                    YesNoDialogFragment yesNoDialogFragment = YesNoDialogFragment.newInstance(message);
+                    YesNoDialogFragment yesNoDialogFragment = YesNoDialogFragment.newInstance(getString(R.string.confirm), message);
                     yesNoDialogFragment.show(fm, "YesNoDialogFragment");
                 }
             }

@@ -3,6 +3,18 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
+        android:key="pref_key_general_settings_group"
+        android:title="@string/general_options">
+        <com.aboutmycode.betteropenwith.settings.WorkingListPreference
+            android:defaultValue="null"
+            android:dialogTitle="@string/appLanguage"
+            android:entries="@array/pref_languages"
+            android:entryValues="@array/pref_languages_values"
+            android:key="pref_lang"
+            android:summary="%s"
+            android:title="@string/language" />
+    </PreferenceCategory>
+    <PreferenceCategory
         android:key="pref_key_popup_layout_group"
         android:title="@string/popup_options">
         <com.aboutmycode.betteropenwith.settings.NumberPickerDialogPreference
@@ -31,24 +43,24 @@
             app:min="1"
             app:summaryKey="%s" />
         <CheckBoxPreference
+            android:defaultValue="false"
             android:key="iconOnly"
-            android:title="@string/iconOnly"
             android:summaryOff="@string/iconOnlyOff"
             android:summaryOn="@string/iconOnlyOn"
-            android:defaultValue="false"/>
+            android:title="@string/iconOnly" />
         <com.aboutmycode.betteropenwith.settings.WorkingListPreference
-            android:key="size"
-            android:title="@string/textSize"
-            android:summary="%s"
+            android:defaultValue="@string/mediumValue"
             android:entries="@array/sizes"
             android:entryValues="@array/size_values"
-            android:defaultValue="@string/mediumValue"/>
-        <com.aboutmycode.betteropenwith.settings.WorkingListPreference
-            android:key="theme"
-            android:title="@string/theme"
+            android:key="size"
             android:summary="%s"
+            android:title="@string/textSize" />
+        <com.aboutmycode.betteropenwith.settings.WorkingListPreference
+            android:defaultValue="@string/lightValue"
             android:entries="@array/themes"
             android:entryValues="@array/theme_values"
-            android:defaultValue="@string/lightValue"/>
+            android:key="theme"
+            android:summary="%s"
+            android:title="@string/theme" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -3,7 +3,9 @@ package com.aboutmycode.betteropenwith.settings;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class SettingsActivity extends Activity {
+import com.aboutmycode.betteropenwith.common.YesNoListener;
+
+public class SettingsActivity extends Activity implements YesNoListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -12,5 +14,10 @@ public class SettingsActivity extends Activity {
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
+    }
+
+    @Override
+    public void yesClicked() {
+
     }
 }
