@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -57,10 +58,32 @@ public class AboutActivity extends Activity {
         );
 
         TextView about = (TextView) findViewById(R.id.about_text);
-        about.setText(text);
+
+        SpannableStringBuilder spanned = trimSpannable((SpannableStringBuilder) text);
+        //spanned = trimSpannable(spanned);
+        about.setText(spanned, TextView.BufferType.SPANNABLE);
 
         about.setMovementMethod(LinkMovementMethod.getInstance());
         about.setLinkTextColor(Color.BLUE);
+    }
+
+    private SpannableStringBuilder trimSpannable(SpannableStringBuilder spannable) {
+        int trimStart = 0;
+        int trimEnd = 0;
+
+        String text = spannable.toString();
+
+        while (text.length() > 0 && text.startsWith("\n")) {
+            text = text.substring(1);
+            trimStart += 1;
+        }
+
+        while (text.length() > 0 && text.endsWith("\n")) {
+            text = text.substring(0, text.length() - 1);
+            trimEnd += 1;
+        }
+
+        return spannable.delete(0, trimStart).delete(spannable.length() - trimEnd, spannable.length());
     }
 
     public void viewChangelog(View view) {
@@ -84,11 +107,13 @@ public class AboutActivity extends Activity {
         }
     }
 
-    public void shareApp(View view) {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_text));
-        shareIntent.putExtra(Intent.EXTRA_TEXT, String.format("https://play.google.com/store/apps/details?id=%s", getPackageName()));
-        startActivity(shareIntent);
+    public void googlePlus(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/communities/110383670951588070492"));
+        startActivity(browserIntent);
+    }
+
+    public void uservoice(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://betteropenwith.uservoice.com/forums/261986-general"));
+        startActivity(browserIntent);
     }
 }

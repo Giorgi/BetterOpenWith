@@ -51,7 +51,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private Intent original = new Intent();
     private AbsListView adapterView;
-    private HandleItem item;
+    private ItemBase item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,18 +96,9 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(launchIntent.getData(), launchIntent.getType());
 
-        int id = -1;
+        item = getCurrentItem(launchIntent);
 
         PackageManager packageManager = getPackageManager();
-        try {
-            ActivityInfo activityInfo = packageManager.getActivityInfo(getComponentName(), PackageManager.GET_META_DATA | PackageManager.GET_ACTIVITIES);
-            id = activityInfo.metaData.getInt("id", -1);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        item = getHandleItem(id);
-
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
         //If only one app is found it is us so there is no other app.
@@ -191,8 +182,6 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
             }
         });
 
-        final long finalId = id;
-
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
 
         settingsButton.setImageResource(isLight ? R.drawable.ic_action_settings_dark : R.drawable.ic_action_settings);
@@ -200,14 +189,19 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainScreen = new Intent(FileHandlerActivity.this, HandlerDetailsActivity.class);
-                mainScreen.putExtra("id", finalId);
-                startActivity(mainScreen);
+                Intent detailsScreenIntent = getDetailsScreenIntent(FileHandlerActivity.this.item);
+                detailsScreenIntent.putExtra("id", getItemId());
+                startActivity(detailsScreenIntent);
             }
         });
     }
 
-    private HandleItem getHandleItem(int id) {
+    protected Intent getDetailsScreenIntent(ItemBase item) {
+        Intent mainScreen = new Intent(this, HandlerDetailsActivity.class);
+        return mainScreen;
+    }
+
+    private HandleItem getHandleItem(long id) {
         CupboardSQLiteOpenHelper dbHelper = new CupboardSQLiteOpenHelper(this);
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         HandleItem item = cupboard().withDatabase(database).get(HandleItem.class, id);
@@ -215,6 +209,23 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         database.close();
         dbHelper.close();
         return item;
+    }
+
+    protected ItemBase getCurrentItem(Intent intent){
+        long id = getItemId();
+
+        return getHandleItem(id);
+    }
+
+    private long getItemId() {
+        PackageManager packageManager = getPackageManager();
+        try {
+            ActivityInfo activityInfo = packageManager.getActivityInfo(getComponentName(), PackageManager.GET_META_DATA | PackageManager.GET_ACTIVITIES);
+            return activityInfo.metaData.getInt("id", -1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Better Open With</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_file_handler">Better Open With</string>
@@ -57,4 +58,5 @@
     <string name="like">Like the app?</string>
     <string name="rateBanner">Rate Now</string>
     <string name="play_store">Cannot start Play Store</string>
+
 </resources>
