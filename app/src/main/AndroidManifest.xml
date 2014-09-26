@@ -202,23 +202,19 @@
                 android:name="id"
                 android:value="3" />
         </activity-alias>
-        <!--<activity-alias-->
-        <!--android:name=".app.BrowserHandlerActivity"-->
-        <!--android:targetActivity=".FileHandlerActivity" >-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.VIEW" />-->
+        <activity-alias
+            android:name="com.aboutmycode.openwith.app.GeoLocationActivity"
+            android:targetActivity=".FileHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="geo" />
+            </intent-filter>
 
-        <!--<category android:name="android.intent.category.BROWSABLE" />-->
-        <!--<category android:name="android.intent.category.DEFAULT" />-->
-
-        <!--<data android:scheme="http" />-->
-        <!--<data android:scheme="https" />-->
-        <!--</intent-filter>-->
-
-        <!--<meta-data-->
-        <!--android:name="id"-->
-        <!--android:value="7" />-->
-        <!--</activity-alias>-->
+            <meta-data
+                android:name="id"
+                android:value="8" />
+        </activity-alias>
 
         <activity
             android:name=".settings.SettingsActivity"
