@@ -10,4 +10,5 @@
     <string name="geo">Geo Location</string>
     <string name="epub">Ebook - Epub</string>
     <string name="txt">Text Files</string>
+    <string name="email">Email</string>
 </resources>
