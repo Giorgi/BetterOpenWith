@@ -13,6 +13,7 @@ import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -51,7 +52,7 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private Intent original = new Intent();
     private AbsListView adapterView;
-    private HandleItem item;
+    private ItemBase item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,18 +97,9 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(launchIntent.getData(), launchIntent.getType());
 
-        int id = -1;
+        item = getCurrentItem(launchIntent);
 
         PackageManager packageManager = getPackageManager();
-        try {
-            ActivityInfo activityInfo = packageManager.getActivityInfo(getComponentName(), PackageManager.GET_META_DATA | PackageManager.GET_ACTIVITIES);
-            id = activityInfo.metaData.getInt("id", -1);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        item = getHandleItem(id);
-
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
         //If only one app is found it is us so there is no other app.
@@ -151,6 +143,12 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
                 }
             }
 
+            //if preferred app isn't set select the last used app
+            if (TextUtils.isEmpty(item.getPackageName()) &&
+                    info.activityInfo.packageName.equals(item.getLastPackageName()) && info.activityInfo.name.equals(item.getLastClassName())) {
+                checked = index;
+            }
+
             ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
             resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
             resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
@@ -178,20 +176,9 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (paused) {
-                    configureTimer();
-                    pauseButton.setText(getString(R.string.pause));
-                } else {
-                    autoStart.cancel();
-                    pauseButton.setText(getString(R.string.resume));
-                }
-
-                paused = !paused;
-                showTimerStatus();
+                toggleTimer();
             }
         });
-
-        final long finalId = id;
 
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
 
@@ -200,14 +187,44 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainScreen = new Intent(FileHandlerActivity.this, HandlerDetailsActivity.class);
-                mainScreen.putExtra("id", finalId);
-                startActivity(mainScreen);
+                pauseTimer();
+                showTimerStatus();
+
+                launchDetailsActivity();
             }
         });
     }
 
-    private HandleItem getHandleItem(int id) {
+    private void launchDetailsActivity() {
+        Intent detailsScreenIntent = getDetailsScreenIntent(this.item);
+        detailsScreenIntent.putExtra("id", getItemId());
+        startActivity(detailsScreenIntent);
+    }
+
+    private void toggleTimer() {
+        if (paused) {
+            configureTimer();
+            pauseButton.setText(getString(R.string.pause));
+            paused = false;
+        } else {
+            pauseTimer();
+        }
+
+        showTimerStatus();
+    }
+
+    private void pauseTimer() {
+        autoStart.cancel();
+        pauseButton.setText(getString(R.string.resume));
+        paused = true;
+    }
+
+    protected Intent getDetailsScreenIntent(ItemBase item) {
+        Intent mainScreen = new Intent(this, HandlerDetailsActivity.class);
+        return mainScreen;
+    }
+
+    private HandleItem getHandleItem(long id) {
         CupboardSQLiteOpenHelper dbHelper = new CupboardSQLiteOpenHelper(this);
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         HandleItem item = cupboard().withDatabase(database).get(HandleItem.class, id);
@@ -217,12 +234,42 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
         return item;
     }
 
+    protected ItemBase getCurrentItem(Intent intent) {
+        long id = getItemId();
+
+        return getHandleItem(id);
+    }
+
+    private long getItemId() {
+        PackageManager packageManager = getPackageManager();
+        try {
+            ActivityInfo activityInfo = packageManager.getActivityInfo(getComponentName(), PackageManager.GET_META_DATA | PackageManager.GET_ACTIVITIES);
+            return activityInfo.metaData.getInt("id", -1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        ResolveInfoDisplay item = adapter.getItem(position);
-        ResolveInfo resolveInfo = item.getResolveInfo();
+        ResolveInfo resolveInfo = adapter.getItem(position).getResolveInfo();
 
+        updateLastApp(item, resolveInfo.activityInfo);
         startIntentFromResolveInfo(resolveInfo);
+    }
+
+    protected void updateLastApp(ItemBase item, ActivityInfo activityInfo) {
+        item.setLastClassName(activityInfo.name);
+        item.setLastPackageName(activityInfo.applicationInfo.packageName);
+
+        CupboardSQLiteOpenHelper dbHelper = new CupboardSQLiteOpenHelper(this);
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+
+        cupboard().withDatabase(database).put(item);
+
+        database.close();
+        dbHelper.close();
     }
 
     private void startIntentFromResolveInfo(ResolveInfo resolveInfo) {

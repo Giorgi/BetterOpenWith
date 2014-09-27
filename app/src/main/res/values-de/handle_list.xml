@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pdf">PDF-Dateien</string>
+    <string name="audio">Audio-Dateien</string>
+    <string name="video">Video-Dateien</string>
+    <string name="images">Bilder</string>
+    <string name="video_stream">Videostream</string>
+    <string name="audio_stream">Audiostream</string>
+    <string name="browser">Browser</string>
+    <string name="geo">Geo-Position</string>
+    <string name="epub">eBook (epub)</string>
+    <string name="txt">Text-Dateien</string>
+    <string name="email">EMail</string>
+</resources>

@@ -32,4 +32,27 @@
     </string-array>
     <string name="lightValue">0</string>
     <string name="darkValue">1</string>
+
+    <string-array name="pref_languages">
+        <item>@string/systemLocale</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Français</item>
+        <item>Español</item>
+        <item>Português</item>
+        <item>Italiano</item>
+        <item>Català</item>
+        <item>العربية</item>
+    </string-array>
+    <string-array name="pref_languages_values">
+        <item>null</item>
+        <item>en</item>
+        <item>de</item>
+        <item>fr</item>
+        <item>es</item>
+        <item>pt</item>
+        <item>it</item>
+        <item>ca</item>
+        <item>ar</item>
+    </string-array>
 </resources>

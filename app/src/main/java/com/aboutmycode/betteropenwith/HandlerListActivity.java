@@ -1,8 +1,5 @@
 package com.aboutmycode.betteropenwith;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -15,12 +12,12 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -29,19 +26,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
-import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
+import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 import com.aboutmycode.betteropenwith.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import it.gmariotti.changelibs.library.view.ChangeLogListView;
+import java.util.Locale;
 
 public class HandlerListActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
     private CommonAdapter<HandleItem> adapter;
@@ -50,8 +47,11 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.handler_list);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        setSelectedLocale();
+
+        setContentView(R.layout.handler_list);
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -70,7 +70,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         try {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             int lastVersion = preferences.getInt("version", -1);
-            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            PackageInfo packageInfo = Utils.getCurrentPackageInfo(this);
 
             if (packageInfo.versionCode > lastVersion) {
                 ChangelogDialogFragment dialogStandardFragment = new ChangelogDialogFragment();
@@ -90,6 +90,24 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         }
     }
 
+    private void setSelectedLocale() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String language = preferences.getString("pref_lang", "null");
+
+        if ("null".equalsIgnoreCase(language)) {
+            language = Locale.getDefault().getLanguage();
+        }
+
+        Locale locale = new Locale(language);
+
+        Resources resources = getBaseContext().getResources();
+        Configuration config = resources.getConfiguration();
+        config.locale = locale;
+
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -97,9 +115,11 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
     @Override
     protected void onListItemClick(ListView listView, View view, int position, long id) {
-        Intent intent = new Intent(this, HandlerDetailsActivity.class);
         HandleItem item = adapter.getItem(position);
+
+        Intent intent = DetailActivityFactory.getDetailsActivity(item.getId(), this);
         intent.putExtra("id", item.getId());
+
         startActivityForResult(intent, 1);
     }
 
@@ -150,7 +170,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         }
 
         if (id == R.id.action_feedback) {
-            SendFeedbackEmail();
+            sendFeedbackEmail();
             return true;
         }
 
@@ -166,27 +186,44 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         }
 
         if (id == R.id.action_all_apps) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://search?q=pub:Giorgi Dalakishvili"));
-
-            startActivity(intent);
+            allApps();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void rateApp() {
-        Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
-        startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+    private void allApps() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://search?q=pub:Giorgi Dalakishvili"));
+
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, getString(R.string.play_store), Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void SendFeedbackEmail() {
+    private void rateApp() {
+        try {
+            Uri marketUri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
+            startActivity(new Intent(Intent.ACTION_VIEW, marketUri));
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, getString(R.string.play_store), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void sendFeedbackEmail() {
         String address = "android@aboutmycode.com";
         String subject = "Feedback for Better Open With";
+
+        String text = Utils.getDeviceInfo(this);
+
         Uri mailto = Uri.fromParts("mailto", address, null);
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, mailto);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, text);
+
         try {
             startActivity(emailIntent);
         } catch (ActivityNotFoundException e) {
@@ -194,6 +231,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
             intent.setType("text/plain");
             intent.putExtra(Intent.EXTRA_EMAIL, address);
             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            intent.putExtra(Intent.EXTRA_TEXT, text);
 
             startActivity(intent);
         }
@@ -201,7 +239,7 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
     @Override
     public Loader<List<HandleItem>> onCreateLoader(int loaderId, Bundle bundle) {
-        return new CupboardCursorLoader(this, new CupboardSQLiteOpenHelper(this));
+        return new HandleItemLoader(this, new CupboardSQLiteOpenHelper(this));
     }
 
     @Override
@@ -274,5 +312,15 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
         }
 
         return row;
+    }
+}
+
+class DetailActivityFactory {
+    public static Intent getDetailsActivity(long id, Context context) {
+        if (id == 7) {
+            return new Intent(context, BrowserDetailsActivity.class);
+        } else {
+            return new Intent(context, HandlerDetailsActivity.class);
+        }
     }
 }

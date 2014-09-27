@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Better Open With</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_file_handler">Better Open With</string>
@@ -56,4 +57,11 @@
     <string name="rate_me">Rate Me!</string>
     <string name="like">Like the app?</string>
     <string name="rateBanner">Rate Now</string>
+    <string name="play_store">Cannot start Play Store</string>
+    <string name="general_options">General Options</string>
+    <string name="appLanguage">Select Application Language</string>
+    <string name="language">Language</string>
+    <string name="systemLocale">System Default</string>
+    <string name="restartTitle">Restart required</string>
+    <string name="localeRestart">The selected language will be applied when the application is restarted.</string>
 </resources>

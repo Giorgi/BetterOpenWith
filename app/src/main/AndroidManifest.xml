@@ -112,6 +112,7 @@
                 <data android:scheme="https" />
                 <data android:mimeType="video/*" />
             </intent-filter>
+
             <meta-data
                 android:name="id"
                 android:value="5" />
@@ -196,27 +197,63 @@
                 <data android:scheme="https" />
                 <data android:mimeType="audio/*" />
             </intent-filter>
+
             <meta-data
                 android:name="id"
                 android:value="3" />
         </activity-alias>
         <activity-alias
-            android:name="com.aboutmycode.betteropenwith.app.BrowserHandlerActivity"
+            android:name="com.aboutmycode.openwith.app.GeoLocationActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
+                <data android:scheme="geo" />
             </intent-filter>
+
             <meta-data
                 android:name="id"
-                android:value="7" />
+                android:value="8" />
         </activity-alias>
+        <activity-alias
+            android:name="com.aboutmycode.openwith.app.EpubActivity"
+            android:targetActivity=".FileHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/epub+zip" />
+            </intent-filter>
 
+            <meta-data
+                android:name="id"
+                android:value="9" />
+        </activity-alias>
+        <activity-alias
+            android:name="com.aboutmycode.openwith.app.TextActivity"
+            android:targetActivity=".FileHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <meta-data
+                android:name="id"
+                android:value="10" />
+        </activity-alias>
+        <activity-alias
+            android:name="com.aboutmycode.openwith.app.EmailActivity"
+            android:targetActivity=".FileHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="mailto" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="id"
+                android:value="11" />
+        </activity-alias>
 
         <activity
             android:name=".settings.SettingsActivity"
@@ -231,7 +268,32 @@
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/action_about"></activity>
+            android:label="@string/action_about" />
+        <activity
+            android:name=".BrowserDetailsActivity"
+            android:label=""
+            android:parentActivityName=".HandlerListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
+            android:name=".SiteHandlerActivity"
+            android:label="@string/title_activity_file_handler">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+
+            <meta-data
+                android:name="id"
+                android:value="7" />
+        </activity>
     </application>
 
 </manifest>

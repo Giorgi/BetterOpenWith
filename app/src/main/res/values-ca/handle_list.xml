@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="pdf">Fitxers PDF</string>
+    <string name="audio">Fitxers d\'àudio</string>
+    <string name="video">Fitxers de vídeo</string>
+    <string name="images">Imatges</string>
+    <string name="video_stream">Transmissió de vídeo</string>
+    <string name="audio_stream">Transmissió d\'àudio</string>
+    <string name="browser">Navegador</string>
+</resources>
