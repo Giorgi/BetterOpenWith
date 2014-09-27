@@ -8,7 +8,7 @@
     <string name="audio_stream">Audio Stream</string>
     <string name="browser">Browser</string>
     <string name="geo">Geo Location</string>
-    <string name="epub">Ebook - Epub</string>
+    <string name="epub">Ebook (epub)</string>
     <string name="txt">Text Files</string>
     <string name="email">Email</string>
 </resources>

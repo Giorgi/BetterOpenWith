@@ -36,6 +36,7 @@
     <string-array name="pref_languages">
         <item>@string/systemLocale</item>
         <item>English</item>
+        <item>Deutsch</item>
         <item>Français</item>
         <item>Español</item>
         <item>Português</item>
@@ -46,6 +47,7 @@
     <string-array name="pref_languages_values">
         <item>null</item>
         <item>en</item>
+        <item>de</item>
         <item>fr</item>
         <item>es</item>
         <item>pt</item>
