@@ -8,7 +8,10 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.NumberPicker;
@@ -40,6 +43,12 @@ public class TimeoutDialogFragment extends DialogFragment {
             useDefault = getArguments().getBoolean(ARG_PARAM_USE_DEFAULT);
             timeout = getArguments().getInt(ARG_PARAM_TIMEOUT);
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
