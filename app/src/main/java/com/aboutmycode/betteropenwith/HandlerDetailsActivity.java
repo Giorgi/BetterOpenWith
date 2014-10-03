@@ -43,7 +43,6 @@ import java.util.List;
 public class HandlerDetailsActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
 
     private CommonAdapter<ResolveInfoDisplay> adapter;
-    private CheckBox skipListCheckBox;
     private Switch masterSwitch;
     private HandleItem item;
     private HandleItemLoader loader;
@@ -81,7 +80,6 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         }
 
         boolean defaultSelected = listView.getCheckedItemCount() > 0;
-        skipListCheckBox.setEnabled(defaultSelected);
 
         if (defaultSelected) {
             item.setPackageName(activityInfo.applicationInfo.packageName);
@@ -218,19 +216,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     }
 
     protected void setAppLaunchDetails(ItemBase item) {
-        Resources resources = getResources();
-
-        skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
-        skipListCheckBox.setEnabled(!TextUtils.isEmpty(item.getPackageName()));
-        skipListCheckBox.setChecked(item.isSkipList());
-        skipListCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                skipChanged(skipListCheckBox.isChecked());
-            }
-        });
-
-        setTimeoutText(resources, item);
+        setTimeoutText(getResources(), item);
     }
 
     protected void loadApps(ItemBase item) {
@@ -315,10 +301,6 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout(),
                                                                         !TextUtils.isEmpty(item.getPackageName()), item.isSkipList());
         editTimeoutDialog.show(fm, "TimeoutDialogFragment");
-    }
-
-    protected void skipChanged(boolean skipList) {
-        updateSkipList(skipList, item, loader);
     }
 
     protected <T extends ItemBase> void updateSkipList(boolean skipList, T item, CupboardCursorLoader<T> loader) {

@@ -28,40 +28,31 @@
             android:layout_below="@+id/selectedAppLabel"
             android:layout_marginBottom="5dp" />
 
-        <TextView
-            android:id="@+id/timeoutTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/skipListCheckBox"
-            android:layout_alignParentLeft="true"
-            android:layout_alignBottom="@+id/editTimeoutButton"
-            android:layout_alignTop="@+id/editTimeoutButton"
-            android:layout_toLeftOf="@+id/editTimeoutButton"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            style="@style/actions" />
-
         <ImageButton
             android:id="@+id/editTimeoutButton"
+            style="@style/timeoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/skipListCheckBox"
-            android:layout_alignParentRight="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:soundEffectsEnabled="true"
-            android:src="@drawable/ic_action_edit"
-            android:onClick="editTimeoutClicked"
-            style="@style/timeoutButton" />
-
-        <CheckBox
-            android:id="@+id/skipListCheckBox"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="@string/start_preferred"
-            style="@style/actions" />
+            android:layout_alignParentLeft="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="editTimeoutClicked"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:soundEffectsEnabled="true"
+            android:src="@drawable/ic_action_edit" />
 
+        <TextView
+            android:id="@+id/timeoutTextView"
+            style="@style/actions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editTimeoutButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/editTimeoutButton"
+            android:layout_toRightOf="@+id/editTimeoutButton"
+            android:gravity="center_vertical"
+            android:paddingRight="5dp" />
     </RelativeLayout>
 
     <LinearLayout
