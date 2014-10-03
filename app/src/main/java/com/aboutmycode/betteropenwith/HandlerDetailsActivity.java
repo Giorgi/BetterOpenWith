@@ -312,7 +312,8 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
     protected void showTimeoutDialog(ItemBase item) {
         FragmentManager fm = getFragmentManager();
-        TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout());
+        TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout(),
+                                                                        !TextUtils.isEmpty(item.getPackageName()), item.isSkipList());
         editTimeoutDialog.show(fm, "TimeoutDialogFragment");
     }
 
@@ -326,15 +327,17 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         setResult(RESULT_OK);
     }
 
-    protected void timeoutChanged(boolean useGlobal, int timeout) {
-        updateTimeout(useGlobal, timeout, item, loader);
+    protected void timeoutChanged(boolean useGlobal, int timeout, boolean skipList) {
+        updateTimeout(useGlobal, timeout, item, skipList, loader);
     }
 
-    protected <T extends ItemBase> void updateTimeout(boolean useGlobal, int timeout, T item, CupboardCursorLoader<T> loader) {
+    protected <T extends ItemBase> void updateTimeout(boolean useGlobal, int timeout, T item, boolean skipList, CupboardCursorLoader<T> loader) {
         item.setUseGlobalTimeout(useGlobal);
         if (!useGlobal) {
             item.setCustomTimeout(timeout);
         }
+
+        item.setSkipList(skipList);
 
         loader.update(item);
         setResult(RESULT_OK);

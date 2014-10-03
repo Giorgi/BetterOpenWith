@@ -20,15 +20,21 @@ import android.widget.TextView;
 public class TimeoutDialogFragment extends DialogFragment {
     private static final String ARG_PARAM_USE_DEFAULT = "param1";
     private static final String ARG_PARAM_TIMEOUT = "param2";
+    private static final String ARG_PARAM_HAS_PREFERRED = "param3";
+    private static final String ARG_PARAM_SKIP_LIST = "param4";
 
     private boolean useDefault;
     private int timeout;
+    private boolean hasPreferred;
+    private boolean skipList;
 
-    public static TimeoutDialogFragment newInstance(boolean useDefault, int timeout) {
+    public static TimeoutDialogFragment newInstance(boolean useDefault, int timeout, boolean hasPreferred, boolean skipList) {
         TimeoutDialogFragment fragment = new TimeoutDialogFragment();
         Bundle args = new Bundle();
         args.putBoolean(ARG_PARAM_USE_DEFAULT, useDefault);
         args.putInt(ARG_PARAM_TIMEOUT, timeout);
+        args.putBoolean(ARG_PARAM_HAS_PREFERRED, hasPreferred);
+        args.putBoolean(ARG_PARAM_SKIP_LIST, skipList);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,6 +48,8 @@ public class TimeoutDialogFragment extends DialogFragment {
         if (getArguments() != null) {
             useDefault = getArguments().getBoolean(ARG_PARAM_USE_DEFAULT);
             timeout = getArguments().getInt(ARG_PARAM_TIMEOUT);
+            hasPreferred = getArguments().getBoolean(ARG_PARAM_HAS_PREFERRED);
+            skipList = getArguments().getBoolean(ARG_PARAM_SKIP_LIST);
         }
     }
 
@@ -83,6 +91,10 @@ public class TimeoutDialogFragment extends DialogFragment {
             }
         });
 
+        final CheckBox skipListCheckBox = (CheckBox) view.findViewById(R.id.skipList);
+        skipListCheckBox.setChecked(skipList);
+        skipListCheckBox.setVisibility(hasPreferred ? View.VISIBLE : View.GONE);
+
         ((TextView) view.findViewById(R.id.text_dialog_message)).setText(getString(R.string.custom_countdown_description));
 
         return new AlertDialog.Builder(activity)
@@ -90,7 +102,7 @@ public class TimeoutDialogFragment extends DialogFragment {
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                ((HandlerDetailsActivity) activity).timeoutChanged(useDefaultCheckbox.isChecked(), picker.getValue());
+                                ((HandlerDetailsActivity) activity).timeoutChanged(useDefaultCheckbox.isChecked(), picker.getValue(), skipListCheckBox.isChecked());
                             }
                         }
                 ).setNegativeButton(android.R.string.cancel,

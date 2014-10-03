@@ -6,9 +6,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -79,11 +77,11 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
     }
 
     @Override
-    protected void timeoutChanged(boolean useGlobal, int timeout) {
+    protected void timeoutChanged(boolean useGlobal, int timeout, boolean skipList) {
         if (site == null) {
-            super.timeoutChanged(useGlobal, timeout);
+            super.timeoutChanged(useGlobal, timeout, skipList);
         } else {
-            updateTimeout(useGlobal, timeout, site, loader);
+            updateTimeout(useGlobal, timeout, site, skipList, loader);
         }
     }
 
