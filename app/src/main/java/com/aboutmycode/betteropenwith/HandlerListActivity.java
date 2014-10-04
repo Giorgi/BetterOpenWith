@@ -225,6 +225,11 @@ public class HandlerListActivity extends LocaleAwareListActivity implements Load
 
     @Override
     public void onLoadFinished(Loader<List<HandleItem>> objectLoader, List<HandleItem> items) {
+        Resources resources = getResources();
+        for (HandleItem handleItem : items) {
+            handleItem.setName(resources.getString(resources.getIdentifier(handleItem.getNameResource(), "string", R.class.getPackage().getName())));
+        }
+
         Collections.sort(items, new Comparator<HandleItem>() {
             @Override
             public int compare(HandleItem item, HandleItem item2) {

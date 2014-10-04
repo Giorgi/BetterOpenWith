@@ -1,6 +1,5 @@
 package com.aboutmycode.betteropenwith.common.baseActivities;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
