@@ -24,17 +24,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareActivity;
+
 import java.util.Locale;
 
 /**
  * Created by Giorgi on 6/27/2014.
  */
-public class AboutActivity extends Activity {
+public class AboutActivity extends LocaleAwareActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setSelectedLocale();
-
         setContentView(R.layout.about);
 
         String version = "";
@@ -74,24 +73,6 @@ public class AboutActivity extends Activity {
 
         about.setMovementMethod(LinkMovementMethod.getInstance());
         about.setLinkTextColor(Color.BLUE);
-    }
-
-    private void setSelectedLocale() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String language = preferences.getString("pref_lang", "null");
-
-        if ("null".equalsIgnoreCase(language)) {
-            language = Locale.getDefault().getLanguage();
-        }
-
-        Locale locale = new Locale(language);
-
-        Resources resources = getBaseContext().getResources();
-        Configuration config = resources.getConfiguration();
-        config.locale = locale;
-
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     private SpannableStringBuilder trimSpannable(SpannableStringBuilder spannable) {

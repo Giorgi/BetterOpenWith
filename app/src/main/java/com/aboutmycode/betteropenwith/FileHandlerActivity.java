@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
+import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareActivity;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ import java.util.TimerTask;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 
-public class FileHandlerActivity extends Activity implements AdapterView.OnItemClickListener {
+public class FileHandlerActivity extends LocaleAwareActivity implements AdapterView.OnItemClickListener {
     private Timer autoStart;
 
     private Button pauseButton;
@@ -59,8 +60,6 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setSelectedLocale();
 
         if (savedInstanceState != null) {
             elapsed = savedInstanceState.getInt("elapsed", 0);
@@ -197,24 +196,6 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
                 launchDetailsActivity();
             }
         });
-    }
-
-    private void setSelectedLocale() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String language = preferences.getString("pref_lang", "null");
-
-        if ("null".equalsIgnoreCase(language)) {
-            language = Locale.getDefault().getLanguage();
-        }
-
-        Locale locale = new Locale(language);
-
-        Resources resources = getBaseContext().getResources();
-        Configuration config = resources.getConfiguration();
-        config.locale = locale;
-
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     private void launchDetailsActivity() {

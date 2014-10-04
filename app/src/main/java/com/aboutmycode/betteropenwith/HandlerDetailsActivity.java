@@ -33,6 +33,7 @@ import com.aboutmycode.betteropenwith.common.YesNoDialogFragment;
 import com.aboutmycode.betteropenwith.common.YesNoListener;
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
+import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareListActivity;
 import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 import com.aboutmycode.betteropenwith.database.HandleItemLoader;
@@ -43,7 +44,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class HandlerDetailsActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
+public class HandlerDetailsActivity extends LocaleAwareListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
 
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private CheckBox skipListCheckBox;
@@ -56,7 +57,6 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setSelectedLocale();
 
         setContentView(R.layout.handler_details);
         flipper = (ViewFlipper) findViewById(R.id.view_flipper);
@@ -65,24 +65,6 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         ListView listView = getListView();
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-    }
-
-    private void setSelectedLocale() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String language = preferences.getString("pref_lang", "null");
-
-        if ("null".equalsIgnoreCase(language)) {
-            language = Locale.getDefault().getLanguage();
-        }
-
-        Locale locale = new Locale(language);
-
-        Resources resources = getBaseContext().getResources();
-        Configuration config = resources.getConfiguration();
-        config.locale = locale;
-
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     protected void loadData() {
