@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
+import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareListActivity;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 import com.aboutmycode.betteropenwith.settings.SettingsActivity;
@@ -40,7 +41,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-public class HandlerListActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
+public class HandlerListActivity extends LocaleAwareListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>> {
     private CommonAdapter<HandleItem> adapter;
     private View overlay;
 
@@ -48,8 +49,6 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-
-        setSelectedLocale();
 
         setContentView(R.layout.handler_list);
 
@@ -88,24 +87,6 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    private void setSelectedLocale() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String language = preferences.getString("pref_lang", "null");
-
-        if ("null".equalsIgnoreCase(language)) {
-            language = Locale.getDefault().getLanguage();
-        }
-
-        Locale locale = new Locale(language);
-
-        Resources resources = getBaseContext().getResources();
-        Configuration config = resources.getConfiguration();
-        config.locale = locale;
-
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     @Override
@@ -244,6 +225,11 @@ public class HandlerListActivity extends ListActivity implements LoaderManager.L
 
     @Override
     public void onLoadFinished(Loader<List<HandleItem>> objectLoader, List<HandleItem> items) {
+        Resources resources = getResources();
+        for (HandleItem handleItem : items) {
+            handleItem.setName(resources.getString(resources.getIdentifier(handleItem.getNameResource(), "string", R.class.getPackage().getName())));
+        }
+
         Collections.sort(items, new Comparator<HandleItem>() {
             @Override
             public int compare(HandleItem item, HandleItem item2) {

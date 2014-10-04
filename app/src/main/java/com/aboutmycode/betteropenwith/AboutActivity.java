@@ -6,12 +6,16 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -20,10 +24,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareActivity;
+
+import java.util.Locale;
+
 /**
  * Created by Giorgi on 6/27/2014.
  */
-public class AboutActivity extends Activity {
+public class AboutActivity extends LocaleAwareActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);

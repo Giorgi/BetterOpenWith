@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,18 +29,20 @@ import android.widget.Toast;
 
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
+import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareActivity;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 
-public class FileHandlerActivity extends Activity implements AdapterView.OnItemClickListener {
+public class FileHandlerActivity extends LocaleAwareActivity implements AdapterView.OnItemClickListener {
     private Timer autoStart;
 
     private Button pauseButton;

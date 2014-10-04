@@ -1,11 +1,18 @@
 package com.aboutmycode.betteropenwith.settings;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import com.aboutmycode.betteropenwith.common.YesNoListener;
+import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareActivity;
 
-public class SettingsActivity extends Activity implements YesNoListener {
+import java.util.Locale;
+
+public class SettingsActivity extends LocaleAwareActivity implements YesNoListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
