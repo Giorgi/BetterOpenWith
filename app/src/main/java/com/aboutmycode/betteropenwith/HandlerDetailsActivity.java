@@ -8,9 +8,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 
 public class HandlerDetailsActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
@@ -53,6 +56,8 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSelectedLocale();
+
         setContentView(R.layout.handler_details);
         flipper = (ViewFlipper) findViewById(R.id.view_flipper);
 
@@ -60,6 +65,24 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         ListView listView = getListView();
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    }
+
+    private void setSelectedLocale() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String language = preferences.getString("pref_lang", "null");
+
+        if ("null".equalsIgnoreCase(language)) {
+            language = Locale.getDefault().getLanguage();
+        }
+
+        Locale locale = new Locale(language);
+
+        Resources resources = getBaseContext().getResources();
+        Configuration config = resources.getConfiguration();
+        config.locale = locale;
+
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     protected void loadData() {

@@ -6,12 +6,16 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -20,12 +24,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 /**
  * Created by Giorgi on 6/27/2014.
  */
 public class AboutActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setSelectedLocale();
+
         setContentView(R.layout.about);
 
         String version = "";
@@ -65,6 +74,24 @@ public class AboutActivity extends Activity {
 
         about.setMovementMethod(LinkMovementMethod.getInstance());
         about.setLinkTextColor(Color.BLUE);
+    }
+
+    private void setSelectedLocale() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String language = preferences.getString("pref_lang", "null");
+
+        if ("null".equalsIgnoreCase(language)) {
+            language = Locale.getDefault().getLanguage();
+        }
+
+        Locale locale = new Locale(language);
+
+        Resources resources = getBaseContext().getResources();
+        Configuration config = resources.getConfiguration();
+        config.locale = locale;
+
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     private SpannableStringBuilder trimSpannable(SpannableStringBuilder spannable) {

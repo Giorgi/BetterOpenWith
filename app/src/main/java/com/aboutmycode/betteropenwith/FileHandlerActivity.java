@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -57,6 +59,8 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setSelectedLocale();
 
         if (savedInstanceState != null) {
             elapsed = savedInstanceState.getInt("elapsed", 0);
@@ -193,6 +197,24 @@ public class FileHandlerActivity extends Activity implements AdapterView.OnItemC
                 launchDetailsActivity();
             }
         });
+    }
+
+    private void setSelectedLocale() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String language = preferences.getString("pref_lang", "null");
+
+        if ("null".equalsIgnoreCase(language)) {
+            language = Locale.getDefault().getLanguage();
+        }
+
+        Locale locale = new Locale(language);
+
+        Resources resources = getBaseContext().getResources();
+        Configuration config = resources.getConfiguration();
+        config.locale = locale;
+
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     private void launchDetailsActivity() {
