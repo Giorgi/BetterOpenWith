@@ -73,27 +73,34 @@ public class TimeoutDialogFragment extends DialogFragment {
             pickerValue = globalTimeout;
         }
 
-        final NumberPicker picker = (NumberPicker) view.findViewById(R.id.numberPicker);
-        picker.setMinValue(1);
-        picker.setMaxValue(120);
-        picker.setValue(pickerValue);
+        final NumberPicker timeoutNumberPicker = (NumberPicker) view.findViewById(R.id.numberPicker);
+        timeoutNumberPicker.setMinValue(1);
+        timeoutNumberPicker.setMaxValue(120);
+        timeoutNumberPicker.setValue(pickerValue);
 
         final CheckBox useDefaultCheckbox = (CheckBox) view.findViewById(R.id.useDefault);
         useDefaultCheckbox.setChecked(useDefault);
         useDefaultCheckbox.setText(String.format(getString(R.string.use_default_timeout), globalTimeout));
 
-        picker.setEnabled(!useDefault);
+        timeoutNumberPicker.setEnabled(!useDefault);
 
         useDefaultCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                picker.setEnabled(!checked);
+                timeoutNumberPicker.setEnabled(!checked);
             }
         });
 
         final CheckBox skipListCheckBox = (CheckBox) view.findViewById(R.id.skipList);
         skipListCheckBox.setChecked(skipList);
         skipListCheckBox.setVisibility(hasPreferred ? View.VISIBLE : View.GONE);
+        skipListCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                useDefaultCheckbox.setEnabled(!checked);
+                timeoutNumberPicker.setEnabled(!checked && !useDefaultCheckbox.isChecked());
+            }
+        });
 
         ((TextView) view.findViewById(R.id.text_dialog_message)).setText(getString(R.string.custom_countdown_description));
 
@@ -102,7 +109,7 @@ public class TimeoutDialogFragment extends DialogFragment {
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                ((HandlerDetailsActivity) activity).timeoutChanged(useDefaultCheckbox.isChecked(), picker.getValue(), skipListCheckBox.isChecked());
+                                ((HandlerDetailsActivity) activity).timeoutChanged(useDefaultCheckbox.isChecked(), timeoutNumberPicker.getValue(), skipListCheckBox.isChecked());
                             }
                         }
                 ).setNegativeButton(android.R.string.cancel,
