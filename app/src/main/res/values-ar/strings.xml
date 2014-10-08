@@ -63,4 +63,5 @@
     <string name="systemLocale">الوضع الإفتراضي</string>
     <string name="restartTitle">يتطلب إعادة تشغيل البرنامج</string>
     <string name="localeRestart">اللغة المُختارة سوف تعمل عند إعادة تشغيل البرنامج</string>
+    <string name="auto"> تلقائي 0s </string>
 </resources>

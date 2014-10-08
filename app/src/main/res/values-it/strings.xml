@@ -49,6 +49,7 @@
     <string name="confirm">Conferma</string>
     <string name="turned_off">Impostato su OFF dall\'utente</string>
     <string name="app_seconds">%1$s (%2$ss.)</string>
+    <string name="auto">auto: 0s</string>
     <string name="changelog">Mostra il changelog</string>
     <string name="rate">Valuta l\'app!</string>
     <string name="share">Condividi</string>

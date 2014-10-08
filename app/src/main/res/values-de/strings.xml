@@ -49,6 +49,7 @@
     <string name="confirm">Bestätigen</string>
     <string name="turned_off">Vom User deaktiviert</string>
     <string name="app_seconds">%1$s (%2$ss.)</string>
+    <string name="auto">auto: 0s</string>
     <string name="changelog">Changelog anzeigen</string>
     <string name="rate">Bewerte die App!</string>
     <string name="share">Teilen</string>
