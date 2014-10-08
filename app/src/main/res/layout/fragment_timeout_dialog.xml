@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.aboutmycode.betteropenwith.TimeoutDialogFragment">
+    tools:context="com.aboutmycode.betteropenwith.TimeoutDialogFragment"
+    android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/text_dialog_message"
@@ -11,16 +12,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dip"
         android:paddingLeft="12dip"
-        android:paddingRight="12dip" >
-    </TextView>
+        android:paddingRight="12dip"></TextView>
 
     <NumberPicker
         android:id="@+id/numberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dip"
-        android:layout_marginTop="6dip"
-        android:layout_gravity="center_horizontal" />
+        android:layout_marginTop="6dip" />
+
+    <CheckBox
+        android:id="@+id/skipList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_preferred" />
 
     <CheckBox
         android:id="@+id/useDefault"

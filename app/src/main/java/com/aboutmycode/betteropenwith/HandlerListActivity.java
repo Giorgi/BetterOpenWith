@@ -291,7 +291,11 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
                 timeout = item.getCustomTimeout();
             }
 
-            selectedAppTextView.setText(String.format(context.getString(R.string.app_seconds), item.getSelectedAppLabel(), timeout));
+            if (item.isSkipList()) {
+                selectedAppTextView.setText(String.format("%1$s (%2$s)", item.getSelectedAppLabel(), context.getString(R.string.auto)));
+            } else {
+                selectedAppTextView.setText(String.format(context.getString(R.string.app_seconds), item.getSelectedAppLabel(), timeout));
+            }
 
             selectedAppIcon.setBounds(0, 0, 32, 32);
             selectedAppTextView.setCompoundDrawables(selectedAppIcon, null, null, null);

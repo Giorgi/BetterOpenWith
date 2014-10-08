@@ -13,23 +13,35 @@
         android:layout_marginTop="6dip"
         android:paddingLeft="12dip"
         android:paddingRight="12dip"
-        android:visibility="gone">
-    </TextView>
+        android:visibility="gone"></TextView>
 
     <NumberPicker
         android:id="@+id/numberPicker"
         android:layout_width="0dp"
-        android:layout_weight="3"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_weight="3" />
 
-    <CheckBox
-        android:id="@+id/useDefault"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_weight="7"
         android:layout_height="wrap_content"
-        android:text="Use default countdown time: X seconds"
-        android:layout_gravity="center_vertical" />
+        android:layout_weight="7"
+        android:layout_gravity="center_vertical">
+        <CheckBox
+            android:id="@+id/skipList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_preferred"
+            android:layout_marginBottom="15dp" />
+
+        <CheckBox
+            android:id="@+id/useDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use default countdown time: X seconds" />
+    </LinearLayout>
+
 </LinearLayout>

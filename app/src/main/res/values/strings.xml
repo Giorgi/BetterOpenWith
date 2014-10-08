@@ -50,6 +50,7 @@
     <string name="confirm">Confirm</string>
     <string name="turned_off">Set OFF by user</string>
     <string name="app_seconds">%1$s (%2$ss.)</string>
+    <string name="auto">auto: 0s</string>
     <string name="changelog">View Changelog</string>
     <string name="rate">Rate the app!</string>
     <string name="share">Share</string>

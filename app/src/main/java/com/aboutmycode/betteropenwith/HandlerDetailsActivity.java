@@ -47,7 +47,6 @@ import java.util.Locale;
 public class HandlerDetailsActivity extends LocaleAwareListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
 
     private CommonAdapter<ResolveInfoDisplay> adapter;
-    private CheckBox skipListCheckBox;
     private Switch masterSwitch;
     private HandleItem item;
     private HandleItemLoader loader;
@@ -86,7 +85,6 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         }
 
         boolean defaultSelected = listView.getCheckedItemCount() > 0;
-        skipListCheckBox.setEnabled(defaultSelected);
 
         if (defaultSelected) {
             item.setPackageName(activityInfo.applicationInfo.packageName);
@@ -223,19 +221,7 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
     }
 
     protected void setAppLaunchDetails(ItemBase item) {
-        Resources resources = getResources();
-
-        skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
-        skipListCheckBox.setEnabled(!TextUtils.isEmpty(item.getPackageName()));
-        skipListCheckBox.setChecked(item.isSkipList());
-        skipListCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                skipChanged(skipListCheckBox.isChecked());
-            }
-        });
-
-        setTimeoutText(resources, item);
+        setTimeoutText(getResources(), item);
     }
 
     protected void loadApps(ItemBase item) {
@@ -317,12 +303,9 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
 
     protected void showTimeoutDialog(ItemBase item) {
         FragmentManager fm = getFragmentManager();
-        TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout());
+        TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout(),
+                                                                        !TextUtils.isEmpty(item.getPackageName()), item.isSkipList());
         editTimeoutDialog.show(fm, "TimeoutDialogFragment");
-    }
-
-    protected void skipChanged(boolean skipList) {
-        updateSkipList(skipList, item, loader);
     }
 
     protected <T extends ItemBase> void updateSkipList(boolean skipList, T item, CupboardCursorLoader<T> loader) {
@@ -331,15 +314,17 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         setResult(RESULT_OK);
     }
 
-    protected void timeoutChanged(boolean useGlobal, int timeout) {
-        updateTimeout(useGlobal, timeout, item, loader);
+    protected void timeoutChanged(boolean useGlobal, int timeout, boolean skipList) {
+        updateTimeout(useGlobal, timeout, item, skipList, loader);
     }
 
-    protected <T extends ItemBase> void updateTimeout(boolean useGlobal, int timeout, T item, CupboardCursorLoader<T> loader) {
+    protected <T extends ItemBase> void updateTimeout(boolean useGlobal, int timeout, T item, boolean skipList, CupboardCursorLoader<T> loader) {
         item.setUseGlobalTimeout(useGlobal);
         if (!useGlobal) {
             item.setCustomTimeout(timeout);
         }
+
+        item.setSkipList(skipList);
 
         loader.update(item);
         setResult(RESULT_OK);
