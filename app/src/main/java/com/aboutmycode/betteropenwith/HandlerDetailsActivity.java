@@ -308,12 +308,6 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         editTimeoutDialog.show(fm, "TimeoutDialogFragment");
     }
 
-    protected <T extends ItemBase> void updateSkipList(boolean skipList, T item, CupboardCursorLoader<T> loader) {
-        item.setSkipList(skipList);
-        loader.update(item);
-        setResult(RESULT_OK);
-    }
-
     protected void timeoutChanged(boolean useGlobal, int timeout, boolean skipList) {
         updateTimeout(useGlobal, timeout, item, skipList, loader);
     }
