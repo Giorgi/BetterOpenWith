@@ -290,11 +290,22 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
 
         int timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", resources.getInteger(R.integer.default_timeout));
 
-        if (item.isUseGlobalTimeout()) {
-            timeoutTextView.setText(String.format(getString(R.string.countdown_time), timeout));
+        String itemType = getItemType(item);
+
+        String timeoutText;
+        if (item.isSkipList()) {
+            timeoutText = String.format(getString(R.string.countdown_time_general), itemType, getString(R.string.auto));
         } else {
-            timeoutTextView.setText(String.format(getString(R.string.countdown_time), item.getCustomTimeout()));
+            String formattedSeconds = String.format(getString(R.string.specified_seconds), item.isUseGlobalTimeout() ? timeout : item.getCustomTimeout());
+
+            timeoutText = String.format(getString(R.string.countdown_time_general), itemType, formattedSeconds);
         }
+
+        timeoutTextView.setText(timeoutText);
+    }
+
+    private String getItemType(ItemBase item) {
+        return item instanceof Site ? getString(R.string.site) : getString(R.string.file_type);
     }
 
     public void editTimeoutClicked(View view) {
