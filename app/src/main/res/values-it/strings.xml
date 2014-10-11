@@ -64,7 +64,9 @@
     <string name="restartTitle">Necessario riavvio</string>
     <string name="localeRestart">La lingua selezonata sarà applicata dopo il riavvio dell\'applicazione</string>
     <string name="auto">auto: 0s</string>
-    <string name="custom_countdown_description_site">Imposta il tempo prima che l\'app preferita venga avviata solo per %s. È possibile modificare il tempo di conto alla rovescia predefinito nelle impostazioni generali.</string>
+    <string name="custom_countdown_description_site">Imposta il tempo prima che l\'app preferita venga avviata solo per questo %s. È possibile modificare il tempo di conto alla rovescia predefinito nelle impostazioni generali.</string>
     <string name="file_type">Tipo di file</string>
     <string name="site">sito</string>
+    <string name="countdown_time_general">Conto allo rovescia per questo %1$s - %2$s</string>
+    <string name="specified_seconds">%s secondi</string>
 </resources>

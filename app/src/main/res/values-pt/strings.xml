@@ -64,4 +64,9 @@
     <string name="restartTitle">É necessário reiniciar para que as especificações entrem em vigor.</string>
     <string name="localeRestart">O idioma selecionado será aplicado ao reiniciar o aplicativo.</string>
     <string name="auto">auto: 0s</string>
+    <string name="custom_countdown_description_site">Defina o tempo antes do app preferido ser aberto, somente para %s. Você pode alterar o tempo padrão nas configurações gerais.</string>
+    <string name="file_type">Tipo de Arquivo</string>
+    <string name="site">Site</string>
+    <string name="countdown_time_general">Contagem regressiva para %1$s - %2$s</string>
+    <string name="specified_seconds">%s segundos</string>
 </resources>
