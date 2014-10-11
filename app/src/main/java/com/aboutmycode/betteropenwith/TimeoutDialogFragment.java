@@ -82,8 +82,6 @@ public class TimeoutDialogFragment extends DialogFragment {
         useDefaultCheckbox.setChecked(useDefault);
         useDefaultCheckbox.setText(String.format(getString(R.string.use_default_timeout), globalTimeout));
 
-        timeoutNumberPicker.setEnabled(!useDefault);
-
         useDefaultCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
@@ -101,6 +99,9 @@ public class TimeoutDialogFragment extends DialogFragment {
                 timeoutNumberPicker.setEnabled(!checked && !useDefaultCheckbox.isChecked());
             }
         });
+
+        useDefaultCheckbox.setEnabled(!skipList);
+        timeoutNumberPicker.setEnabled(!useDefault && !skipList);
 
         ((TextView) view.findViewById(R.id.text_dialog_message)).setText(getString(R.string.custom_countdown_description));
 
