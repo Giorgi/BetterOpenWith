@@ -49,7 +49,6 @@
     <string name="confirm">Bestätigen</string>
     <string name="turned_off">Vom User deaktiviert</string>
     <string name="app_seconds">%1$s (%2$ss.)</string>
-    <string name="auto">auto: 0s</string>
     <string name="changelog">Changelog anzeigen</string>
     <string name="rate">Bewerte die App!</string>
     <string name="share">Teilen</string>
@@ -64,4 +63,8 @@
     <string name="systemLocale">Systemstandard</string>
     <string name="restartTitle">Neustart erforderlich</string>
     <string name="localeRestart">Die gewählte Sprache wird nach einem Neustart der App übernommen.</string>
+    <string name="auto">auto: 0s</string>
+    <string name="custom_countdown_description_site">Definiere die Zeit, nach der die bevorzugte App für %s geöffnet wird. Du kannst die globale Wartezeit in den Allgemeinen Einstellungen ändern.</string>
+    <string name="file_type">Dateityp</string>
+    <string name="site">Website</string>
 </resources>

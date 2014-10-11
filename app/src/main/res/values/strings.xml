@@ -50,7 +50,6 @@
     <string name="confirm">Confirm</string>
     <string name="turned_off">Set OFF by user</string>
     <string name="app_seconds">%1$s (%2$ss.)</string>
-    <string name="auto">auto: 0s</string>
     <string name="changelog">View Changelog</string>
     <string name="rate">Rate the app!</string>
     <string name="share">Share</string>
@@ -65,4 +64,8 @@
     <string name="systemLocale">System Default</string>
     <string name="restartTitle">Restart required</string>
     <string name="localeRestart">The selected language will be applied when the application is restarted.</string>
+    <string name="auto">auto: 0s</string>
+    <string name="custom_countdown_description_site">Set time before preferred app will be launched only for %s. You can change the default countdown time in the general settings.</string>
+    <string name="file_type">file type</string>
+    <string name="site">site</string>
 </resources>

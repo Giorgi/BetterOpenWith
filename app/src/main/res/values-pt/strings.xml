@@ -44,8 +44,11 @@
     <string name="custom_countdown">Contagem regressiva personalizada</string>
     <string name="use_default_timeout">Usar a contagem padrão: %s segundos</string>
     <string name="custom_countdown_description">Defina o tempo antes do app preferido ser aberto, somente para este tipo de arquivo. Você pode alterar o tempo padrão nas configurações gerais.</string>
+    <string name="not_handled">%1$s não pode ser aberto com %2$s</string>
+    <string name="confirm_disable">Parar de abrir %1$s com %2$s?</string>
     <string name="confirm">Confirmar</string>
     <string name="turned_off">Desativado pelo usuário</string>
+    <string name="app_seconds">%1$s (%2$ss.)</string>
     <string name="changelog">Visualizar Changelog</string>
     <string name="rate">Avalie o app!</string>
     <string name="share">Compartilhar</string>
@@ -60,4 +63,5 @@
     <string name="systemLocale">Padrão do sistema</string>
     <string name="restartTitle">É necessário reiniciar para que as especificações entrem em vigor.</string>
     <string name="localeRestart">O idioma selecionado será aplicado ao reiniciar o aplicativo.</string>
+    <string name="auto">auto: 0s</string>
 </resources>
