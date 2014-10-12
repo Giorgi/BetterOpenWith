@@ -22,19 +22,22 @@ public class TimeoutDialogFragment extends DialogFragment {
     private static final String ARG_PARAM_TIMEOUT = "param2";
     private static final String ARG_PARAM_HAS_PREFERRED = "param3";
     private static final String ARG_PARAM_SKIP_LIST = "param4";
+    private static final String ARG_PARAM_ITEM_TYPE = "param5";
 
     private boolean useDefault;
     private int timeout;
     private boolean hasPreferred;
     private boolean skipList;
+    private String itemType;
 
-    public static TimeoutDialogFragment newInstance(boolean useDefault, int timeout, boolean hasPreferred, boolean skipList) {
+    public static TimeoutDialogFragment newInstance(boolean useDefault, int timeout, boolean hasPreferred, boolean skipList, String itemType) {
         TimeoutDialogFragment fragment = new TimeoutDialogFragment();
         Bundle args = new Bundle();
         args.putBoolean(ARG_PARAM_USE_DEFAULT, useDefault);
         args.putInt(ARG_PARAM_TIMEOUT, timeout);
         args.putBoolean(ARG_PARAM_HAS_PREFERRED, hasPreferred);
         args.putBoolean(ARG_PARAM_SKIP_LIST, skipList);
+        args.putString(ARG_PARAM_ITEM_TYPE, itemType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,6 +53,7 @@ public class TimeoutDialogFragment extends DialogFragment {
             timeout = getArguments().getInt(ARG_PARAM_TIMEOUT);
             hasPreferred = getArguments().getBoolean(ARG_PARAM_HAS_PREFERRED);
             skipList = getArguments().getBoolean(ARG_PARAM_SKIP_LIST);
+            itemType = getArguments().getString(ARG_PARAM_ITEM_TYPE);
         }
     }
 
@@ -103,7 +107,9 @@ public class TimeoutDialogFragment extends DialogFragment {
         useDefaultCheckbox.setEnabled(!skipList);
         timeoutNumberPicker.setEnabled(!useDefault && !skipList);
 
-        ((TextView) view.findViewById(R.id.text_dialog_message)).setText(getString(R.string.custom_countdown_description));
+        String text = getString(R.string.custom_countdown_description_site);
+        text = String.format(text, itemType);
+        ((TextView) view.findViewById(R.id.text_dialog_message)).setText(text);
 
         return new AlertDialog.Builder(activity)
                 .setTitle(this.getString(R.string.custom_countdown))

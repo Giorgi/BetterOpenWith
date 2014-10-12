@@ -315,7 +315,7 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
     protected void showTimeoutDialog(ItemBase item) {
         FragmentManager fm = getFragmentManager();
         TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout(),
-                                                                        !TextUtils.isEmpty(item.getPackageName()), item.isSkipList());
+                !TextUtils.isEmpty(item.getPackageName()), item.isSkipList(), getItemType(item));
         editTimeoutDialog.show(fm, "TimeoutDialogFragment");
     }
 

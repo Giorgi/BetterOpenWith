@@ -64,9 +64,9 @@
     <string name="restartTitle">Neustart erforderlich</string>
     <string name="localeRestart">Die gewählte Sprache wird nach einem Neustart der App übernommen.</string>
     <string name="auto">auto: 0s</string>
-    <string name="custom_countdown_description_site">Definiere die Zeit, nach der die bevorzugte App für diesen %s geöffnet wird. Du kannst die globale Wartezeit in den Allgemeinen Einstellungen ändern.</string>
+    <string name="custom_countdown_description_site">Definiere die Zeit, nach der die bevorzugte App für %s geöffnet wird. Du kannst die globale Wartezeit in den Allgemeinen Einstellungen ändern.</string>
     <string name="file_type">Dateityp</string>
     <string name="site">Website</string>
-    <string name="countdown_time_general">Wartezeit für diesen %1$s - %2$s</string>
+    <string name="countdown_time_general">Wartezeit für %1$s - %2$s</string>
     <string name="specified_seconds">%s Sekunden</string>
 </resources>
