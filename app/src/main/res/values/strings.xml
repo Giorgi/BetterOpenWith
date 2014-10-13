@@ -64,4 +64,10 @@
     <string name="systemLocale">System Default</string>
     <string name="restartTitle">Restart required</string>
     <string name="localeRestart">The selected language will be applied when the application is restarted.</string>
+    <string name="auto">auto: 0s</string>
+    <string name="custom_countdown_description_site">Set time before preferred app will be launched only for this %s. You can change the default countdown time in the general settings.</string>
+    <string name="file_type">file type</string>
+    <string name="site">site</string>
+    <string name="countdown_time_general">Countdown time for this %1$s - %2$s</string>
+    <string name="specified_seconds">%s seconds</string>
 </resources>

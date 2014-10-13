@@ -63,4 +63,8 @@
     <string name="systemLocale">الوضع الإفتراضي</string>
     <string name="restartTitle">يتطلب إعادة تشغيل البرنامج</string>
     <string name="localeRestart">اللغة المُختارة سوف تعمل عند إعادة تشغيل البرنامج</string>
+    <string name="auto"> تلقائي 0s </string>
+    <string name="custom_countdown_description_site">ضبط الوقت قبل تشغيل البرنامج المفضل لهذا النوع المحدد من الملفات لمدة %s ثانية \nتستطيع تغيير ضبط الوقت التنازلي الافتراضي في الضبط .</string>
+    <string name="file_type">نوع الملف</string>
+    <string name="site">الموقع</string>
 </resources>

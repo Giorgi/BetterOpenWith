@@ -7,4 +7,8 @@
     <string name="video_stream">فيديو علي الانترنت</string>
     <string name="audio_stream">ملف صوتي علي الانترنت</string>
     <string name="browser">المتصفح</string>
+    <string name="geo">الموقع</string>
+    <string name="epub">الكتاب الإلكتروني (epub)</string>
+    <string name="txt">الملفات النصية</string>
+    <string name="email">البريد الإلكتروني</string>
 </resources>

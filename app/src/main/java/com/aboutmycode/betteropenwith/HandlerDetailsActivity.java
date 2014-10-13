@@ -8,9 +8,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import com.aboutmycode.betteropenwith.common.YesNoDialogFragment;
 import com.aboutmycode.betteropenwith.common.YesNoListener;
 import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
+import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareListActivity;
 import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 import com.aboutmycode.betteropenwith.database.HandleItemLoader;
@@ -38,12 +41,12 @@ import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 
-public class HandlerDetailsActivity extends ListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
+public class HandlerDetailsActivity extends LocaleAwareListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
 
     private CommonAdapter<ResolveInfoDisplay> adapter;
-    private CheckBox skipListCheckBox;
     private Switch masterSwitch;
     private HandleItem item;
     private HandleItemLoader loader;
@@ -53,6 +56,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.handler_details);
         flipper = (ViewFlipper) findViewById(R.id.view_flipper);
 
@@ -81,7 +85,6 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
         }
 
         boolean defaultSelected = listView.getCheckedItemCount() > 0;
-        skipListCheckBox.setEnabled(defaultSelected);
 
         if (defaultSelected) {
             item.setPackageName(activityInfo.applicationInfo.packageName);
@@ -218,19 +221,7 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
     }
 
     protected void setAppLaunchDetails(ItemBase item) {
-        Resources resources = getResources();
-
-        skipListCheckBox = (CheckBox) findViewById(R.id.skipListCheckBox);
-        skipListCheckBox.setEnabled(!TextUtils.isEmpty(item.getPackageName()));
-        skipListCheckBox.setChecked(item.isSkipList());
-        skipListCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                skipChanged(skipListCheckBox.isChecked());
-            }
-        });
-
-        setTimeoutText(resources, item);
+        setTimeoutText(getResources(), item);
     }
 
     protected void loadApps(ItemBase item) {
@@ -299,11 +290,22 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
         int timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", resources.getInteger(R.integer.default_timeout));
 
-        if (item.isUseGlobalTimeout()) {
-            timeoutTextView.setText(String.format(getString(R.string.countdown_time), timeout));
+        String itemType = getItemType(item);
+
+        String timeoutText;
+        if (item.isSkipList()) {
+            timeoutText = String.format(getString(R.string.countdown_time_general), itemType, getString(R.string.auto));
         } else {
-            timeoutTextView.setText(String.format(getString(R.string.countdown_time), item.getCustomTimeout()));
+            String formattedSeconds = String.format(getString(R.string.specified_seconds), item.isUseGlobalTimeout() ? timeout : item.getCustomTimeout());
+
+            timeoutText = String.format(getString(R.string.countdown_time_general), itemType, formattedSeconds);
         }
+
+        timeoutTextView.setText(timeoutText);
+    }
+
+    private String getItemType(ItemBase item) {
+        return item instanceof Site ? getString(R.string.site) : getString(R.string.file_type);
     }
 
     public void editTimeoutClicked(View view) {
@@ -312,29 +314,22 @@ public class HandlerDetailsActivity extends ListActivity implements LoaderManage
 
     protected void showTimeoutDialog(ItemBase item) {
         FragmentManager fm = getFragmentManager();
-        TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout());
+        TimeoutDialogFragment editTimeoutDialog = TimeoutDialogFragment.newInstance(item.isUseGlobalTimeout(), item.getCustomTimeout(),
+                !TextUtils.isEmpty(item.getPackageName()), item.isSkipList(), getItemType(item));
         editTimeoutDialog.show(fm, "TimeoutDialogFragment");
     }
 
-    protected void skipChanged(boolean skipList) {
-        updateSkipList(skipList, item, loader);
+    protected void timeoutChanged(boolean useGlobal, int timeout, boolean skipList) {
+        updateTimeout(useGlobal, timeout, item, skipList, loader);
     }
 
-    protected <T extends ItemBase> void updateSkipList(boolean skipList, T item, CupboardCursorLoader<T> loader) {
-        item.setSkipList(skipList);
-        loader.update(item);
-        setResult(RESULT_OK);
-    }
-
-    protected void timeoutChanged(boolean useGlobal, int timeout) {
-        updateTimeout(useGlobal, timeout, item, loader);
-    }
-
-    protected <T extends ItemBase> void updateTimeout(boolean useGlobal, int timeout, T item, CupboardCursorLoader<T> loader) {
+    protected <T extends ItemBase> void updateTimeout(boolean useGlobal, int timeout, T item, boolean skipList, CupboardCursorLoader<T> loader) {
         item.setUseGlobalTimeout(useGlobal);
         if (!useGlobal) {
             item.setCustomTimeout(timeout);
         }
+
+        item.setSkipList(skipList);
 
         loader.update(item);
         setResult(RESULT_OK);

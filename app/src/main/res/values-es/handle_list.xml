@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="pdf">Archivos PDF</string>
     <string name="audio">Archivos audio</string>
     <string name="video">Videos</string>
@@ -7,4 +7,8 @@
     <string name="video_stream">Reproducir videos online</string>
     <string name="audio_stream">Reproducir audios online</string>
     <string name="browser">Navegador web</string>
+    <string name="geo">Posición geográfica</string>
+    <string name="epub">También en formato eBook (para dispositivos móviles)</string>
+    <string name="txt">Archivos de texto</string>
+    <string name="email">Email</string>
 </resources>

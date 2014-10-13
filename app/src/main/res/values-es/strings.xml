@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Mejor Abre Con</string>
     <string name="action_settings">Ajustes</string>
     <string name="title_activity_file_handler">Better Open With</string>
@@ -56,4 +56,12 @@
     <string name="rate_me">¡Calificame!</string>
     <string name="like">Te gusta la aplicación?</string>
     <string name="rateBanner">Califica</string>
+    <string name="play_store">No se puede iniciar Play Store</string>
+    <string name="general_options">Opciones generales</string>
+    <string name="appLanguage">Seleccione lenguaje de aplicación</string>
+    <string name="language">Lenguaje</string>
+    <string name="systemLocale">Predeterminado del sistema</string>
+    <string name="restartTitle">Se requiere reiniciar la aplicación</string>
+    <string name="localeRestart">El idioma será aplicado cuando la aplicación empiece de nuevo</string>
+    <string name="auto">auto: 0s</string>
 </resources>

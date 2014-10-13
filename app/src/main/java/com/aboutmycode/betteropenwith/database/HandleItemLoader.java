@@ -29,11 +29,7 @@ public class HandleItemLoader extends CupboardCursorLoader<HandleItem> {
     protected List<HandleItem> buildList() {
         List<HandleItem> handleItems = super.buildList();
 
-        Resources resources = super.getContext().getResources();
-
         for (HandleItem handleItem : handleItems) {
-            handleItem.setName(resources.getString(resources.getIdentifier(handleItem.getNameResource(), "string", R.class.getPackage().getName())));
-
             //If there is a selected app for handle item load details for that app.
             if (!TextUtils.isEmpty(handleItem.getPackageName())) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
