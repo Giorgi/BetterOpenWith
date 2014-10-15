@@ -35,6 +35,10 @@ public class SiteHandlerActivity extends FileHandlerActivity {
     }
 
     public String getDomainName(String url) throws URISyntaxException {
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "http://" + url;
+        }
+
         URI uri = new URI(url);
         String domain = uri.getHost();
         return domain.startsWith("www.") ? domain.substring(4) : domain;
@@ -48,6 +52,11 @@ public class SiteHandlerActivity extends FileHandlerActivity {
         for (Site site : sites) {
             try {
                 String domainName = getDomainName(url).toLowerCase();
+
+                if (domainName == null) {
+                    return super.getCurrentItem(intent);
+                }
+
                 if (domainName.contains(site.getDomain())) {
                     return site;
                 }
