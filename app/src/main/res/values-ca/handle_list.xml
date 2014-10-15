@@ -7,4 +7,8 @@
     <string name="video_stream">Transmissió de vídeo</string>
     <string name="audio_stream">Transmissió d\'àudio</string>
     <string name="browser">Navegador</string>
+    <string name="geo">Ubicació</string>
+    <string name="epub">Llibre electrònic (epub)</string>
+    <string name="txt">Fitxers de text</string>
+    <string name="email">Correu electrònic</string>
 </resources>

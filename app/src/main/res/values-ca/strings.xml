@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Better Open With</string>
     <string name="action_settings">Configuració</string>
     <string name="title_activity_file_handler">Better Open With</string>
@@ -56,4 +56,17 @@
     <string name="rate_me">Puntueu l\'aplicació!</string>
     <string name="like">Us agrada aquesta aplicació?</string>
     <string name="rateBanner">Puntueu l\'aplicació</string>
+    <string name="play_store">No es pot iniciar el PlayStore</string>
+    <string name="general_options">Configuració general</string>
+    <string name="appLanguage">Idioma de l\'aplicació</string>
+    <string name="language">Idioma</string>
+    <string name="systemLocale">Per defecte</string>
+    <string name="restartTitle">És necessari reiniciar</string>
+    <string name="localeRestart">S\'aplicaran els canvis d\'idioma en reiniciar l\'aplicació.</string>
+    <string name="auto">auto: 0s</string>
+    <string name="countdown_time_general">Compte enrere %1$s - %2$s</string>
+    <string name="custom_countdown_description_site">Temps per iniciar l\'aplicació per defecte només per aquesta tasca %s. Podeu personalitzar el compte enrere per defecte a la configuració general.</string>
+    <string name="file_type">Tipus de fitxer</string>
+    <string name="site">Web</string>
+    <string name="specified_seconds">%s segons</string>
 </resources>
