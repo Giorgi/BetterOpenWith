@@ -279,6 +279,7 @@
         </activity>
         <activity
             android:name=".SiteHandlerActivity"
+            android:theme="@android:style/Theme.Holo.Dialog"
             android:label="@string/title_activity_file_handler">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
