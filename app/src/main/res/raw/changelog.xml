@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="16 October, 2014" versionName="1.2.1">
+        <changelogtext>
+            [b]Bug fix![/b] Fixed black background issue when handling urls.
+        </changelogtext>
+        <changelogtext>
+            Updated Catalan translation
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="13 October, 2014" versionName="1.2">
         <changelogtext>
             [b]New![/b] You can now set preferred app for popular websites such as Youtube, Reddit, Play Store and so on
