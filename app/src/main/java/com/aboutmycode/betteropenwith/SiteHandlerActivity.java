@@ -48,21 +48,21 @@ public class SiteHandlerActivity extends FileHandlerActivity {
     protected ItemBase getCurrentItem(Intent intent) {
         List<Site> sites = getSites();
         String url = intent.getDataString();
+        String domainName = null;
+        try {
+            domainName = getDomainName(url).toLowerCase();
 
-        for (Site site : sites) {
-            try {
-                String domainName = getDomainName(url).toLowerCase();
+            if (domainName == null) {
+                return super.getCurrentItem(intent);
+            }
 
-                if (domainName == null) {
-                    return super.getCurrentItem(intent);
-                }
-
+            for (Site site : sites) {
                 if (domainName.contains(site.getDomain())) {
                     return site;
                 }
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
             }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
 
         return super.getCurrentItem(intent);
