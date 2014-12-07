@@ -42,6 +42,7 @@
         <item>Português</item>
         <item>Italiano</item>
         <item>Català</item>
+        <item>Čeština</item>
         <item>العربية</item>
     </string-array>
     <string-array name="pref_languages_values">
@@ -53,6 +54,7 @@
         <item>pt</item>
         <item>it</item>
         <item>ca</item>
+        <item>cs</item>
         <item>ar</item>
     </string-array>
 </resources>

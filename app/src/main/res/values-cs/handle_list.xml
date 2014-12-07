@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pdf">PDF soubory</string>
+    <string name="audio">Zvukové soubory</string>
+    <string name="video">Video soubory</string>
+    <string name="images">Obrázky</string>
+    <string name="video_stream">Videostream</string>
+    <string name="audio_stream">Audiostream</string>
+    <string name="browser">Prohlížeč</string>
+    <string name="geo">Geolokace</string>
+    <string name="epub">Elektronická kniha</string>
+    <string name="txt">Textové soubory</string>
+    <string name="email">E-mail</string>
+</resources>
