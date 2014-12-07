@@ -12,6 +12,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -70,12 +71,18 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
         boolean isLight;
 
+        int lightTheme = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
+                            android.R.style.Theme_Material_Light_Dialog : android.R.style.Theme_Holo_Light_Dialog;
+
+        int darkTheme = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
+                            android.R.style.Theme_Material_Dialog : android.R.style.Theme_Holo_Dialog;
+
         if (preferences.getString("theme", resources.getString(R.string.lightValue)).equals(resources.getString(R.string.lightValue))) {
             isLight = true;
-            setTheme(android.R.style.Theme_Holo_Light_Dialog);
+            setTheme(lightTheme);
         } else {
             isLight = false;
-            setTheme(android.R.style.Theme_Holo_Dialog);
+            setTheme(darkTheme);
         }
 
         setContentView(R.layout.file_handler);
