@@ -1,0 +1,1 @@
+update HandleItem set appComponentName='com.aboutmycode.betteropenwith.SiteHandlerActivity'
