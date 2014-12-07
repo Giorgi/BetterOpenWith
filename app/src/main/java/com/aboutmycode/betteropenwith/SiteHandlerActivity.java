@@ -41,6 +41,11 @@ public class SiteHandlerActivity extends FileHandlerActivity {
 
         URI uri = new URI(url);
         String domain = uri.getHost();
+
+        if (TextUtils.isEmpty(domain)){
+            return null;
+        }
+
         return domain.startsWith("www.") ? domain.substring(4) : domain;
     }
 
@@ -48,6 +53,11 @@ public class SiteHandlerActivity extends FileHandlerActivity {
     protected ItemBase getCurrentItem(Intent intent) {
         List<Site> sites = getSites();
         String url = intent.getDataString();
+
+        if (TextUtils.isEmpty(url)){
+            return super.getCurrentItem(intent);
+        }
+
         String domainName = null;
         try {
             domainName = getDomainName(url).toLowerCase();
