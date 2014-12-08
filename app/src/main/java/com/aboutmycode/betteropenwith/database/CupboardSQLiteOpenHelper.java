@@ -18,6 +18,6 @@ public class CupboardSQLiteOpenHelper extends SQLiteAssetHelper {
     }
 
     public CupboardSQLiteOpenHelper(Context context) {
-        super(context, "applist.db", null, 6);
+        super(context, "applist.db", null, 7);
     }
 }
