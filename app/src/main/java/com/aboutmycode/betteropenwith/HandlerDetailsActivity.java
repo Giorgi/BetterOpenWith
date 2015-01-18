@@ -78,6 +78,12 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
 
     protected <T extends ItemBase> void onListItemClick(ListView listView, int position, T item, CupboardCursorLoader<T> loader) {
         ResolveInfoDisplay adapterItem = adapter.getItem(position);
+
+        if (adapterItem.isHidden()) {
+            Toast.makeText(this, getString(R.string.CannotPreferrHidden), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ActivityInfo activityInfo = adapterItem.getResolveInfo().activityInfo;
 
         if (activityInfo.name.equals(item.getClassName())) {
@@ -346,16 +352,37 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
     }
 
     public void hideClicked(View view) {
-        int position = getListView().getPositionForView(view);
+        ListView listView = getListView();
+        int position = listView.getPositionForView(view);
 
         ResolveInfoDisplay adapterItem = adapter.getItem(position);
-        boolean hidden = !adapterItem.isHidden();
-        adapterItem.setHidden(hidden);
+        boolean shouldHide = !adapterItem.isHidden();
 
-        HiddenApp hiddenApp = new HiddenApp(adapterItem.getResolveInfo().activityInfo.packageName);
+        String packageName = adapterItem.getResolveInfo().activityInfo.packageName;
+        if (packageName.equals(itemOrSite().getPackageName())) {
+            Toast.makeText(this, getString(R.string.CannotHidePreferred), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (shouldHide) {
+            int hiddenCount = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                ResolveInfoDisplay temp = adapter.getItem(i);
+                if (temp.isHidden()) hiddenCount++;
+            }
+
+            if (hiddenCount + 1 == adapter.getCount()) {
+                Toast.makeText(this, getString(R.string.CannotHideAll), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        adapterItem.setHidden(shouldHide);
+
+        HiddenApp hiddenApp = new HiddenApp(packageName);
         setHiddenAppId(hiddenApp);
 
-        if (hidden) {
+        if (shouldHide) {
             loader.insert(hiddenApp);
             itemOrSite().addHiddenApp(hiddenApp);
         } else {
@@ -373,7 +400,7 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         app.setItemId(item.getId());
     }
 
-    protected ItemBase itemOrSite(){
+    protected ItemBase itemOrSite() {
         return item;
     }
 }
