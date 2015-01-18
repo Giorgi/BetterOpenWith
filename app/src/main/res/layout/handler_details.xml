@@ -52,7 +52,9 @@
             android:layout_alignTop="@+id/editTimeoutButton"
             android:layout_toRightOf="@+id/editTimeoutButton"
             android:gravity="center_vertical"
-            android:paddingRight="5dp" />
+            android:paddingRight="5dp"
+            android:onClick="editTimeoutClicked"
+            android:clickable="true" />
     </RelativeLayout>
 
     <LinearLayout
