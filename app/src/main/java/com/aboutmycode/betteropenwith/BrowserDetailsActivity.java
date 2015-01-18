@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.aboutmycode.betteropenwith.database.CupboardCursorLoader;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
+import com.aboutmycode.betteropenwith.database.SiteItemLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
     private ArrayList<SpinnerSite> navSpinner;
     private SiteNavigationAdapter adapter;
     private Site site;
-    private CupboardCursorLoader<Site> loader;
+    private SiteItemLoader loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,10 +101,28 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
         return true;
     }
 
+    @Override
+    protected void setHiddenAppId(HiddenApp app) {
+        if (site == null) {
+            super.setHiddenAppId(app);
+        } else {
+            app.setSiteId(site.getId());
+        }
+    }
+
+    @Override
+    protected ItemBase itemOrSite() {
+        if (site == null) {
+            return super.itemOrSite();
+        }
+
+        return site;
+    }
+
     class SiteLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<Site>> {
         @Override
         public Loader<List<Site>> onCreateLoader(int id, Bundle bundle) {
-            loader = new CupboardCursorLoader<Site>(BrowserDetailsActivity.this, new CupboardSQLiteOpenHelper(BrowserDetailsActivity.this),
+            loader = new SiteItemLoader(BrowserDetailsActivity.this, new CupboardSQLiteOpenHelper(BrowserDetailsActivity.this),
                     Site.class, "_id=?", bundle.getLong("id"));
             return loader;
         }
@@ -111,7 +130,7 @@ public class BrowserDetailsActivity extends HandlerDetailsActivity implements Ac
         @Override
         public void onLoadFinished(Loader<List<Site>> listLoader, List<Site> sites) {
             if (loader == null) {
-                loader = (CupboardCursorLoader<Site>) listLoader;
+                loader = (SiteItemLoader) listLoader;
             }
             Site site = sites.get(0);
 

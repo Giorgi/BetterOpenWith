@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
@@ -13,7 +12,7 @@ import android.util.Log;
 
 import com.aboutmycode.betteropenwith.HandleItem;
 import com.aboutmycode.betteropenwith.HiddenApp;
-import com.aboutmycode.betteropenwith.R;
+import com.aboutmycode.betteropenwith.Site;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +37,8 @@ public class HandleItemLoader extends CupboardCursorLoader<HandleItem> {
 
             SQLiteDatabase database = db.getReadableDatabase();
             List<HiddenApp> hiddenApps = cupboard().withDatabase(database)
-                                        .query(HiddenApp.class).withSelection("itemId=?", String.valueOf(handleItem.getId()))
-                                        .query().list();
+                    .query(HiddenApp.class).withSelection("itemId=?", String.valueOf(handleItem.getId()))
+                    .query().list();
             database.close();
 
             handleItem.setHiddenApps(new ArrayList<>(hiddenApps));
@@ -73,3 +72,4 @@ public class HandleItemLoader extends CupboardCursorLoader<HandleItem> {
         return handleItems;
     }
 }
+

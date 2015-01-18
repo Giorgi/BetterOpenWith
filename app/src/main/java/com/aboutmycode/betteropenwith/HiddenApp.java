@@ -2,7 +2,8 @@ package com.aboutmycode.betteropenwith;
 
 public class HiddenApp {
     private Long _id;
-    private long itemId;
+    private Long itemId;
+    private Long siteId;
     private String packageName;
 
     public HiddenApp() {
@@ -34,6 +35,14 @@ public class HiddenApp {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public Long getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(Long siteId) {
+        this.siteId = siteId;
     }
 
     @Override

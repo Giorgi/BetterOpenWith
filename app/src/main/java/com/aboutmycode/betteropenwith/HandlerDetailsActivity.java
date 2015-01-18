@@ -353,20 +353,28 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         adapterItem.setHidden(hidden);
 
         HiddenApp hiddenApp = new HiddenApp(adapterItem.getResolveInfo().activityInfo.packageName);
-        hiddenApp.setItemId(item.getId());
+        setHiddenAppId(hiddenApp);
 
         if (hidden) {
             loader.insert(hiddenApp);
-            item.addHiddenApp(hiddenApp);
+            itemOrSite().addHiddenApp(hiddenApp);
         } else {
-            int index = item.getHiddenApps().indexOf(hiddenApp);
-            HiddenApp app = item.getHiddenApps().get(index);
+            int index = itemOrSite().getHiddenApps().indexOf(hiddenApp);
+            HiddenApp app = itemOrSite().getHiddenApps().get(index);
 
             loader.delete(app);
-            item.getHiddenApps().remove(index);
+            itemOrSite().getHiddenApps().remove(index);
         }
 
         adapter.notifyDataSetChanged();
+    }
+
+    protected void setHiddenAppId(HiddenApp app) {
+        app.setItemId(item.getId());
+    }
+
+    protected ItemBase itemOrSite(){
+        return item;
     }
 }
 

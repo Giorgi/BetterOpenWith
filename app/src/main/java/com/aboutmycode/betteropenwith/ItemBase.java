@@ -28,6 +28,10 @@ public class ItemBase {
 
     private transient ArrayList<HiddenApp> hiddenApps;
 
+    public ItemBase() {
+        hiddenApps = new ArrayList<>();
+    }
+
     public long getId() {
         return _id;
     }
