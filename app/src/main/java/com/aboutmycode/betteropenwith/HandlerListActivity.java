@@ -292,7 +292,7 @@ class HandleItemViewBinder implements IBindView<HandleItem> {
             }
 
             if (item.isSkipList()) {
-                selectedAppTextView.setText(String.format("%1$s (%2$s)", item.getSelectedAppLabel(), context.getString(R.string.auto)));
+                selectedAppTextView.setText(String.format("%1$s (%2$s.)", item.getSelectedAppLabel(), context.getString(R.string.auto)));
             } else {
                 selectedAppTextView.setText(String.format(context.getString(R.string.app_seconds), item.getSelectedAppLabel(), timeout));
             }

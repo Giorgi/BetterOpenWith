@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.aboutmycode.betteropenwith.common.YesNoDialogFragment;
@@ -77,6 +78,12 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
 
     protected <T extends ItemBase> void onListItemClick(ListView listView, int position, T item, CupboardCursorLoader<T> loader) {
         ResolveInfoDisplay adapterItem = adapter.getItem(position);
+
+        if (adapterItem.isHidden()) {
+            Toast.makeText(this, getString(R.string.CannotPreferrHidden), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ActivityInfo activityInfo = adapterItem.getResolveInfo().activityInfo;
 
         if (activityInfo.name.equals(item.getClassName())) {
@@ -272,11 +279,12 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
             resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
             resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
             resolveInfoDisplay.setResolveInfo(info);
+            resolveInfoDisplay.setHidden(item.getHiddenApps().contains(new HiddenApp(info.activityInfo.packageName)));
 
             list.add(resolveInfoDisplay);
         }
 
-        adapter = new CommonAdapter<ResolveInfoDisplay>(this, list, R.layout.resolve_info_checkable, new ResolveInfoDetailsActivityViewBinder());
+        adapter = new CommonAdapter<>(this, list, R.layout.resolve_info_checkable, new ResolveInfoDetailsActivityViewBinder());
         setListAdapter(adapter);
 
         if (checked >= 0) {
@@ -342,6 +350,59 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         toggleHandlerState(false);
         masterSwitch.setChecked(false);
     }
+
+    public void hideClicked(View view) {
+        ListView listView = getListView();
+        int position = listView.getPositionForView(view);
+
+        ResolveInfoDisplay adapterItem = adapter.getItem(position);
+        boolean shouldHide = !adapterItem.isHidden();
+
+        String packageName = adapterItem.getResolveInfo().activityInfo.packageName;
+        if (packageName.equals(itemOrSite().getPackageName())) {
+            Toast.makeText(this, getString(R.string.CannotHidePreferred), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (shouldHide) {
+            int hiddenCount = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                ResolveInfoDisplay temp = adapter.getItem(i);
+                if (temp.isHidden()) hiddenCount++;
+            }
+
+            if (hiddenCount + 1 == adapter.getCount()) {
+                Toast.makeText(this, getString(R.string.CannotHideAll), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        adapterItem.setHidden(shouldHide);
+
+        HiddenApp hiddenApp = new HiddenApp(packageName);
+        setHiddenAppId(hiddenApp);
+
+        if (shouldHide) {
+            loader.insert(hiddenApp);
+            itemOrSite().addHiddenApp(hiddenApp);
+        } else {
+            int index = itemOrSite().getHiddenApps().indexOf(hiddenApp);
+            HiddenApp app = itemOrSite().getHiddenApps().get(index);
+
+            loader.delete(app);
+            itemOrSite().getHiddenApps().remove(index);
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
+    protected void setHiddenAppId(HiddenApp app) {
+        app.setItemId(item.getId());
+    }
+
+    protected ItemBase itemOrSite() {
+        return item;
+    }
 }
 
 class ResolveInfoDetailsActivityViewBinder implements IBindView<ResolveInfoDisplay> {
@@ -349,9 +410,11 @@ class ResolveInfoDetailsActivityViewBinder implements IBindView<ResolveInfoDispl
     public View bind(View row, ResolveInfoDisplay item, Context context) {
         ImageView image = (ImageView) row.findViewById(R.id.image);
         CheckedTextView checkedTextView = (CheckedTextView) row.findViewById(R.id.resolveCheckBox);
+        ImageView toggleHideView = (ImageView) row.findViewById(R.id.toggleHideView);
 
         image.setImageDrawable(item.getDisplayIcon());
         checkedTextView.setText(item.getDisplayLabel());
+        toggleHideView.setImageResource(item.isHidden() ? R.drawable.ic_action_disabled : R.drawable.ic_action_enabled);
 
         return row;
     }
