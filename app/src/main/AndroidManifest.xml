@@ -264,7 +264,7 @@
             android:parentActivityName=".HandlerListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value=".HandlerListActivity" />
         </activity>
         <activity
             android:name=".AboutActivity"
@@ -275,12 +275,12 @@
             android:parentActivityName=".HandlerListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value=".HandlerListActivity" />
         </activity>
         <activity
             android:name=".SiteHandlerActivity"
-            android:theme="@android:style/Theme.Holo.Dialog"
-            android:label="@string/title_activity_file_handler">
+            android:label="@string/title_activity_file_handler"
+            android:theme="@android:style/Theme.Holo.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
