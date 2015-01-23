@@ -1,6 +1,7 @@
 package com.aboutmycode.betteropenwith;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.ListActivity;
 import android.app.LoaderManager;
@@ -17,6 +18,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -232,7 +234,19 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
     }
 
     protected void loadApps(ItemBase item) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        String action = Intent.ACTION_VIEW;
+
+        //calendar
+        if (item.getId() == 13) {
+            action = Intent.ACTION_EDIT;
+        }
+
+        //camera
+        if (item.getId() == 14) {
+            action = MediaStore.ACTION_IMAGE_CAPTURE;
+        }
+
+        Intent intent = new Intent(action);
         String intentData = item.getIntentData();
 
         if (TextUtils.isEmpty(intentData)) {

@@ -104,7 +104,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
         original = makeMyIntent();
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Intent intent = new Intent(launchIntent.getAction());
         intent.setDataAndType(launchIntent.getData(), launchIntent.getType());
 
         item = getCurrentItem(launchIntent);

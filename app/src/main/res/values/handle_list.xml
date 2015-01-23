@@ -11,4 +11,7 @@
     <string name="epub">Ebook (epub)</string>
     <string name="txt">Text Files</string>
     <string name="email">Email</string>
+    <string name="dialer">Dialer</string>
+    <string name="camera">Camera</string>
+    <string name="calendar">Calendar</string>
 </resources>
