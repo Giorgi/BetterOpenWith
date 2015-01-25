@@ -73,4 +73,5 @@
     <string name="CannotHidePreferred">You cannot hide preferred app</string>
     <string name="CannotHideAll">You cannot hide all apps</string>
     <string name="CannotPreferrHidden">You cannot set hidden app as preferred</string>
+    <string name="hint">Click star to set preferred app. Click eye to hide it</string>
 </resources>

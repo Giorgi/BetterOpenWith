@@ -27,7 +27,7 @@
             android:layout_below="@+id/selectedAppLabel"
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Click star to set preferred app. Click eye to hide it" />
+            android:text="@string/hint" />
 
         <include
             layout="@android:layout/list_content"
