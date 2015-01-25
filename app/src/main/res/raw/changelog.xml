@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="25 January, 2015" versionName="1.3.4 Beta">
+        <changelogtext>
+            [b]New![/b] Added option to hide apps from list
+        </changelogtext>
+        <changelogtext>
+            [b]New![/b] Added handler for dialer, calendar and camera
+        </changelogtext>
+        <changelogtext>
+            [b]Bug fix![/b] Fixed multiple small bugs.
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="8 December, 2014" versionName="1.3.1">
         <changelogtext>
             [b]New![/b] Added Czech translation
