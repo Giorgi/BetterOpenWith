@@ -10,24 +10,15 @@
         android:orientation="vertical"
         android:paddingBottom="5dp"
         android:paddingTop="7dp">
-
-        <TextView
-            android:id="@+id/selectedAppLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/select_preferred_app"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
         <TextView
             android:id="@+id/hintLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/selectedAppLabel"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/hint" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/hint"
+            android:gravity="center_horizontal" />
 
         <include
             layout="@android:layout/list_content"
