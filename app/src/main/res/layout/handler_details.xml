@@ -16,9 +16,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/hint"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp" />
 
         <include
             layout="@android:layout/list_content"

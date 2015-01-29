@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,6 +83,17 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         ResolveInfoDisplay adapterItem = adapter.getItem(position);
 
         if (adapterItem.isHidden()) {
+            if (!TextUtils.isEmpty(item.getClassName())) {
+                int count = adapter.getCount();
+                for (int i = 0; i < count; i++) {
+                    ResolveInfoDisplay current = adapter.getItem(i);
+                    if (current.getResolveInfo().activityInfo.name.equals(item.getClassName())) {
+                        listView.setItemChecked(i, true);
+                    }
+                }
+            }
+
+            listView.setItemChecked(position, false);
             Toast.makeText(this, getString(R.string.CannotPreferrHidden), Toast.LENGTH_SHORT).show();
             return;
         }

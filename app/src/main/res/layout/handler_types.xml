@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
         android:layout_marginRight="5dp"
         android:baselineAlignBottom="false"
         android:src="@drawable/ic_adobe_acrobat"></ImageView>
@@ -24,7 +25,7 @@
         android:textAppearance="?android:textAppearanceMedium"></TextView>
 
     <TextView
-        android:id="@id/selectedAppLabel"
+        android:id="@+id/selectedAppLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/label"
