@@ -72,7 +72,7 @@
     <string name="CannotHidePreferred">L\'applicazione preferita non può essere nascosta</string>
     <string name="CannotHideAll">Non è possibile nascondere tutte le applicazioni</string>
     <string name="CannotPreferrHidden">Non puoi impostare un\'applicazione nascosta come preferita</string>
-    <string name="hint">Seleziona la stella per impostare l\'applicazione preferita. Seleziona l\'occhio per nasconderla</string>
+    <string name="hint">Seleziona la stella per impostare l\'applicazione preferita.\nSeleziona l\'occhio per nasconderla</string>
     <string name="credits">Credits</string>
     <string name="app_idea">Un grazie a %s di reddit, <b>che ha avuto l\'idea</b> per questa app!</string>
     <string name="Translators">Traduttori</string>

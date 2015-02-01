@@ -72,7 +72,7 @@
     <string name="CannotHidePreferred">Du kannst eine bevorzugte App nicht ausblenden</string>
     <string name="CannotHideAll">Es können nicht alle Apps ausgeblendet werden</string>
     <string name="CannotPreferrHidden">Du kannst eine ausgeblendete App nicht als bevorzugte App definieren</string>
-    <string name="hint">Tippe auf den Stern, um eine App zu bevorzugen. Tippe auf das Auge, um sie zu auszublenden.</string>
+    <string name="hint">Tippe auf den Stern, um eine App zu bevorzugen.\nTippe auf das Auge, um sie zu auszublenden.</string>
     <string name="credits">Danksagungen</string>
     <string name="app_idea">Danke an Reddit-User %s, <b>von ihm stammt die Idee</b> für diese App!</string>
     <string name="Translators">Übersetzer</string>
