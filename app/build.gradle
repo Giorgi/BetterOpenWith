@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 34
-        versionName "1.3.7 Beta"
+        versionCode 42
+        versionName "1.4"
     }
 
     final Console console = System.console();
