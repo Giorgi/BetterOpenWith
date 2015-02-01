@@ -2,30 +2,42 @@
 
 <com.aboutmycode.betteropenwith.common.layout.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingTop="3dip"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
     android:paddingBottom="3dip"
-    android:layout_height="match_parent">
+    android:paddingTop="3dip">
 
     <ImageView
-        android:paddingLeft="2dip"
-        android:layout_centerVertical="true"
-        android:adjustViewBounds="true"
+        android:id="@+id/image"
         android:layout_width="34dip"
         android:layout_height="34dip"
-        android:id="@+id/image">
-    </ImageView>
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:paddingLeft="2dip"></ImageView>
 
     <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/resolveCheckBox"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeightSmall"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:gravity="center_vertical"
+        android:layout_alignBaseline="@id/image"
+        android:layout_toLeftOf="@+id/toggleHideView"
+        android:layout_toRightOf="@id/image"
         android:checkMark="@drawable/btn_star_holo_light"
+        android:gravity="center_vertical"
         android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
         android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+        android:text="sample application name"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
+
+    <ImageView
+        android:id="@+id/toggleHideView"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:paddingRight="3dp"
+        android:paddingLeft="3dp"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/image"
-        android:layout_alignBaseline="@id/image"
-        />
+        android:clickable="true"
+        android:soundEffectsEnabled="true"
+        android:onClick="hideClicked"
+        android:src="@drawable/ic_action_enabled" />
 </com.aboutmycode.betteropenwith.common.layout.CheckableRelativeLayout>

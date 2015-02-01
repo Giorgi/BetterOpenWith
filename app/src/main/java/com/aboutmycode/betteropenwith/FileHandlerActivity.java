@@ -72,10 +72,10 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         boolean isLight;
 
         int lightTheme = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
-                            android.R.style.Theme_Material_Light_Dialog : android.R.style.Theme_Holo_Light_Dialog;
+                android.R.style.Theme_Material_Light_Dialog : android.R.style.Theme_Holo_Light_Dialog;
 
         int darkTheme = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
-                            android.R.style.Theme_Material_Dialog : android.R.style.Theme_Holo_Dialog;
+                android.R.style.Theme_Material_Dialog : android.R.style.Theme_Holo_Dialog;
 
         if (preferences.getString("theme", resources.getString(R.string.lightValue)).equals(resources.getString(R.string.lightValue))) {
             isLight = true;
@@ -104,7 +104,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
         original = makeMyIntent();
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Intent intent = new Intent(launchIntent.getAction());
         intent.setDataAndType(launchIntent.getData(), launchIntent.getType());
 
         item = getCurrentItem(launchIntent);
@@ -142,6 +142,10 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
                 continue;
             }
 
+            if (item.getHiddenApps().contains(new HiddenApp(info.activityInfo.packageName))) {
+                continue;
+            }
+
             index++;
 
             if (info.activityInfo.packageName.equals(item.getPackageName()) && info.activityInfo.name.equals(item.getClassName())) {
@@ -167,7 +171,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             data.add(resolveInfoDisplay);
         }
 
-        adapter = new CommonAdapter<ResolveInfoDisplay>(this, data, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder(this));
+        adapter = new CommonAdapter<>(this, data, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder(this));
         adapterView.setAdapter(adapter);
 
         adapterView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -238,6 +242,12 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         CupboardSQLiteOpenHelper dbHelper = new CupboardSQLiteOpenHelper(this);
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         HandleItem item = cupboard().withDatabase(database).get(HandleItem.class, id);
+
+        List<HiddenApp> hiddenApps = cupboard().withDatabase(database)
+                .query(HiddenApp.class).withSelection("itemId=?", String.valueOf(item.getId()))
+                .query().list();
+
+        item.setHiddenApps(new ArrayList<>(hiddenApps));
 
         database.close();
         dbHelper.close();

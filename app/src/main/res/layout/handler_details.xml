@@ -10,22 +10,23 @@
         android:orientation="vertical"
         android:paddingBottom="5dp"
         android:paddingTop="7dp">
-
         <TextView
-            android:id="@+id/selectedAppLabel"
+            android:id="@+id/hintLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="@string/select_preferred_app"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="@string/hint"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp" />
 
         <include
             layout="@android:layout/list_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/editTimeoutButton"
-            android:layout_below="@+id/selectedAppLabel"
+            android:layout_below="@+id/hintLabel"
             android:layout_marginBottom="5dp" />
 
         <ImageButton
@@ -51,7 +52,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@+id/editTimeoutButton"
             android:layout_toRightOf="@+id/editTimeoutButton"
+            android:clickable="true"
             android:gravity="center_vertical"
+            android:onClick="editTimeoutClicked"
             android:paddingRight="5dp" />
     </RelativeLayout>
 

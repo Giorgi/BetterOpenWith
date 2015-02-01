@@ -71,6 +71,6 @@
     <string name="custom_countdown_description_site">Nastavit čas dříve než bude spuštěna preferovaná aplikace, pouze pro těchto %s. Výchozí čas odpočtu lze nastavit ve všeobecných nastaveních.</string>
     <string name="file_type">typ souboru</string>
     <string name="site">stránka</string>
-    <string name="specified_seconds">%s vteřin</string>
+    <string name="specified_seconds">%ss</string>
     <string name="Translators">překladatele</string>
 </resources>

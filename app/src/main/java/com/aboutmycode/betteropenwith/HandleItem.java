@@ -60,3 +60,4 @@ public class HandleItem extends ItemBase {
         this.selectedAppIcon = selectedAppIcon;
     }
 }
+

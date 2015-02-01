@@ -1,6 +1,7 @@
 package com.aboutmycode.betteropenwith;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.ListActivity;
 import android.app.LoaderManager;
@@ -17,7 +18,9 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.aboutmycode.betteropenwith.common.YesNoDialogFragment;
@@ -77,6 +81,23 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
 
     protected <T extends ItemBase> void onListItemClick(ListView listView, int position, T item, CupboardCursorLoader<T> loader) {
         ResolveInfoDisplay adapterItem = adapter.getItem(position);
+
+        if (adapterItem.isHidden()) {
+            if (!TextUtils.isEmpty(item.getClassName())) {
+                int count = adapter.getCount();
+                for (int i = 0; i < count; i++) {
+                    ResolveInfoDisplay current = adapter.getItem(i);
+                    if (current.getResolveInfo().activityInfo.name.equals(item.getClassName())) {
+                        listView.setItemChecked(i, true);
+                    }
+                }
+            }
+
+            listView.setItemChecked(position, false);
+            Toast.makeText(this, getString(R.string.CannotPreferrHidden), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ActivityInfo activityInfo = adapterItem.getResolveInfo().activityInfo;
 
         if (activityInfo.name.equals(item.getClassName())) {
@@ -225,7 +246,19 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
     }
 
     protected void loadApps(ItemBase item) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        String action = Intent.ACTION_VIEW;
+
+        //calendar
+        if (item.getId() == 13) {
+            action = Intent.ACTION_EDIT;
+        }
+
+        //camera
+        if (item.getId() == 14) {
+            action = MediaStore.ACTION_IMAGE_CAPTURE;
+        }
+
+        Intent intent = new Intent(action);
         String intentData = item.getIntentData();
 
         if (TextUtils.isEmpty(intentData)) {
@@ -272,11 +305,12 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
             resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
             resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
             resolveInfoDisplay.setResolveInfo(info);
+            resolveInfoDisplay.setHidden(item.getHiddenApps().contains(new HiddenApp(info.activityInfo.packageName)));
 
             list.add(resolveInfoDisplay);
         }
 
-        adapter = new CommonAdapter<ResolveInfoDisplay>(this, list, R.layout.resolve_info_checkable, new ResolveInfoDetailsActivityViewBinder());
+        adapter = new CommonAdapter<>(this, list, R.layout.resolve_info_checkable, new ResolveInfoDetailsActivityViewBinder());
         setListAdapter(adapter);
 
         if (checked >= 0) {
@@ -296,7 +330,7 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         if (item.isSkipList()) {
             timeoutText = String.format(getString(R.string.countdown_time_general), itemType, getString(R.string.auto));
         } else {
-            String formattedSeconds = String.format(getString(R.string.specified_seconds), item.isUseGlobalTimeout() ? timeout : item.getCustomTimeout());
+            String formattedSeconds = String.format(getString(R.string.specified_seconds), item.isUseGlobalTimeout() ? timeout : item.getCustomTimeout()) + ".";
 
             timeoutText = String.format(getString(R.string.countdown_time_general), itemType, formattedSeconds);
         }
@@ -342,6 +376,59 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         toggleHandlerState(false);
         masterSwitch.setChecked(false);
     }
+
+    public void hideClicked(View view) {
+        ListView listView = getListView();
+        int position = listView.getPositionForView(view);
+
+        ResolveInfoDisplay adapterItem = adapter.getItem(position);
+        boolean shouldHide = !adapterItem.isHidden();
+
+        String packageName = adapterItem.getResolveInfo().activityInfo.packageName;
+        if (packageName.equals(itemOrSite().getPackageName())) {
+            Toast.makeText(this, getString(R.string.CannotHidePreferred), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (shouldHide) {
+            int hiddenCount = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                ResolveInfoDisplay temp = adapter.getItem(i);
+                if (temp.isHidden()) hiddenCount++;
+            }
+
+            if (hiddenCount + 1 == adapter.getCount()) {
+                Toast.makeText(this, getString(R.string.CannotHideAll), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        adapterItem.setHidden(shouldHide);
+
+        HiddenApp hiddenApp = new HiddenApp(packageName);
+        setHiddenAppId(hiddenApp);
+
+        if (shouldHide) {
+            loader.insert(hiddenApp);
+            itemOrSite().addHiddenApp(hiddenApp);
+        } else {
+            int index = itemOrSite().getHiddenApps().indexOf(hiddenApp);
+            HiddenApp app = itemOrSite().getHiddenApps().get(index);
+
+            loader.delete(app);
+            itemOrSite().getHiddenApps().remove(index);
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
+    protected void setHiddenAppId(HiddenApp app) {
+        app.setItemId(item.getId());
+    }
+
+    protected ItemBase itemOrSite() {
+        return item;
+    }
 }
 
 class ResolveInfoDetailsActivityViewBinder implements IBindView<ResolveInfoDisplay> {
@@ -349,9 +436,11 @@ class ResolveInfoDetailsActivityViewBinder implements IBindView<ResolveInfoDispl
     public View bind(View row, ResolveInfoDisplay item, Context context) {
         ImageView image = (ImageView) row.findViewById(R.id.image);
         CheckedTextView checkedTextView = (CheckedTextView) row.findViewById(R.id.resolveCheckBox);
+        ImageView toggleHideView = (ImageView) row.findViewById(R.id.toggleHideView);
 
         image.setImageDrawable(item.getDisplayIcon());
         checkedTextView.setText(item.getDisplayLabel());
+        toggleHideView.setImageResource(item.isHidden() ? R.drawable.ic_action_disabled : R.drawable.ic_action_enabled);
 
         return row;
     }

@@ -3,7 +3,7 @@
     <string name="app_name">Better Open With</string>
     <string name="action_settings">Impostazioni</string>
     <string name="title_activity_file_handler">Better Open With</string>
-    <string name="complete_action_with">Completa l\'azione con</string>
+    <string name="complete_action_with">Completa l\'azione con...</string>
     <string name="timeout">Countdown predefinito</string>
     <string name="timeoutSummary">Avvia l\'app preferita in %s secondi</string>
     <string name="title_activity_settings">Impostazioni</string>
@@ -68,5 +68,12 @@
     <string name="file_type">Tipo di file</string>
     <string name="site">sito</string>
     <string name="countdown_time_general">Conto allo rovescia per questo %1$s - %2$s</string>
-    <string name="specified_seconds">%s secondi</string>
+    <string name="specified_seconds">%ss</string>
+    <string name="CannotHidePreferred">L\'applicazione preferita non può essere nascosta</string>
+    <string name="CannotHideAll">Non è possibile nascondere tutte le applicazioni</string>
+    <string name="CannotPreferrHidden">Non puoi impostare un\'applicazione nascosta come preferita</string>
+    <string name="hint">Seleziona la stella per impostare l\'applicazione preferita.\nSeleziona l\'occhio per nasconderla</string>
+    <string name="credits">Credits</string>
+    <string name="app_idea">Un grazie a %s di reddit, <b>che ha avuto l\'idea</b> per questa app!</string>
+    <string name="Translators">Traduttori</string>
 </resources>

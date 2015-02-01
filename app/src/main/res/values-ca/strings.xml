@@ -64,9 +64,16 @@
     <string name="restartTitle">És necessari reiniciar</string>
     <string name="localeRestart">S\'aplicaran els canvis d\'idioma en reiniciar l\'aplicació.</string>
     <string name="auto">auto: 0s</string>
-    <string name="countdown_time_general">Compte enrere %1$s - %2$s</string>
     <string name="custom_countdown_description_site">Temps per iniciar l\'aplicació per defecte només per aquesta tasca %s. Podeu personalitzar el compte enrere per defecte a la configuració general.</string>
     <string name="file_type">Tipus de fitxer</string>
     <string name="site">Web</string>
-    <string name="specified_seconds">%s segons</string>
+    <string name="countdown_time_general">Compte enrere %1$s - %2$s</string>
+    <string name="specified_seconds">%ss</string>
+    <string name="CannotHidePreferred">No podeu amagar l\'aplicació per defecte</string>
+    <string name="CannotHideAll">No podeu amagar totes les aplicacions</string>
+    <string name="CannotPreferrHidden">No podeu seleccionar una aplicació amagada com a opció per defecte</string>
+    <string name="hint">Toqueu l\'estrella per marcar l\'aplicació per defecte i l\'ull per amagar-la</string>
+    <string name="credits">Crèdits</string>
+    <string name="app_idea">Gràcies a l\'usuari de reddit %s, <b>perquè és d\'on ve la inspiració per crear aquesta aplicació!</b></string>
+    <string name="Translators">Traductors</string>
 </resources>

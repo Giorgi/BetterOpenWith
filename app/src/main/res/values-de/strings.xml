@@ -68,5 +68,12 @@
     <string name="file_type">Dateityp</string>
     <string name="site">Website</string>
     <string name="countdown_time_general">Wartezeit für %1$s - %2$s</string>
-    <string name="specified_seconds">%s Sekunden</string>
+    <string name="specified_seconds">%ss</string>
+    <string name="CannotHidePreferred">Du kannst eine bevorzugte App nicht ausblenden</string>
+    <string name="CannotHideAll">Es können nicht alle Apps ausgeblendet werden</string>
+    <string name="CannotPreferrHidden">Du kannst eine ausgeblendete App nicht als bevorzugte App definieren</string>
+    <string name="hint">Tippe auf den Stern, um eine App zu bevorzugen.\nTippe auf das Auge, um sie zu auszublenden.</string>
+    <string name="credits">Danksagungen</string>
+    <string name="app_idea">Danke an Reddit-User %s, <b>von ihm stammt die Idee</b> für diese App!</string>
+    <string name="Translators">Übersetzer</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.aboutmycode.betteropenwith;
 
+import java.util.ArrayList;
+
 /**
  * Created by Giorgi on 8/22/2014.
  */
@@ -23,6 +25,12 @@ public class ItemBase {
 
     private boolean useGlobalTimeout;
     private int customTimeout;
+
+    private transient ArrayList<HiddenApp> hiddenApps;
+
+    public ItemBase() {
+        hiddenApps = new ArrayList<>();
+    }
 
     public long getId() {
         return _id;
@@ -126,5 +134,17 @@ public class ItemBase {
 
     public void setLastClassName(String lastClassName) {
         this.lastClassName = lastClassName;
+    }
+
+    public ArrayList<HiddenApp> getHiddenApps() {
+        return hiddenApps;
+    }
+
+    public void setHiddenApps(ArrayList<HiddenApp> hiddenApps) {
+        this.hiddenApps = hiddenApps;
+    }
+
+    public void addHiddenApp(HiddenApp app) {
+        hiddenApps.add(app);
     }
 }

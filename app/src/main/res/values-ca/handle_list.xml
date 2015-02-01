@@ -11,4 +11,7 @@
     <string name="epub">Llibre electrònic (epub)</string>
     <string name="txt">Fitxers de text</string>
     <string name="email">Correu electrònic</string>
+    <string name="dialer">Marcador</string>
+    <string name="camera">Càmera</string>
+    <string name="calendar">Calendari</string>
 </resources>

@@ -10,6 +10,7 @@ class ResolveInfoDisplay {
     private CharSequence displayLabel;
     private Drawable displayIcon;
     private ResolveInfo resolveInfo;
+    private boolean hidden;
 
     public CharSequence getDisplayLabel() {
         return displayLabel;
@@ -33,5 +34,13 @@ class ResolveInfoDisplay {
 
     public void setResolveInfo(ResolveInfo resolveInfo) {
         this.resolveInfo = resolveInfo;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 }

@@ -254,6 +254,45 @@
                 android:name="id"
                 android:value="11" />
         </activity-alias>
+        <activity-alias
+            android:name="com.aboutmycode.betteropenwith.app.dialer"
+            android:targetActivity=".FileHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tel" />
+            </intent-filter>
+            <meta-data
+                android:name="id"
+                android:value="12" />
+        </activity-alias>
+        <activity-alias
+            android:name="com.aboutmycode.betteropenwith.app.calendar"
+            android:targetActivity=".FileHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="android.intent.action.INSERT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/event" />
+            </intent-filter>
+            <meta-data
+                android:name="id"
+                android:value="13" />
+        </activity-alias>
+        <activity-alias
+            android:name="com.aboutmycode.betteropenwith.app.camera"
+            android:targetActivity=".FileHandlerActivity">
+            <intent-filter>
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="id"
+                android:value="14" />
+        </activity-alias>
 
         <activity
             android:name=".settings.SettingsActivity"
@@ -264,7 +303,7 @@
             android:parentActivityName=".HandlerListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value=".HandlerListActivity" />
         </activity>
         <activity
             android:name=".AboutActivity"
@@ -275,12 +314,12 @@
             android:parentActivityName=".HandlerListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value=".HandlerListActivity" />
         </activity>
         <activity
             android:name=".SiteHandlerActivity"
-            android:theme="@android:style/Theme.Holo.Dialog"
-            android:label="@string/title_activity_file_handler">
+            android:label="@string/title_activity_file_handler"
+            android:theme="@android:style/Theme.Holo.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

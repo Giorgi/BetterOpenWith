@@ -42,7 +42,7 @@ public class SiteHandlerActivity extends FileHandlerActivity {
         URI uri = new URI(url);
         String domain = uri.getHost();
 
-        if (TextUtils.isEmpty(domain)){
+        if (TextUtils.isEmpty(domain)) {
             return null;
         }
 
@@ -54,17 +54,19 @@ public class SiteHandlerActivity extends FileHandlerActivity {
         List<Site> sites = getSites();
         String url = intent.getDataString();
 
-        if (TextUtils.isEmpty(url)){
+        if (TextUtils.isEmpty(url)) {
             return super.getCurrentItem(intent);
         }
 
         String domainName = null;
         try {
-            domainName = getDomainName(url).toLowerCase();
+            domainName = getDomainName(url);
 
             if (domainName == null) {
                 return super.getCurrentItem(intent);
             }
+
+            domainName = domainName.toLowerCase();
 
             for (Site site : sites) {
                 if (domainName.contains(site.getDomain())) {
@@ -82,10 +84,18 @@ public class SiteHandlerActivity extends FileHandlerActivity {
         CupboardSQLiteOpenHelper dbHelper = new CupboardSQLiteOpenHelper(this);
         SQLiteDatabase database = dbHelper.getReadableDatabase();
 
-        List<Site> list = cupboard().withDatabase(database).query(Site.class).list();
+        List<Site> sites = cupboard().withDatabase(database).query(Site.class).list();
+
+        for (Site site : sites) {
+            List<HiddenApp> hiddenApps = cupboard().withDatabase(database)
+                    .query(HiddenApp.class).withSelection("siteId=?", String.valueOf(site.getId()))
+                    .query().list();
+
+            site.setHiddenApps(new ArrayList<>(hiddenApps));
+        }
 
         database.close();
         dbHelper.close();
-        return list;
+        return sites;
     }
 }

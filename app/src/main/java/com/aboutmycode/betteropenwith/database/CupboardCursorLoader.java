@@ -63,4 +63,16 @@ public class CupboardCursorLoader<T> extends AbstractListLoader<T> {
         cupboard().withDatabase(database).put(item);
         database.close();
     }
+
+    public <T> void delete(T item) {
+        SQLiteDatabase database = db.getWritableDatabase();
+        cupboard().withDatabase(database).delete(item);
+        database.close();
+    }
+
+    public <T> void insert(T item) {
+        SQLiteDatabase database = db.getWritableDatabase();
+        cupboard().withDatabase(database).put(item);
+        database.close();
+    }
 }
