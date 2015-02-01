@@ -68,7 +68,7 @@
     <string name="file_type">Tipo de Arquivo</string>
     <string name="site">Site</string>
     <string name="countdown_time_general">Contagem regressiva para este %1$s - %2$s</string>
-    <string name="specified_seconds">%s segundos</string>
+    <string name="specified_seconds">%ss</string>
     <string name="credits">Créditos</string>
     <string name="app_idea">Agradeço a %s no reddit, <b>que teve a ideia</b> para este aplicativo!</string>
     <string name="Translators">Tradutores</string>

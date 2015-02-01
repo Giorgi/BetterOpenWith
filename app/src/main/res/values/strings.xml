@@ -69,7 +69,7 @@
     <string name="file_type">file type</string>
     <string name="site">site</string>
     <string name="countdown_time_general">Countdown time for this %1$s - %2$s</string>
-    <string name="specified_seconds">%s seconds</string>
+    <string name="specified_seconds">%ss</string>
     <string name="CannotHidePreferred">You cannot hide preferred app</string>
     <string name="CannotHideAll">You cannot hide all apps</string>
     <string name="CannotPreferrHidden">You cannot set hidden app as preferred</string>

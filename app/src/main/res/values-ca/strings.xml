@@ -68,7 +68,7 @@
     <string name="file_type">Tipus de fitxer</string>
     <string name="site">Web</string>
     <string name="countdown_time_general">Compte enrere %1$s - %2$s</string>
-    <string name="specified_seconds">%s segons</string>
+    <string name="specified_seconds">%ss</string>
     <string name="CannotHidePreferred">No podeu amagar l\'aplicació per defecte</string>
     <string name="CannotHideAll">No podeu amagar totes les aplicacions</string>
     <string name="CannotPreferrHidden">No podeu seleccionar una aplicació amagada com a opció per defecte</string>

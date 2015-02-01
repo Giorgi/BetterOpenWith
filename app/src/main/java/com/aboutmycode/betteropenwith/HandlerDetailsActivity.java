@@ -330,7 +330,7 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         if (item.isSkipList()) {
             timeoutText = String.format(getString(R.string.countdown_time_general), itemType, getString(R.string.auto));
         } else {
-            String formattedSeconds = String.format(getString(R.string.specified_seconds), item.isUseGlobalTimeout() ? timeout : item.getCustomTimeout());
+            String formattedSeconds = String.format(getString(R.string.specified_seconds), item.isUseGlobalTimeout() ? timeout : item.getCustomTimeout()) + ".";
 
             timeoutText = String.format(getString(R.string.countdown_time_general), itemType, formattedSeconds);
         }

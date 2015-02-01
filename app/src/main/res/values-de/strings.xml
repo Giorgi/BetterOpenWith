@@ -68,7 +68,7 @@
     <string name="file_type">Dateityp</string>
     <string name="site">Website</string>
     <string name="countdown_time_general">Wartezeit für %1$s - %2$s</string>
-    <string name="specified_seconds">%s Sekunden</string>
+    <string name="specified_seconds">%ss</string>
     <string name="CannotHidePreferred">Du kannst eine bevorzugte App nicht ausblenden</string>
     <string name="CannotHideAll">Es können nicht alle Apps ausgeblendet werden</string>
     <string name="CannotPreferrHidden">Du kannst eine ausgeblendete App nicht als bevorzugte App definieren</string>

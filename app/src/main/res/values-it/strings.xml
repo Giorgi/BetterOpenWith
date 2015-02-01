@@ -68,7 +68,7 @@
     <string name="file_type">Tipo di file</string>
     <string name="site">sito</string>
     <string name="countdown_time_general">Conto allo rovescia per questo %1$s - %2$s</string>
-    <string name="specified_seconds">%s secondi</string>
+    <string name="specified_seconds">%ss</string>
     <string name="CannotHidePreferred">L\'applicazione preferita non può essere nascosta</string>
     <string name="CannotHideAll">Non è possibile nascondere tutte le applicazioni</string>
     <string name="CannotPreferrHidden">Non puoi impostare un\'applicazione nascosta come preferita</string>
