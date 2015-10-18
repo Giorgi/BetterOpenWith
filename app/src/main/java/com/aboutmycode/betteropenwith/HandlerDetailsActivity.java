@@ -264,6 +264,8 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         PackageManager packageManager = getPackageManager();
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
 
+        flipper.setDisplayedChild(0);
+
         if (resInfo.size() == 1 && item.isEnabled()) {
             hideSwitch = true;
             invalidateOptionsMenu();
