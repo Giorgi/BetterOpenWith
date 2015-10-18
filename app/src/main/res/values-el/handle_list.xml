@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pdf">Αρχεία PDF</string>
+    <string name="audio">Αρχεία ήχου</string>
+    <string name="video">Αρχεία βίντεο</string>
+    <string name="images">Φωτογραφίες</string>
+    <string name="video_stream">Ροή βίντεο</string>
+    <string name="audio_stream">Ροή ήχου</string>
+    <string name="browser">Περιηγητής</string>
+    <string name="geo">Τοποθεσία</string>
+    <string name="epub">Ηλεκτρονικό βιβλίο</string>
+    <string name="txt">Αρχεία κειμένου</string>
+    <string name="email">Ηλ. Ταχυδρομείο</string>
+    <string name="dialer">Κλήσεις</string>
+    <string name="camera">Κάμερα</string>
+    <string name="calendar">Ημερολόγιο</string>
+</resources>

@@ -44,6 +44,7 @@
         <item>Català</item>
         <item>Čeština</item>
         <item>العربية</item>
+        <item>Ελληνική</item>
     </string-array>
     <string-array name="pref_languages_values">
         <item>null</item>
@@ -56,5 +57,6 @@
         <item>ca</item>
         <item>cs</item>
         <item>ar</item>
+        <item>el</item>
     </string-array>
 </resources>
