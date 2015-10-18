@@ -20,6 +20,7 @@ import java.util.List;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class HandleItemLoader extends CupboardCursorLoader<HandleItem> {
+    private final int MATCH_ALL = 131072;
 
     public HandleItemLoader(Context context, SQLiteOpenHelper db) {
         super(context, db, HandleItem.class);
@@ -58,7 +59,7 @@ public class HandleItemLoader extends CupboardCursorLoader<HandleItem> {
                 }
 
                 PackageManager packageManager = getContext().getPackageManager();
-                List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
 
                 if (resInfo.size() == 1) {
                     handleItem.setSelectedAppLabel(resInfo.get(0).loadLabel(packageManager).toString());

@@ -1,30 +1,24 @@
 package com.aboutmycode.betteropenwith;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -45,11 +39,11 @@ import com.aboutmycode.betteropenwith.database.HandleItemLoader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 
 public class HandlerDetailsActivity extends LocaleAwareListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
 
+    private final int MATCH_ALL = 131072;
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private Switch masterSwitch;
     private HandleItem item;
@@ -268,9 +262,12 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         }
 
         PackageManager packageManager = getPackageManager();
-        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
 
-        if (resInfo.size() == 1 && item.isEnabled()) {
+        flipper.setDisplayedChild(0);
+
+        if (resInfo.size() == 1 && item.isEnabled()
+                && resInfo.get(0).activityInfo.packageName.equals(getPackageName())) {
             hideSwitch = true;
             invalidateOptionsMenu();
             flipper.setDisplayedChild(2);

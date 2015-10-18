@@ -44,6 +44,7 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 
 public class FileHandlerActivity extends LocaleAwareActivity implements AdapterView.OnItemClickListener {
+    private final int MATCH_ALL = 131072;
     private Timer autoStart;
 
     private Button pauseButton;
@@ -110,10 +111,10 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         item = getCurrentItem(launchIntent);
 
         PackageManager packageManager = getPackageManager();
-        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
 
-        //If only one app is found it is us so there is no other app.
-        if (resInfo.size() == 1) {
+        //If only one app is found and it is us there is no other app.
+        if (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName())) {
             Toast.makeText(this, "No application found to open the selected file", Toast.LENGTH_LONG).show();
             finish();
         }
