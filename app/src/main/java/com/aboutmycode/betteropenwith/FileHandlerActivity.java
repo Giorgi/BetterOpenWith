@@ -113,8 +113,8 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         PackageManager packageManager = getPackageManager();
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
 
-        //If only one app is found it is us so there is no other app.
-        if (resInfo.size() == 1) {
+        //If only one app is found and it is us there is no other app.
+        if (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName())) {
             Toast.makeText(this, "No application found to open the selected file", Toast.LENGTH_LONG).show();
             finish();
         }
