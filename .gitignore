@@ -27,3 +27,4 @@ proguard/
 .classpath
 .project
 .idea/workspace.xml
+app/app.iml
