@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="library-1.5.1">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.changeloglib/library/1.5.1/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.changeloglib/library/1.5.1/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.changeloglib/library/1.5.1/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://E:/Software/Android/gradle/caches/modules-2/files-2.1/com.github.gabrielemariotti.changeloglib/library/1.5.1/6e24f3bcb35eb2c50fb8468320fa351896de6bdd/library-1.5.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
