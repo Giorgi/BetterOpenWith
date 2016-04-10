@@ -318,6 +318,7 @@
         </activity>
         <activity
             android:name=".SiteHandlerActivity"
+            android:excludeFromRecents="true"
             android:label="@string/title_activity_file_handler"
             android:theme="@android:style/Theme.Holo.Dialog">
             <intent-filter>
