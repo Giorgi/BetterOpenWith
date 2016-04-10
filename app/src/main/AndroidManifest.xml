@@ -293,6 +293,18 @@
                 android:name="id"
                 android:value="14" />
         </activity-alias>
+        <activity-alias
+            android:name="com.aboutmycode.betteropenwith.app.torrent"
+            android:targetActivity=".FileHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/x-bittorrent" />
+            </intent-filter>
+            <meta-data
+                android:name="id"
+                android:value="15" />
+        </activity-alias>
 
         <activity
             android:name=".settings.SettingsActivity"

@@ -1,0 +1,1 @@
+INSERT INTO "HandleItem" VALUES(15,NULL,NULL,'ic_action_torrent','torrent','ic_action_torrent_light','file:///mnt/sdcard/dummy.torrent','application/x-bittorrent',NULL,1,0,'com.aboutmycode.betteropenwith.app.torrent',-1,1,NULL,NULL);
