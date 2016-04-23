@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="April 24, 2016" versionName="1.4.2">
+        <changelogtext>
+            [b]New![/b] Added support for Microsoft word, excel and powerpoint files.
+        </changelogtext>
+        <changelogtext>
+            [b]New![/b] Added support for torrent files
+        </changelogtext>
+        <changelogtext>
+            [b]New![/b] Added Dutch translation
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="October 20, 2015" versionName="1.4.1">
         <changelogtext>
             [b]New![/b] Added Greek translation
