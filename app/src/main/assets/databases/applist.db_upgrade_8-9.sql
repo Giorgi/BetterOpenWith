@@ -1,1 +1,4 @@
 INSERT INTO "HandleItem" VALUES(15,NULL,NULL,'ic_action_torrent','torrent','ic_action_torrent_light','file:///mnt/sdcard/dummy.torrent','application/x-bittorrent',NULL,1,0,'com.aboutmycode.betteropenwith.app.torrent',-1,1,NULL,NULL);
+INSERT INTO "HandleItem" VALUES(16,NULL,NULL,'ic_action_word','word','ic_action_word_light','file:///mnt/sdcard/dummy.docx','application/msword',NULL,1,0,'com.aboutmycode.betteropenwith.app.word',-1,1,NULL,NULL);
+INSERT INTO "HandleItem" VALUES(17,NULL,NULL,'ic_action_excel','excel','ic_action_excel_light','file:///mnt/sdcard/dummy.xlsx','application/vnd.ms-excel',NULL,1,0,'com.aboutmycode.betteropenwith.app.excel',-1,1,NULL,NULL);
+INSERT INTO "HandleItem" VALUES(18,NULL,NULL,'ic_action_powerpoint','powerpoint','ic_action_powerpoint_light','file:///mnt/sdcard/dummy.pptx','application/vnd.ms-powerpoint',NULL,1,0,'com.aboutmycode.betteropenwith.app.powerpoint',-1,1,NULL,NULL);
