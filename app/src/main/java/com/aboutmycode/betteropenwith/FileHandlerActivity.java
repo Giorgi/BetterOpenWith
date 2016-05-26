@@ -1,6 +1,5 @@
 package com.aboutmycode.betteropenwith;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,15 +8,17 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,7 +37,6 @@ import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -67,6 +67,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             elapsed = savedInstanceState.getInt("elapsed", 0);
             paused = savedInstanceState.getBoolean("paused", false);
         }
+
         Resources resources = getResources();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -88,6 +89,18 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
         setContentView(R.layout.file_handler);
         setTitle(getString(R.string.complete_action_with));
+
+        Window window = getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        wlp.gravity = Gravity.BOTTOM;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        window.setAttributes(wlp);
+
+        window.setBackgroundDrawable(null);
+        window.setBackgroundDrawableResource(android.R.color.white);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
 
         View list = findViewById(R.id.listInclude);
         View grid = findViewById(R.id.gridView);
