@@ -87,15 +87,15 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             setTheme(darkTheme);
         }
 
-        setContentView(R.layout.file_handler);
-        setTitle(getString(R.string.complete_action_with));
-
         Window window = getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
 
         wlp.gravity = Gravity.BOTTOM;
         wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         window.setAttributes(wlp);
+
+        setContentView(R.layout.file_handler);
+        setTitle(getString(R.string.complete_action_with));
 
         window.setBackgroundDrawable(null);
         window.setBackgroundDrawableResource(android.R.color.white);
