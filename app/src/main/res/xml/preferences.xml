@@ -27,6 +27,13 @@
             app:min="1"
             app:summaryKey="@string/timeoutSummary" />
         <com.aboutmycode.betteropenwith.settings.WorkingListPreference
+            android:defaultValue="@string/bottomValue"
+            android:entries="@array/positions"
+            android:entryValues="@array/position_values"
+            android:key="position"
+            android:summary="@string/position_summary"
+            android:title="@string/position" />
+        <com.aboutmycode.betteropenwith.settings.WorkingListPreference
             android:defaultValue="@string/listValue"
             android:entries="@array/layouts"
             android:entryValues="@array/layout_values"

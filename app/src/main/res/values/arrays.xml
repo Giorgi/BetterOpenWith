@@ -5,12 +5,22 @@
         <item>@string/list</item>
         <item>@string/grid</item>
     </string-array>
+    <string-array name="positions">
+        <item>@string/bottom</item>
+        <item>@string/middle</item>
+    </string-array>
     <string-array name="layout_values">
         <item>@string/listValue</item>
         <item>@string/gridValue</item>
     </string-array>
+    <string-array name="position_values">
+        <item>@string/bottomValue</item>
+        <item>@string/middleValue</item>
+    </string-array>
     <string name="listValue">0</string>
     <string name="gridValue">1</string>
+    <string name="bottomValue">0</string>
+    <string name="middleValue">1</string>
 
     <string-array name="sizes">
         <item>@string/small</item>

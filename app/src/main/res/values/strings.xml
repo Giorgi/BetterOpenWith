@@ -77,4 +77,8 @@
     <string name="credits">Credits</string>
     <string name="app_idea">Thanks to reddit\'s %s, <b>who came up with the idea</b> for this app!</string>
     <string name="Translators">Translators</string>
+    <string name="bottom">Bottom</string>
+    <string name="middle">Middle</string>
+    <string name="position">Popup Position</string>
+    <string name="position_summary">Available apps will be displayed at the %s of the screen</string>
 </resources>

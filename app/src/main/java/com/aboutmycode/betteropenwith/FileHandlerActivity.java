@@ -90,7 +90,9 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         Window window = getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
 
-        wlp.gravity = Gravity.BOTTOM;
+        if (preferences.getString("position", resources.getString(R.string.bottomValue)).equals(resources.getString(R.string.bottomValue))) {
+            wlp.gravity = Gravity.BOTTOM;
+        }
         wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         window.setAttributes(wlp);
 
