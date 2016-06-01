@@ -246,6 +246,7 @@
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SENDTO" />
                 <data android:scheme="mailto" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
