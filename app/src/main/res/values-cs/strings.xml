@@ -73,4 +73,8 @@
     <string name="site">stránka</string>
     <string name="specified_seconds">%ss</string>
     <string name="Translators">překladatele</string>
+    <string name="bottom">Dole</string>
+    <string name="middle">Uprostřed</string>
+    <string name="position">Pozice vyskakovacího okna</string>
+    <string name="position_summary">Dostupné aplikace budou zobrazeny na %s displeje</string>
 </resources>
