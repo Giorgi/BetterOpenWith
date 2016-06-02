@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="June 2, 2016" versionName="1.4.4">
+        <changelogtext>
+            [b]Bug fix![/b] Fixed dark theme background color
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="June 2, 2016" versionName="1.4.3">
         <changelogtext>
             [b]New![/b] Show app selection popup at the bottom of the screen.
