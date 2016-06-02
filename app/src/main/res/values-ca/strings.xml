@@ -76,4 +76,8 @@
     <string name="credits">Crèdits</string>
     <string name="app_idea">Gràcies a l\'usuari de reddit %s, <b>perquè és d\'on ve la inspiració per crear aquesta aplicació!</b></string>
     <string name="Translators">Traductors</string>
+    <string name="bottom">Inferior</string>
+    <string name="middle">Central</string>
+    <string name="position">Posició de la notificació</string>
+    <string name="position_summary">Les aplicacions disponibles es mostraran a la part %s de la pantalla</string>
 </resources>
