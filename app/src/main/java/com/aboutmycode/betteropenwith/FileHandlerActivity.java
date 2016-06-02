@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
@@ -79,13 +80,9 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         int darkTheme = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
                 android.R.style.Theme_Material_Dialog : android.R.style.Theme_Holo_Dialog;
 
-        if (preferences.getString("theme", resources.getString(R.string.lightValue)).equals(resources.getString(R.string.lightValue))) {
-            isLight = true;
-            setTheme(lightTheme);
-        } else {
-            isLight = false;
-            setTheme(darkTheme);
-        }
+        isLight = preferences.getString("theme", resources.getString(R.string.lightValue)).equals(resources.getString(R.string.lightValue));
+
+        setTheme(isLight ? lightTheme : darkTheme);
 
         Window window = getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
@@ -99,10 +96,13 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         setContentView(R.layout.file_handler);
         setTitle(getString(R.string.complete_action_with));
 
+        TypedArray array = getTheme().obtainStyledAttributes(new int[]{android.R.attr.colorBackground,});
+
         window.setBackgroundDrawable(null);
-        window.setBackgroundDrawableResource(android.R.color.white);
+        window.getDecorView().setBackgroundColor(array.getColor(0, 0xFF00FF));
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        array.recycle();
 
         View list = findViewById(R.id.listInclude);
         View grid = findViewById(R.id.gridView);
