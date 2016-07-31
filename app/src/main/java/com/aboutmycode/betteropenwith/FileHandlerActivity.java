@@ -11,6 +11,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -130,8 +131,12 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
         //If only one app is found and it is us there is no other app.
         if (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName())) {
-            Toast.makeText(this, "No application found to open the selected file", Toast.LENGTH_LONG).show();
-            finish();
+            resInfo = packageManager.queryIntentActivities(getIntentWithRawSchemeUri(intent), MATCH_ALL);
+
+            if (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName())) {
+                Toast.makeText(this, "No application found to open the selected file", Toast.LENGTH_LONG).show();
+                finish();
+            }
         }
 
         //If there are two apps start the other one.
@@ -223,6 +228,14 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
                 launchDetailsActivity();
             }
         });
+    }
+
+    Intent getIntentWithRawSchemeUri(Intent intent) {
+        return new Intent(intent).setData(getRawSchemeUri(intent.getData()));
+    }
+
+    Uri getRawSchemeUri(Uri uri) {
+        return new Uri.Builder().scheme(uri.getScheme()).build();
     }
 
     private void launchDetailsActivity() {
@@ -385,8 +398,8 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
                     int checkedItemPosition = adapterView.getCheckedItemPosition();
                     if (checkedItemPosition >= 0) {
                         ResolveInfoDisplay item = adapter.getItem(checkedItemPosition);
-                        startIntentFromResolveInfo(item.getResolveInfo());
-                    }
+                                startIntentFromResolveInfo(item.getResolveInfo());
+                            }
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
