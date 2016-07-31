@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="pdf">Archivos PDF</string>
-    <string name="audio">Archivos audio</string>
-    <string name="video">Videos</string>
-    <string name="images">Imagenes</string>
-    <string name="video_stream">Reproducir videos online</string>
-    <string name="audio_stream">Reproducir audios online</string>
+    <string name="audio">Archivos de audio</string>
+    <string name="video">Archivos de video</string>
+    <string name="images">Imágenes</string>
+    <string name="video_stream">Video directo</string>
+    <string name="audio_stream">Audio directo</string>
     <string name="browser">Navegador web</string>
     <string name="geo">Posición geográfica</string>
-    <string name="epub">También en formato eBook (para dispositivos móviles)</string>
+    <string name="epub">Libro electrónico (epub)</string>
     <string name="txt">Archivos de texto</string>
-    <string name="email">Email</string>
+    <string name="email">Correo electrónico</string>
+    <string name="dialer">Marcador de llamadas</string>
+    <string name="camera">Cámara</string>
+    <string name="calendar">Calendario</string>
 </resources>
