@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="Aug 4, 2016" versionName="1.4.5">
+        <changelogtext>
+            [b]New![/b] Updated Spanish translation
+        </changelogtext>
+        <changelogtext>
+            [b]Bug fix![/b] Improve support for new Office formats (docx, xlsx, pptx)
+        </changelogtext>
+        <changelogtext>
+            [b]Bug fix![/b] Fix "No Application found to open the selected file"
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="June 2, 2016" versionName="1.4.4">
         <changelogtext>
             [b]Bug fix![/b] Fixed dark theme background color
@@ -61,16 +72,19 @@
     </changelogversion>
     <changelogversion changeDate="13 October, 2014" versionName="1.2">
         <changelogtext>
-            [b]New![/b] You can now set preferred app for popular websites such as Youtube, Reddit, Play Store and so on
+            [b]New![/b] You can now set preferred app for popular websites such as Youtube, Reddit,
+            Play Store and so on
         </changelogtext>
         <changelogtext>
             [b]New![/b] Added support for handling epub files, text files, location and email links
         </changelogtext>
         <changelogtext>
-            [b]New![/b] Added German, French, Italian, Portuguese, Spanish, Catalan and Arabic translations
+            [b]New![/b] Added German, French, Italian, Portuguese, Spanish, Catalan and Arabic
+            translations
         </changelogtext>
         <changelogtext>
-            [b]New![/b] Automatically remembers last used app when no preferred app is set and pauses times when settings button is clicked
+            [b]New![/b] Automatically remembers last used app when no preferred app is set and
+            pauses times when settings button is clicked
         </changelogtext>
     </changelogversion>
     <changelogversion changeDate="29 July, 2014" versionName="1.0">
