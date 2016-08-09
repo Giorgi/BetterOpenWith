@@ -117,6 +117,80 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             ((GridView) grid).setNumColumns(preferences.getInt("gridColumns", resources.getInteger(R.integer.default_columns)));
         }
 
+        if (prepareListAndLaunch()) {
+            return;
+        }
+
+        secondsTextView = (TextView) findViewById(R.id.secondsTextView);
+        pauseButton = (Button) findViewById(R.id.pauseButton);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleTimer();
+            }
+        });
+
+        ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+
+        settingsButton.setImageResource(isLight ? R.drawable.ic_action_settings_dark : R.drawable.ic_action_settings);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pauseTimer();
+                showTimerStatus();
+
+                launchDetailsActivity();
+            }
+        });
+    }
+
+    private boolean prepareListAndLaunch() {
+        PackageManager packageManager = getPackageManager();
+        List<ResolveInfo> resInfo = resolveMatchingActivities(packageManager);
+
+        List<ResolveInfoDisplay> data = new ArrayList<>();
+
+        int checked = -1;
+
+        for (int index = 0; index < resInfo.size(); index++) {
+            ResolveInfo info = resInfo.get(index);
+            if (info.activityInfo.packageName.equals(getPackageName())) {
+                continue;
+            }
+
+            if (item.getHiddenApps().contains(new HiddenApp(info.activityInfo.packageName))) {
+                continue;
+            }
+
+            if (info.activityInfo.packageName.equals(item.getPackageName()) && info.activityInfo.name.equals(item.getClassName())) {
+                if (item.isSkipList()) {
+                    startIntentFromResolveInfo(info);
+                    return true;
+                } else {
+                    checked = index;
+                }
+            }
+
+            //if preferred app isn't set select the last used app
+            if (TextUtils.isEmpty(item.getPackageName()) &&
+                    info.activityInfo.packageName.equals(item.getLastPackageName()) && info.activityInfo.name.equals(item.getLastClassName())) {
+                checked = index;
+            }
+
+            ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
+            resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
+            resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
+            resolveInfoDisplay.setResolveInfo(info);
+
+            data.add(resolveInfoDisplay);
+        }
+
+        configureAdapter(data, checked);
+        return false;
+    }
+
+    private List<ResolveInfo> resolveMatchingActivities(PackageManager packageManager) {
         Intent launchIntent = getIntent();
 
         original = makeMyIntent();
@@ -125,8 +199,6 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         intent.setDataAndType(launchIntent.getData(), launchIntent.getType());
 
         item = getCurrentItem(launchIntent);
-
-        PackageManager packageManager = getPackageManager();
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
 
         //If only one app is found and it is us there is no other app.
@@ -152,46 +224,10 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         }
 
         Collections.sort(resInfo, new ResolveInfo.DisplayNameComparator(packageManager));
+        return resInfo;
+    }
 
-        List<ResolveInfoDisplay> data = new ArrayList<ResolveInfoDisplay>();
-
-        int checked = -1;
-        int index = -1;
-
-        for (ResolveInfo info : resInfo) {
-            if (info.activityInfo.packageName.equals(getPackageName())) {
-                continue;
-            }
-
-            if (item.getHiddenApps().contains(new HiddenApp(info.activityInfo.packageName))) {
-                continue;
-            }
-
-            index++;
-
-            if (info.activityInfo.packageName.equals(item.getPackageName()) && info.activityInfo.name.equals(item.getClassName())) {
-                if (item.isSkipList()) {
-                    startIntentFromResolveInfo(info);
-                    return;
-                } else {
-                    checked = index;
-                }
-            }
-
-            //if preferred app isn't set select the last used app
-            if (TextUtils.isEmpty(item.getPackageName()) &&
-                    info.activityInfo.packageName.equals(item.getLastPackageName()) && info.activityInfo.name.equals(item.getLastClassName())) {
-                checked = index;
-            }
-
-            ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
-            resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
-            resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
-            resolveInfoDisplay.setResolveInfo(info);
-
-            data.add(resolveInfoDisplay);
-        }
-
+    private void configureAdapter(List<ResolveInfoDisplay> data, int checked) {
         adapter = new CommonAdapter<>(this, data, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder(this));
         adapterView.setAdapter(adapter);
 
@@ -205,29 +241,6 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         }
 
         adapterView.setOnItemClickListener(this);
-
-        secondsTextView = (TextView) findViewById(R.id.secondsTextView);
-        pauseButton = (Button) findViewById(R.id.pauseButton);
-        pauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleTimer();
-            }
-        });
-
-        ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
-
-        settingsButton.setImageResource(isLight ? R.drawable.ic_action_settings_dark : R.drawable.ic_action_settings);
-
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pauseTimer();
-                showTimerStatus();
-
-                launchDetailsActivity();
-            }
-        });
     }
 
     Intent getIntentWithRawSchemeUri(Intent intent) {
@@ -398,8 +411,8 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
                     int checkedItemPosition = adapterView.getCheckedItemPosition();
                     if (checkedItemPosition >= 0) {
                         ResolveInfoDisplay item = adapter.getItem(checkedItemPosition);
-                                startIntentFromResolveInfo(item.getResolveInfo());
-                            }
+                        startIntentFromResolveInfo(item.getResolveInfo());
+                    }
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
