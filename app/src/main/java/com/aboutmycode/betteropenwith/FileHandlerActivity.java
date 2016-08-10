@@ -117,6 +117,35 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             ((GridView) grid).setNumColumns(preferences.getInt("gridColumns", resources.getInteger(R.integer.default_columns)));
         }
 
+        if (prepareDataAndLaunch()) return;
+
+        secondsTextView = (TextView) findViewById(R.id.secondsTextView);
+        pauseButton = (Button) findViewById(R.id.pauseButton);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleTimer();
+            }
+        });
+
+        ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+
+        settingsButton.setImageResource(isLight ? R.drawable.ic_action_settings_dark : R.drawable.ic_action_settings);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pauseTimer();
+                showTimerStatus();
+
+                launchDetailsActivity();
+            }
+        });
+    }
+
+    private boolean prepareDataAndLaunch() {
+        PackageManager packageManager = getPackageManager();
+
         Intent launchIntent = getIntent();
 
         original = makeMyIntent();
@@ -125,8 +154,68 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         intent.setDataAndType(launchIntent.getData(), launchIntent.getType());
 
         item = getCurrentItem(launchIntent);
+        List<ResolveInfo> resInfo = getMatchingActivities(packageManager, intent);
 
-        PackageManager packageManager = getPackageManager();
+        List<ResolveInfoDisplay> data = new ArrayList<>();
+
+        int checked = -1;
+        int index = -1;
+
+        for (ResolveInfo info : resInfo) {
+            if (info.activityInfo.packageName.equals(getPackageName())) {
+                continue;
+            }
+
+            if (item.getHiddenApps().contains(new HiddenApp(info.activityInfo.packageName))) {
+                continue;
+            }
+
+            index++;
+
+            if (info.activityInfo.packageName.equals(item.getPackageName()) && info.activityInfo.name.equals(item.getClassName())) {
+                if (item.isSkipList()) {
+                    startIntentFromResolveInfo(info);
+                    return true;
+                } else {
+                    checked = index;
+                }
+            }
+
+            //if preferred app isn't set select the last used app
+            if (TextUtils.isEmpty(item.getPackageName()) &&
+                    info.activityInfo.packageName.equals(item.getLastPackageName()) && info.activityInfo.name.equals(item.getLastClassName())) {
+                checked = index;
+            }
+
+            ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
+            resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
+            resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
+            resolveInfoDisplay.setResolveInfo(info);
+
+            data.add(resolveInfoDisplay);
+        }
+
+        configureAdapter(data, checked);
+        return false;
+    }
+
+    private void configureAdapter(List<ResolveInfoDisplay> data, int checked) {
+        adapter = new CommonAdapter<>(this, data, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder(this));
+        adapterView.setAdapter(adapter);
+
+        adapterView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        if (checked >= 0) {
+            adapterView.setItemChecked(checked, true);
+            adapterView.setSelection(checked);
+        } else {
+            adapterView.setItemChecked(0, true);
+        }
+
+        adapterView.setOnItemClickListener(this);
+    }
+
+    private List<ResolveInfo> getMatchingActivities(PackageManager packageManager, Intent intent) {
         List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
 
         //If only one app is found and it is us there is no other app.
@@ -152,82 +241,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         }
 
         Collections.sort(resInfo, new ResolveInfo.DisplayNameComparator(packageManager));
-
-        List<ResolveInfoDisplay> data = new ArrayList<ResolveInfoDisplay>();
-
-        int checked = -1;
-        int index = -1;
-
-        for (ResolveInfo info : resInfo) {
-            if (info.activityInfo.packageName.equals(getPackageName())) {
-                continue;
-            }
-
-            if (item.getHiddenApps().contains(new HiddenApp(info.activityInfo.packageName))) {
-                continue;
-            }
-
-            index++;
-
-            if (info.activityInfo.packageName.equals(item.getPackageName()) && info.activityInfo.name.equals(item.getClassName())) {
-                if (item.isSkipList()) {
-                    startIntentFromResolveInfo(info);
-                    return;
-                } else {
-                    checked = index;
-                }
-            }
-
-            //if preferred app isn't set select the last used app
-            if (TextUtils.isEmpty(item.getPackageName()) &&
-                    info.activityInfo.packageName.equals(item.getLastPackageName()) && info.activityInfo.name.equals(item.getLastClassName())) {
-                checked = index;
-            }
-
-            ResolveInfoDisplay resolveInfoDisplay = new ResolveInfoDisplay();
-            resolveInfoDisplay.setDisplayLabel(info.loadLabel(packageManager));
-            resolveInfoDisplay.setDisplayIcon(info.loadIcon(packageManager));
-            resolveInfoDisplay.setResolveInfo(info);
-
-            data.add(resolveInfoDisplay);
-        }
-
-        adapter = new CommonAdapter<>(this, data, R.layout.resolve_list_item, new ResolveInfoDisplayFileHandlerViewBinder(this));
-        adapterView.setAdapter(adapter);
-
-        adapterView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-        if (checked >= 0) {
-            adapterView.setItemChecked(checked, true);
-            adapterView.setSelection(checked);
-        } else {
-            adapterView.setItemChecked(0, true);
-        }
-
-        adapterView.setOnItemClickListener(this);
-
-        secondsTextView = (TextView) findViewById(R.id.secondsTextView);
-        pauseButton = (Button) findViewById(R.id.pauseButton);
-        pauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleTimer();
-            }
-        });
-
-        ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
-
-        settingsButton.setImageResource(isLight ? R.drawable.ic_action_settings_dark : R.drawable.ic_action_settings);
-
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pauseTimer();
-                showTimerStatus();
-
-                launchDetailsActivity();
-            }
-        });
+        return resInfo;
     }
 
     Intent getIntentWithRawSchemeUri(Intent intent) {
