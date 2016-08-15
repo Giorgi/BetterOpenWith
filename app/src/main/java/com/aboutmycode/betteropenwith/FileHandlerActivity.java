@@ -49,7 +49,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private final int MATCH_ALL = 131072;
     private Timer autoStart;
 
-    private Button pauseButton;
+    private ImageButton pauseButton;
     private TextView secondsTextView;
 
     private int elapsed;
@@ -60,6 +60,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private Intent original = new Intent();
     private AbsListView adapterView;
     private ItemBase item;
+    private boolean isLight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +73,6 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
         Resources resources = getResources();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        boolean isLight;
 
         int lightTheme = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
                 android.R.style.Theme_Material_Light_Dialog : android.R.style.Theme_Holo_Light_Dialog;
@@ -120,7 +119,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         if (prepareDataAndLaunch()) return;
 
         secondsTextView = (TextView) findViewById(R.id.secondsTextView);
-        pauseButton = (Button) findViewById(R.id.pauseButton);
+        pauseButton = (ImageButton) findViewById(R.id.pauseButton);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,7 +129,8 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
 
-        settingsButton.setImageResource(isLight ? R.drawable.ic_action_settings_dark : R.drawable.ic_action_settings);
+        settingsButton.setImageResource(isLight ? R.drawable.ic_settings_grey600_36dp : R.drawable.ic_settings_white_36dp);
+        pauseButton.setImageResource(isLight ? R.drawable.ic_pause_circle_outline_grey600_36dp : R.drawable.ic_pause_circle_outline_white_36dp);
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,7 +261,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private void toggleTimer() {
         if (paused) {
             configureTimer();
-            pauseButton.setText(getString(R.string.pause));
+            pauseButton.setImageResource(isLight ? R.drawable.ic_pause_circle_outline_grey600_36dp : R.drawable.ic_pause_circle_outline_white_36dp);
             paused = false;
         } else {
             pauseTimer();
@@ -272,7 +272,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
     private void pauseTimer() {
         autoStart.cancel();
-        pauseButton.setText(getString(R.string.resume));
+        pauseButton.setImageResource(isLight ? R.drawable.ic_play_circle_outline_grey600_36dp : R.drawable.ic_play_circle_outline_white_36dp);
         paused = true;
     }
 
@@ -394,10 +394,10 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private void showTimerStatus() {
         if (paused) {
             secondsTextView.setText(getString(R.string.paused));
-            pauseButton.setText(getString(R.string.resume));
+            pauseButton.setImageResource(isLight ? R.drawable.ic_play_circle_outline_grey600_36dp : R.drawable.ic_play_circle_outline_white_36dp);
         } else {
             secondsTextView.setText(String.format(getString(R.string.launching_in), timeout - elapsed));
-            pauseButton.setText(getString(R.string.pause));
+            pauseButton.setImageResource(isLight ? R.drawable.ic_pause_circle_outline_grey600_36dp : R.drawable.ic_pause_circle_outline_white_36dp);
         }
     }
 
@@ -412,8 +412,8 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
                     int checkedItemPosition = adapterView.getCheckedItemPosition();
                     if (checkedItemPosition >= 0) {
                         ResolveInfoDisplay item = adapter.getItem(checkedItemPosition);
-                                startIntentFromResolveInfo(item.getResolveInfo());
-                            }
+                        startIntentFromResolveInfo(item.getResolveInfo());
+                    }
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
