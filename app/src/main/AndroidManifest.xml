@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.aboutmycode.betteropenwith">
 
     <application
@@ -7,7 +8,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:theme">
+        <activity
+            android:name="com.todddavies.components.progressbar.Main"
+            android:label="@string/app_name" >
+            <intent-filter tools:node="removeAll" />
+        </activity>
         <activity
             android:name=".HandlerListActivity"
             android:label="@string/app_name">

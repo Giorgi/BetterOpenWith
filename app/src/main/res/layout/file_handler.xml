@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -23,23 +24,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="8"
-        android:gravity="center_vertical">
-        <TextView
-            android:id="@+id/secondsTextView"
+        android:weightSum="9">
+
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center_horizontal"
-            android:text="some info"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center">
+
+            <com.todddavies.components.progressbar.ProgressWheel
+                android:id="@+id/timerCountDown"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                ProgressWheel:barColor="@color/accent"
+                ProgressWheel:barWidth="3dp"
+                ProgressWheel:rimColor="@color/primary"
+                ProgressWheel:rimWidth="1dp"
+                ProgressWheel:textColor="@color/primary_text"
+                ProgressWheel:textSize="16sp" />
+        </RelativeLayout>
 
         <ImageButton
             android:id="@+id/pauseButton"
             style="?android:buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:src="@drawable/ic_action_app_settings" />
 
         <ImageButton
@@ -47,7 +57,7 @@
             style="?android:buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:src="@drawable/ic_action_app_settings" />
     </LinearLayout>
 

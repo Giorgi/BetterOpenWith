@@ -23,7 +23,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,6 +34,7 @@ import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
 import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareActivity;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
+import com.todddavies.components.progressbar.ProgressWheel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,7 +50,6 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private Timer autoStart;
 
     private ImageButton pauseButton;
-    private TextView secondsTextView;
 
     private int elapsed;
     private int timeout;
@@ -61,6 +60,8 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private AbsListView adapterView;
     private ItemBase item;
     private boolean isLight;
+    private ProgressWheel timerCountDown;
+    private double factor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +117,12 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             ((GridView) grid).setNumColumns(preferences.getInt("gridColumns", resources.getInteger(R.integer.default_columns)));
         }
 
-        if (prepareDataAndLaunch()) return;
+        if (prepareDataAndLaunch()) {
+            return;
+        }
 
-        secondsTextView = (TextView) findViewById(R.id.secondsTextView);
+        timerCountDown = (ProgressWheel) findViewById(R.id.timerCountDown);
+
         pauseButton = (ImageButton) findViewById(R.id.pauseButton);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -384,6 +388,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             timeout = item.getCustomTimeout();
         }
 
+        factor = 360.0 / timeout;
         showTimerStatus();
 
         if (autoStart == null && !paused) {
@@ -393,12 +398,16 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
     private void showTimerStatus() {
         if (paused) {
-            secondsTextView.setText(getString(R.string.paused));
             pauseButton.setImageResource(isLight ? R.drawable.ic_play_circle_outline_grey600_36dp : R.drawable.ic_play_circle_outline_white_36dp);
         } else {
-            secondsTextView.setText(String.format(getString(R.string.launching_in), timeout - elapsed));
+            updateCountDownTimer();
             pauseButton.setImageResource(isLight ? R.drawable.ic_pause_circle_outline_grey600_36dp : R.drawable.ic_pause_circle_outline_white_36dp);
         }
+    }
+
+    private void updateCountDownTimer() {
+        timerCountDown.setProgress((int) ((timeout - elapsed) * factor));
+        timerCountDown.setText(String.valueOf((timeout - elapsed)));
     }
 
     private void configureTimer() {
@@ -418,7 +427,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            secondsTextView.setText(String.format(getString(R.string.launching_in), timeout - elapsed));
+                            updateCountDownTimer();
                         }
                     });
                 }

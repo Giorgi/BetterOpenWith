@@ -46,4 +46,5 @@ dependencies {
     compile 'ch.acra:acra:4.5.0'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile 'com.github.gabrielemariotti.changeloglib:library:1.5.1'
+    compile 'com.github.Todd-Davies:ProgressWheel:1.1'
 }
