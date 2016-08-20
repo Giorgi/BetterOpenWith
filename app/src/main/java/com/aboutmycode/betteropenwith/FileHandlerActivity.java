@@ -63,7 +63,6 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private ItemBase item;
     private boolean isLight;
     private ProgressWheel timerCountDown;
-    private double factor;
     private TickerView tickerView;
 
     @Override
@@ -393,7 +392,6 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             timeout = item.getCustomTimeout();
         }
 
-        factor = 360.0 / timeout;
         showTimerStatus();
 
         if (autoStart == null && !paused) {
@@ -411,7 +409,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     }
 
     private void updateCountDownTimer() {
-        timerCountDown.setProgress((int) ((timeout - elapsed) * factor));
+        timerCountDown.setProgress((int) ((timeout - elapsed) * 360.0 / timeout));
         tickerView.setText(String.valueOf((timeout - elapsed)));
     }
 
