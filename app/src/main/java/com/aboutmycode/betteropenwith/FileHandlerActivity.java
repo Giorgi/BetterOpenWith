@@ -149,6 +149,8 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
                 launchDetailsActivity();
             }
         });
+
+        overridePendingTransition(R.anim.slide_right_left, 0);
     }
 
     private boolean prepareDataAndLaunch() {
