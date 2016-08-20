@@ -34,6 +34,8 @@ import com.aboutmycode.betteropenwith.common.adapter.CommonAdapter;
 import com.aboutmycode.betteropenwith.common.adapter.IBindView;
 import com.aboutmycode.betteropenwith.common.baseActivities.LocaleAwareActivity;
 import com.aboutmycode.betteropenwith.database.CupboardSQLiteOpenHelper;
+import com.robinhood.ticker.TickerUtils;
+import com.robinhood.ticker.TickerView;
 import com.todddavies.components.progressbar.ProgressWheel;
 
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private boolean isLight;
     private ProgressWheel timerCountDown;
     private double factor;
+    private TickerView tickerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +125,8 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         }
 
         timerCountDown = (ProgressWheel) findViewById(R.id.timerCountDown);
+        tickerView = (TickerView) findViewById(R.id.tickerView);
+        tickerView.setCharacterList(TickerUtils.getDefaultNumberList());
 
         pauseButton = (ImageButton) findViewById(R.id.pauseButton);
         pauseButton.setOnClickListener(new View.OnClickListener() {
@@ -407,7 +412,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
 
     private void updateCountDownTimer() {
         timerCountDown.setProgress((int) ((timeout - elapsed) * factor));
-        timerCountDown.setText(String.valueOf((timeout - elapsed)));
+        tickerView.setText(String.valueOf((timeout - elapsed)));
     }
 
     private void configureTimer() {
@@ -417,19 +422,19 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             public void run() {
                 elapsed++;
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateCountDownTimer();
+                    }
+                });
+
                 if (elapsed == timeout) {
                     int checkedItemPosition = adapterView.getCheckedItemPosition();
                     if (checkedItemPosition >= 0) {
                         ResolveInfoDisplay item = adapter.getItem(checkedItemPosition);
                         startIntentFromResolveInfo(item.getResolveInfo());
                     }
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateCountDownTimer();
-                        }
-                    });
                 }
             }
         }, 1000, 1000);

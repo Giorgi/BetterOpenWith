@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -36,12 +37,21 @@
                 android:id="@+id/timerCountDown"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_centerInParent="true"
                 ProgressWheel:barColor="@color/accent"
                 ProgressWheel:barWidth="3dp"
                 ProgressWheel:rimColor="@color/primary"
                 ProgressWheel:rimWidth="1dp"
                 ProgressWheel:textColor="@color/primary_text"
                 ProgressWheel:textSize="16sp" />
+
+            <com.robinhood.ticker.TickerView
+                android:id="@+id/tickerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                app:ticker_animationDuration="1000" />
         </RelativeLayout>
 
         <ImageButton
