@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -38,12 +37,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                ProgressWheel:barColor="@color/accent"
-                ProgressWheel:barWidth="3dp"
-                ProgressWheel:rimColor="@color/primary"
-                ProgressWheel:rimWidth="1dp"
-                ProgressWheel:textColor="@color/primary_text"
-                ProgressWheel:textSize="16sp" />
+                app:barColor="@color/accent"
+                app:barWidth="3dp"
+                app:rimColor="@color/primary"
+                app:rimWidth="1dp"
+                app:textColor="@color/primary_text"
+                app:textSize="16sp" />
 
             <com.robinhood.ticker.TickerView
                 android:id="@+id/tickerView"

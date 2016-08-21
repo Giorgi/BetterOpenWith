@@ -81,4 +81,8 @@
     <string name="middle">Middle</string>
     <string name="position">Popup Position</string>
     <string name="position_summary">Available apps will be displayed at the %s of the screen</string>
+    <string name="animation">Animation</string>
+    <string name="slideFromBottom">Slide Up</string>
+    <string name="slideFromLeft">Slide from Left</string>
+    <string name="slideFromRight">Slide from Right</string>
 </resources>

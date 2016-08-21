@@ -150,7 +150,18 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             }
         });
 
-        overridePendingTransition(R.anim.slide_right_left, 0);
+        int slideAnimation = R.anim.slide_bottom_up;
+        String animation = preferences.getString("animation", resources.getString(R.string.fromBottomValue));
+
+        if (animation == resources.getString(R.string.fromLeftValue)) {
+            slideAnimation = R.anim.slide_left_right;
+        }
+
+        if (animation == resources.getString(R.string.fromRightValue)) {
+            slideAnimation = R.anim.slide_right_left;
+        }
+
+        overridePendingTransition(slideAnimation, 0);
     }
 
     private boolean prepareDataAndLaunch() {
