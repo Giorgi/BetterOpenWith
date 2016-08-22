@@ -413,10 +413,11 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     }
 
     private void showTimerStatus() {
+        updateCountDownTimer();
+
         if (paused) {
             pauseButton.setImageResource(isLight ? R.drawable.ic_play_circle_outline_grey600_36dp : R.drawable.ic_play_circle_outline_white_36dp);
         } else {
-            updateCountDownTimer();
             pauseButton.setImageResource(isLight ? R.drawable.ic_pause_circle_outline_grey600_36dp : R.drawable.ic_pause_circle_outline_white_36dp);
         }
     }
