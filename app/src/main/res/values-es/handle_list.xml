@@ -4,8 +4,8 @@
     <string name="audio">Archivos de audio</string>
     <string name="video">Archivos de video</string>
     <string name="images">Imágenes</string>
-    <string name="video_stream">Video directo</string>
-    <string name="audio_stream">Audio directo</string>
+    <string name="video_stream">Video en línea</string>
+    <string name="audio_stream">Audio en línea</string>
     <string name="browser">Navegador web</string>
     <string name="geo">Posición geográfica</string>
     <string name="epub">Libro electrónico (epub)</string>

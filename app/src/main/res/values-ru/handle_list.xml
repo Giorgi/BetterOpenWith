@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pdf">PDF файлы</string>
+    <string name="audio">Аудио файлы</string>
+    <string name="video">Видео файлы</string>
+    <string name="images">Изображения</string>
+    <string name="video_stream">Потоковое видео</string>
+    <string name="audio_stream">Потоковое аудио</string>
+    <string name="browser">Браузер</string>
+    <string name="geo">Местоположение</string>
+    <string name="epub">Книги (epub)</string>
+    <string name="txt">Текстовые файлы</string>
+    <string name="email">Эл. почта</string>
+    <string name="dialer">Набор номера</string>
+    <string name="camera">Камера</string>
+    <string name="calendar">Календарь</string>
+</resources>

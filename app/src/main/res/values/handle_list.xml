@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingTranslation">
+<resources>
     <string name="pdf">PDF Files</string>
     <string name="audio">Audio Files</string>
     <string name="video">Video Files</string>
@@ -15,8 +14,4 @@
     <string name="dialer">Dialer</string>
     <string name="camera">Camera</string>
     <string name="calendar">Calendar</string>
-    <string name="torrent">Torrent</string>
-    <string name="word">Microsoft Word</string>
-    <string name="excel">Microsoft Excel</string>
-    <string name="powerpoint">Microsoft PowerPoint</string>
 </resources>

@@ -10,8 +10,8 @@
     <string name="geo">Geo-Position</string>
     <string name="epub">eBook (epub)</string>
     <string name="txt">Text-Dateien</string>
-    <string name="email">EMail</string>
-    <string name="dialer">Wählvorrichtung</string>
+    <string name="email">E-Mail</string>
+    <string name="dialer">Telefonanwendung</string>
     <string name="camera">Kamera</string>
     <string name="calendar">Kalender</string>
 </resources>
