@@ -71,6 +71,9 @@
         <item>العربية</item>
         <item>Ελληνική</item>
         <item>Nederlands</item>
+        <item>Brazilian Portuguese</item>
+        <item>Turkish</item>
+        <item>Russian</item>
     </string-array>
     <string-array name="pref_languages_values">
         <item>null</item>
@@ -85,5 +88,8 @@
         <item>ar</item>
         <item>el</item>
         <item>nl</item>
+        <item>pt-rBR</item>
+        <item>tr</item>
+        <item>ru</item>
     </string-array>
 </resources>

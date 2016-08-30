@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pdf">PDF Dosyaları</string>
+    <string name="audio">Ses Dosyaları</string>
+    <string name="video">Video Dosyaları</string>
+    <string name="images">Görseller</string>
+    <string name="video_stream">Video Akışı</string>
+    <string name="audio_stream">Ses Akışı</string>
+    <string name="browser">Tarayıcı</string>
+    <string name="geo">Konum</string>
+    <string name="epub">eKitap(epub)</string>
+    <string name="txt">Metin Dosyaları</string>
+    <string name="email">Eposta</string>
+    <string name="dialer">Çevirici</string>
+    <string name="camera">Kamera</string>
+    <string name="calendar">Takvim</string>
+</resources>

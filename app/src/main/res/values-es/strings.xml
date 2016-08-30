@@ -80,4 +80,8 @@
     <string name="middle">Medio</string>
     <string name="position">Posicion desplegable</string>
     <string name="position_summary">Aplicaciones disponibles serán mostradas en %s de la pantalla</string>
+    <string name="animation">Animación</string>
+    <string name="slideFromBottom">Deslizar arriba</string>
+    <string name="slideFromLeft">Deslizar a la izquierda</string>
+    <string name="slideFromRight">Deslizar a la derecha</string>
 </resources>
