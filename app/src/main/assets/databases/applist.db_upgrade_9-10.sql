@@ -1,0 +1,1 @@
+INSERT INTO "HandleItem" VALUES(19,NULL,NULL,'ic_action_html','html','ic_action_html_light','file:///mnt/sdcard/dummy.html','text/html',NULL,1,0,'com.aboutmycode.betteropenwith.app.html',-1,1,NULL,NULL);
