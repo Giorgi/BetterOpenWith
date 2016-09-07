@@ -161,6 +161,10 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             slideAnimation = R.anim.slide_right_left;
         }
 
+        if (animation.equals(resources.getString(R.string.noneValue))) {
+            slideAnimation = 0;
+        }
+
         overridePendingTransition(slideAnimation, 0);
     }
 

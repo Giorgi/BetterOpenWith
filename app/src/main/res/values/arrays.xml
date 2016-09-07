@@ -48,15 +48,18 @@
         <item>@string/slideFromBottom</item>
         <item>@string/slideFromLeft</item>
         <item>@string/slideFromRight</item>
+        <item>@string/slideNone</item>
     </string-array>
     <string-array name="animation_values">
         <item>@string/fromBottomValue</item>
         <item>@string/fromLeftValue</item>
         <item>@string/fromRightValue</item>
+        <item>@string/noneValue</item>
     </string-array>
     <string name="fromLeftValue">0</string>
     <string name="fromRightValue">1</string>
     <string name="fromBottomValue">2</string>
+    <string name="noneValue">3</string>
 
     <string-array name="pref_languages">
         <item>@string/systemLocale</item>
