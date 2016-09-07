@@ -153,11 +153,11 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         int slideAnimation = R.anim.slide_bottom_up;
         String animation = preferences.getString("animation", resources.getString(R.string.fromBottomValue));
 
-        if (animation == resources.getString(R.string.fromLeftValue)) {
+        if (animation.equals(resources.getString(R.string.fromLeftValue))) {
             slideAnimation = R.anim.slide_left_right;
         }
 
-        if (animation == resources.getString(R.string.fromRightValue)) {
+        if (animation.equals(resources.getString(R.string.fromRightValue))) {
             slideAnimation = R.anim.slide_right_left;
         }
 
