@@ -247,8 +247,9 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         if (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName())) {
             resInfo = packageManager.queryIntentActivities(getIntentWithRawSchemeUri(intent), MATCH_ALL);
 
-            if (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName())) {
-                Toast.makeText(this, "No application found to open the selected file", Toast.LENGTH_LONG).show();
+            if (resInfo.size() == 0 ||
+                    (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName()))) {
+                Toast.makeText(this, R.string.cannot_open_file, Toast.LENGTH_LONG).show();
                 finish();
             }
         }

@@ -85,4 +85,5 @@
     <string name="slideFromLeft">Slide Right</string>
     <string name="slideFromRight">Slide Left</string>
     <string name="slideNone">None</string>
+    <string name="cannot_open_file">No application found to open the selected file</string>
 </resources>
