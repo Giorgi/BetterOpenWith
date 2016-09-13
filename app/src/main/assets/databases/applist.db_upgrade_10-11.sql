@@ -1,0 +1,2 @@
+INSERT INTO "HandleItem" VALUES(20,NULL,NULL,'ic_action_xml','xml','ic_action_xml','file:///mnt/sdcard/dummy.xml','text/xml',NULL,1,0,'com.aboutmycode.betteropenwith.app.xml',-1,1,NULL,NULL);
+INSERT INTO "HandleItem" VALUES(21,NULL,NULL,'ic_action_zip','zip','ic_action_zip','file:///mnt/sdcard/dummy.zip','application/zip',NULL,1,0,'com.aboutmycode.betteropenwith.app.zip',-1,1,NULL,NULL);
