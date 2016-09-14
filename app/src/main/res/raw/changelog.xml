@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="September 16, 2016" versionName="1.4.8">
+        <changelogtext>
+            [b]New![/b] Added support for Zip and Xml files.
+        </changelogtext>
+        <changelogtext>
+            [b]New![/b] Added an option to disable popup animation.
+        </changelogtext>
+        <changelogtext>
+            [b]Bug fix![/b] Fixed multiple small bugs.
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="September 4, 2016" versionName="1.4.7">
         <changelogtext>
             [b]New![/b] Changed the way popup looks and added different appearance animations.
