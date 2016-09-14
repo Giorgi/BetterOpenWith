@@ -14,4 +14,7 @@
     <string name="dialer">Çevirici</string>
     <string name="camera">Kamera</string>
     <string name="calendar">Takvim</string>
+    <string name="html">HTML Dosyaları</string>
+    <string name="xml">XML Dosyaları</string>
+    <string name="zip">Zip Dosyaları</string>
 </resources>

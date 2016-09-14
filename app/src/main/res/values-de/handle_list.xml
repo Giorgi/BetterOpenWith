@@ -14,4 +14,7 @@
     <string name="dialer">Telefonanwendung</string>
     <string name="camera">Kamera</string>
     <string name="calendar">Kalender</string>
+    <string name="html">Html-Dateien</string>
+    <string name="xml">XML-Dateien</string>
+    <string name="zip">Zip-Dateien</string>
 </resources>
