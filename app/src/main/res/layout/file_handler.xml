@@ -22,6 +22,7 @@
         android:numColumns="2" />
 
     <LinearLayout
+        android:id="@+id/timerFooter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="9">

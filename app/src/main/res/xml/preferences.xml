@@ -62,6 +62,12 @@
             android:summaryOff="@string/iconOnlyOff"
             android:summaryOn="@string/iconOnlyOn"
             android:title="@string/iconOnly" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="disableTimer"
+            android:summaryOff="@string/disableTimerOff"
+            android:summaryOn="@string/disableTimerOn"
+            android:title="@string/disableTimer" />
         <com.aboutmycode.betteropenwith.settings.WorkingListPreference
             android:defaultValue="@string/mediumValue"
             android:entries="@array/sizes"

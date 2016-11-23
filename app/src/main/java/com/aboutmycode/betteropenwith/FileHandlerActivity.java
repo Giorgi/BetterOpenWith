@@ -64,6 +64,7 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     private boolean isLight;
     private ProgressWheel timerCountDown;
     private TickerView tickerView;
+    private boolean disableTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,32 +124,38 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             return;
         }
 
-        timerCountDown = (ProgressWheel) findViewById(R.id.timerCountDown);
-        tickerView = (TickerView) findViewById(R.id.tickerView);
-        tickerView.setCharacterList(TickerUtils.getDefaultNumberList());
+        disableTimer = preferences.getBoolean("disableTimer", false);
 
-        pauseButton = (ImageButton) findViewById(R.id.pauseButton);
-        pauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleTimer();
-            }
-        });
+        if (disableTimer) {
+            findViewById(R.id.timerFooter).setVisibility(View.GONE);
+        } else {
+            timerCountDown = (ProgressWheel) findViewById(R.id.timerCountDown);
+            tickerView = (TickerView) findViewById(R.id.tickerView);
+            tickerView.setCharacterList(TickerUtils.getDefaultNumberList());
 
-        ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+            pauseButton = (ImageButton) findViewById(R.id.pauseButton);
+            pauseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    toggleTimer();
+                }
+            });
 
-        settingsButton.setImageResource(isLight ? R.drawable.ic_settings_grey600_36dp : R.drawable.ic_settings_white_36dp);
-        pauseButton.setImageResource(isLight ? R.drawable.ic_pause_circle_outline_grey600_36dp : R.drawable.ic_pause_circle_outline_white_36dp);
+            ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
 
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pauseTimer();
-                showTimerStatus();
+            settingsButton.setImageResource(isLight ? R.drawable.ic_settings_grey600_36dp : R.drawable.ic_settings_white_36dp);
+            pauseButton.setImageResource(isLight ? R.drawable.ic_pause_circle_outline_grey600_36dp : R.drawable.ic_pause_circle_outline_white_36dp);
 
-                launchDetailsActivity();
-            }
-        });
+            settingsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pauseTimer();
+                    showTimerStatus();
+
+                    launchDetailsActivity();
+                }
+            });
+        }
 
         int slideAnimation = R.anim.slide_bottom_up;
         String animation = preferences.getString("animation", resources.getString(R.string.fromBottomValue));
@@ -404,16 +411,18 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     protected void onStart() {
         super.onStart();
 
-        if (item.isUseGlobalTimeout()) {
-            timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", getResources().getInteger(R.integer.default_timeout));
-        } else {
-            timeout = item.getCustomTimeout();
-        }
+        if (!disableTimer) {
+            if (item.isUseGlobalTimeout()) {
+                timeout = PreferenceManager.getDefaultSharedPreferences(this).getInt("timeout", getResources().getInteger(R.integer.default_timeout));
+            } else {
+                timeout = item.getCustomTimeout();
+            }
 
-        showTimerStatus();
+            showTimerStatus();
 
-        if (autoStart == null && !paused) {
-            configureTimer();
+            if (autoStart == null && !paused) {
+                configureTimer();
+            }
         }
     }
 

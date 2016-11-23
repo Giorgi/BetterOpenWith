@@ -86,4 +86,7 @@
     <string name="slideFromRight">Slide Left</string>
     <string name="slideNone">None</string>
     <string name="cannot_open_file">No application found to open the selected file</string>
+    <string name="disableTimer">Disable countdown timer</string>
+    <string name="disableTimerOff">Select to disable countdown timer</string>
+    <string name="disableTimerOn">Deselect to enable countdown timer</string>
 </resources>
