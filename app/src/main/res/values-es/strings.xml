@@ -82,6 +82,11 @@
     <string name="position_summary">Aplicaciones disponibles serán mostradas en %s de la pantalla</string>
     <string name="animation">Animación</string>
     <string name="slideFromBottom">Deslizar arriba</string>
-    <string name="slideFromLeft">Deslizar a la izquierda</string>
-    <string name="slideFromRight">Deslizar a la derecha</string>
+    <string name="slideFromLeft">Deslizar a la derecha</string>
+    <string name="slideFromRight">Deslizar a la izquierda</string>
+    <string name="slideNone">Ninguna</string>
+    <string name="cannot_open_file">Ninguna aplicación encontrada para abrir el archivo seleccionado</string>
+    <string name="disableTimer">Deshabilitar cuenta regresiva</string>
+    <string name="disableTimerOff">Seleccionar para deshabilitar la cuenta regresiva</string>
+    <string name="disableTimerOn">Anular selección para habilitar cuenta regresiva</string>
 </resources>

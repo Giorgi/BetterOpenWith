@@ -84,4 +84,9 @@
     <string name="slideFromBottom">Deslizar para cima</string>
     <string name="slideFromLeft">Deslizar da esquerda</string>
     <string name="slideFromRight">Deslizar da direita</string>
+    <string name="slideNone">Nenhum</string>
+    <string name="cannot_open_file">Nenhuma aplicação encontrada para abrir o arquivo selecionado</string>
+    <string name="disableTimer">Desabilitar temporizador de contagem regressiva</string>
+    <string name="disableTimerOff">Marque para desativar o temporizador de contagem regressiva</string>
+    <string name="disableTimerOn">Desmarque para habilitar o temporizador de contagem regressiva</string>
 </resources>

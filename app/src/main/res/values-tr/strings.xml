@@ -84,6 +84,9 @@
     <string name="slideFromBottom">Üstten kaydır</string>
     <string name="slideFromLeft">Sağdan kaydır</string>
     <string name="slideFromRight">Soldan kaydır</string>
-    <string name="slideNone">Hiçbiri</string>
+    <string name="slideNone">Yok</string>
     <string name="cannot_open_file">Seçilen dosyayı açmak için uygulama bulunamadı</string>
+    <string name="disableTimer">Geri sayım saati devre dışı</string>
+    <string name="disableTimerOff">Geri sayım saatini devre dışı bırakmak için seçin</string>
+    <string name="disableTimerOn">Geri sayım saatini etkinleştirmek için seçimi kaldırın</string>
 </resources>

@@ -80,4 +80,10 @@
     <string name="middle">Central</string>
     <string name="position">Posició de la notificació</string>
     <string name="position_summary">Les aplicacions disponibles es mostraran a la part %s de la pantalla</string>
+    <string name="animation">Animació</string>
+    <string name="slideFromBottom">Desplaçament amunt</string>
+    <string name="slideFromLeft">Desplaçament a la dreta</string>
+    <string name="slideFromRight">Desplaçament a l\'esquerra</string>
+    <string name="slideNone">Cap</string>
+    <string name="cannot_open_file">No s\'ha trobat cap aplicació per obrir el fitxer seleccionat</string>
 </resources>

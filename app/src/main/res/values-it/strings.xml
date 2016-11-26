@@ -79,4 +79,6 @@
     <string name="bottom">In basso</string>
     <string name="middle">Centro</string>
     <string name="position">Posizione della finestra a comparsa</string>
+    <string name="slideNone">Nessuno</string>
+    <string name="cannot_open_file">impossibile_aprire_il_file</string>
 </resources>

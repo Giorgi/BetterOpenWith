@@ -86,4 +86,7 @@
     <string name="slideFromRight">Wische nach links</string>
     <string name="slideNone">Keine</string>
     <string name="cannot_open_file">Keine Anwendung gefunden, um die ausgewählte Datei zu öffnen</string>
+    <string name="disableTimer">Countdown-Timer abschalten</string>
+    <string name="disableTimerOff">Auswählen, um den Countdown-Timer abzuschalten</string>
+    <string name="disableTimerOn">Abwählen, um den Countdown-Timer einzuschalten</string>
 </resources>

@@ -14,11 +14,11 @@
     <string name="dialer">Dialer</string>
     <string name="camera">Camera</string>
     <string name="calendar">Calendar</string>
+    <string name="excel">Microsoft Excel</string>
+    <string name="html">Html Files</string>
+    <string name="powerpoint">Microsoft PowerPoint</string>
     <string name="torrent">Torrent</string>
     <string name="word">Microsoft Word</string>
-    <string name="excel">Microsoft Excel</string>
-    <string name="powerpoint">Microsoft PowerPoint</string>
-    <string name="html">Html Files</string>
     <string name="xml">XML Files</string>
     <string name="zip">Zip Files</string>
 </resources>

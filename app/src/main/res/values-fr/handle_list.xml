@@ -11,4 +11,14 @@
     <string name="epub">Format eBook (pour appareils portatifs)</string>
     <string name="txt">Fichiers texte</string>
     <string name="email">Email</string>
+    <string name="dialer">Numérotation</string>
+    <string name="camera">Caméra</string>
+    <string name="calendar">Calendrier</string>
+    <string name="excel">Microsoft Excel</string>
+    <string name="html">Fichiers Html</string>
+    <string name="powerpoint">Microsoft PowerPoint</string>
+    <string name="torrent">Torrent</string>
+    <string name="word">Microsoft Word</string>
+    <string name="xml">Fichiers XML</string>
+    <string name="zip">Fichiers Zip</string>
 </resources>

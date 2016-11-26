@@ -14,7 +14,11 @@
     <string name="dialer">Telefonanwendung</string>
     <string name="camera">Kamera</string>
     <string name="calendar">Kalender</string>
+    <string name="excel">Microsoft Excel</string>
     <string name="html">Html-Dateien</string>
+    <string name="powerpoint">Microsoft PowerPoint</string>
+    <string name="torrent">Torrent</string>
+    <string name="word">Microsoft Word</string>
     <string name="xml">XML-Dateien</string>
     <string name="zip">Zip-Dateien</string>
 </resources>
