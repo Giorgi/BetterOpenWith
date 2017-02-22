@@ -89,4 +89,7 @@
     <string name="disableTimer">Disable countdown timer</string>
     <string name="disableTimerOff">Select to disable countdown timer</string>
     <string name="disableTimerOn">Deselect to enable countdown timer</string>
+    <string name="toggle_app_visibility">Toggle app visibility</string>
+    <string name="app_icon">App icon</string>
+    <string name="edit_timeout">Edit Timeout</string>
 </resources>

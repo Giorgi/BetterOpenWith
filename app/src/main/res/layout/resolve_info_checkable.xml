@@ -13,6 +13,7 @@
         android:layout_height="34dip"
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/app_icon"
         android:paddingLeft="2dip"></ImageView>
 
     <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,6 +39,7 @@
         android:layout_alignParentRight="true"
         android:clickable="true"
         android:soundEffectsEnabled="true"
+        android:contentDescription="@string/toggle_app_visibility"
         android:onClick="hideClicked"
         android:src="@drawable/ic_action_enabled" />
 </com.aboutmycode.betteropenwith.common.layout.CheckableRelativeLayout>
