@@ -86,4 +86,7 @@
     <string name="slideFromRight">Desplaçament a l\'esquerra</string>
     <string name="slideNone">Cap</string>
     <string name="cannot_open_file">No s\'ha trobat cap aplicació per obrir el fitxer seleccionat</string>
+    <string name="disableTimer">Inhabilita el compte enrere</string>
+    <string name="disableTimerOff">Toqueu per inhabilitar el compte enrere</string>
+    <string name="disableTimerOn">Toqueu per habilitar el compte enrere</string>
 </resources>
