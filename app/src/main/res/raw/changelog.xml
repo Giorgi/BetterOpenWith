@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="February 23, 2017" versionName="1.4.10">
+        <changelogtext>
+            [b]New![/b] Added youtu.be short url support
+        </changelogtext>
+        <changelogtext>
+            [b]New![/b] Added Lithuanian and Polish translation.
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="November 27, 2016" versionName="1.4.9">
         <changelogtext>
             [b]New![/b] Added an option to disable and hide countdown timer.
