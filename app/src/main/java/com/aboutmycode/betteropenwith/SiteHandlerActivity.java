@@ -69,8 +69,11 @@ public class SiteHandlerActivity extends FileHandlerActivity {
             domainName = domainName.toLowerCase();
 
             for (Site site : sites) {
-                if (domainName.contains(site.getDomain())) {
-                    return site;
+                List<String> allSupportedDomains = site.getAllDomains();
+                for (String supportedDomain : allSupportedDomains) {
+                    if (domainName.contains(supportedDomain)) {
+                        return site;
+                    }
                 }
             }
         } catch (URISyntaxException e) {

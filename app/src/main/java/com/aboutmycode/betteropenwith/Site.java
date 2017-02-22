@@ -2,6 +2,9 @@ package com.aboutmycode.betteropenwith;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Giorgi on 8/22/2014.
  */
@@ -28,6 +31,11 @@ public class Site extends ItemBase {
 
     public String getDomain() {
         return domain;
+    }
+
+    public List<String> getAllDomains(){
+        List<String> items = Arrays.asList(domain.split("\\s*,\\s*"));
+        return items;
     }
 
     public void setDomain(String domain) {

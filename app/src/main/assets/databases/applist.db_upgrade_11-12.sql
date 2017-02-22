@@ -1,0 +1,1 @@
+UPDATE "main"."Site" SET "domain" = "youtube,youtu.be" WHERE  "_id" = 1
