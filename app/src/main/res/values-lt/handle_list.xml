@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pdf">PDF failai</string>
+    <string name="audio">Garso failai</string>
+    <string name="video">Vaizdo įrašai</string>
+    <string name="images">Nuotraukos</string>
+    <string name="video_stream">Video srautas</string>
+    <string name="audio_stream">Garso srautas</string>
+    <string name="browser">Naršyklė</string>
+    <string name="geo">Geografinė pozicija</string>
+    <string name="epub">Elektroninė knyga (epub)</string>
+    <string name="txt">Teksto failai</string>
+    <string name="email">El. paštas</string>
+    <string name="dialer">Skambučiai</string>
+    <string name="camera">Kamera</string>
+    <string name="calendar">Kalendorius</string>
+    <string name="excel">Microsoft Excel</string>
+    <string name="html">HTML failai</string>
+    <string name="powerpoint">Microsoft PowerPoint</string>
+    <string name="torrent">Torentas</string>
+    <string name="word">Microsoft Word</string>
+    <string name="xml">XML failai</string>
+    <string name="zip">ZIP failai</string>
+</resources>

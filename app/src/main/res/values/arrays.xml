@@ -75,6 +75,8 @@
         <item>Ελληνική</item>
         <item>Nederlands</item>
         <item>Brazilian Portuguese</item>
+        <item>Lithuanian</item>
+        <item>Polish</item>
         <item>Turkish</item>
         <item>Russian</item>
     </string-array>
@@ -92,6 +94,8 @@
         <item>el</item>
         <item>nl</item>
         <item>pt-rBR</item>
+        <item>lt</item>
+        <item>pl</item>
         <item>tr</item>
         <item>ru</item>
     </string-array>
