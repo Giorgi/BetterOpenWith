@@ -39,7 +39,9 @@ import com.robinhood.ticker.TickerView;
 import com.todddavies.components.progressbar.ProgressWheel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -192,12 +194,16 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
         int checked = -1;
         int index = -1;
 
-        for (ResolveInfo info : resInfo) {
+        for (Iterator<ResolveInfo> iter = resInfo.listIterator(); iter.hasNext(); ) {
+            ResolveInfo info = iter.next();
+
             if (info.activityInfo.packageName.equals(getPackageName())) {
+                iter.remove();
                 continue;
             }
 
             if (item.getHiddenApps().contains(new HiddenApp(info.activityInfo.packageName))) {
+                iter.remove();
                 continue;
             }
 
@@ -224,6 +230,11 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
             resolveInfoDisplay.setResolveInfo(info);
 
             data.add(resolveInfoDisplay);
+        }
+
+        if (resInfo.size() == 1) {
+            startIntentFromResolveInfo(resInfo.get(0));
+            return true;
         }
 
         configureAdapter(data, checked);
