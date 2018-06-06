@@ -13,6 +13,7 @@ import android.util.Log;
 import com.aboutmycode.betteropenwith.HandleItem;
 import com.aboutmycode.betteropenwith.HiddenApp;
 import com.aboutmycode.betteropenwith.Site;
+import com.aboutmycode.betteropenwith.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,6 @@ import java.util.List;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class HandleItemLoader extends CupboardCursorLoader<HandleItem> {
-    private final int MATCH_ALL = 131072;
-
     public HandleItemLoader(Context context, SQLiteOpenHelper db) {
         super(context, db, HandleItem.class);
     }
@@ -59,7 +58,7 @@ public class HandleItemLoader extends CupboardCursorLoader<HandleItem> {
                 }
 
                 PackageManager packageManager = getContext().getPackageManager();
-                List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
+                List<ResolveInfo> resInfo = Utils.resolveIntent(packageManager, intent);
 
                 if (resInfo.size() == 1) {
                     handleItem.setSelectedAppLabel(resInfo.get(0).loadLabel(packageManager).toString());

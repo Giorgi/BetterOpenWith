@@ -43,7 +43,6 @@ import java.util.List;
 
 public class HandlerDetailsActivity extends LocaleAwareListActivity implements LoaderManager.LoaderCallbacks<List<HandleItem>>, YesNoListener {
 
-    private final int MATCH_ALL = 131072;
     private CommonAdapter<ResolveInfoDisplay> adapter;
     private Switch masterSwitch;
     private HandleItem item;
@@ -262,7 +261,7 @@ public class HandlerDetailsActivity extends LocaleAwareListActivity implements L
         }
 
         PackageManager packageManager = getPackageManager();
-        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
+        List<ResolveInfo> resInfo = Utils.resolveIntent(packageManager, intent);
 
         flipper.setDisplayedChild(0);
 

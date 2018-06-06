@@ -1,11 +1,18 @@
 package com.aboutmycode.betteropenwith;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class Utils {
+    private static final int MATCH_ALL = 131072;
+
     public static String getDeviceInfo(Context context) {
         String text = "Sent from: " + getDeviceName() + System.getProperty("line.separator");
         text = text + "Android version: " + Build.VERSION.RELEASE + System.getProperty("line.separator");
@@ -42,5 +49,18 @@ public class Utils {
         } else {
             return Character.toUpperCase(first) + s.substring(1);
         }
+    }
+
+    public static List<ResolveInfo> resolveIntent(PackageManager packageManager, Intent intent){
+        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
+
+        for (Iterator<ResolveInfo> iter = resInfo.listIterator(); iter.hasNext(); ) {
+            ResolveInfo current = iter.next();
+            if (current.activityInfo.name.equalsIgnoreCase("com.google.android.apps.chrome.VrIntentDispatcher")) {
+                iter.remove();
+            }
+        }
+
+        return resInfo;
     }
 }

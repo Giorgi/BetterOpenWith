@@ -48,7 +48,6 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 
 public class FileHandlerActivity extends LocaleAwareActivity implements AdapterView.OnItemClickListener {
-    private final int MATCH_ALL = 131072;
     private Timer autoStart;
 
     private ImageButton pauseButton;
@@ -248,11 +247,11 @@ public class FileHandlerActivity extends LocaleAwareActivity implements AdapterV
     }
 
     private List<ResolveInfo> getMatchingActivities(PackageManager packageManager, Intent intent) {
-        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
+        List<ResolveInfo> resInfo = Utils.resolveIntent(packageManager, intent);
 
         //If only one app is found and it is us there is no other app.
         if (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName())) {
-            resInfo = packageManager.queryIntentActivities(getIntentWithRawSchemeUri(intent), MATCH_ALL);
+            resInfo = Utils.resolveIntent(packageManager, getIntentWithRawSchemeUri(intent));
 
             if (resInfo.size() == 0 ||
                     (resInfo.size() == 1 && resInfo.get(0).activityInfo.packageName.equals(getPackageName()))) {
