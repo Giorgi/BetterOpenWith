@@ -51,5 +51,5 @@ dependencies {
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile 'com.github.gabrielemariotti.changeloglib:library:1.5.1'
     compile 'com.github.Todd-Davies:ProgressWheel:1.1'
-    compile 'com.robinhood.ticker:ticker:1.1.0'
+    compile 'com.robinhood.ticker:ticker:1.1.1'
 }
