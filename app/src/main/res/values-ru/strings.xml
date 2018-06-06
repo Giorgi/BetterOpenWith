@@ -3,7 +3,7 @@
     <string name="app_name">Better Open With</string>
     <string name="action_settings">Настройки</string>
     <string name="title_activity_file_handler">Better Open With</string>
-    <string name="complete_action_with">Завершить с помощью...</string>
+    <string name="complete_action_with">Открыть с помощью...</string>
     <string name="timeout">Отсчет по умолчанию</string>
     <string name="timeoutSummary">Запустить предпочтительные приложения через %s секунд</string>
     <string name="title_activity_settings">Настройки</string>
