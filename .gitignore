@@ -28,3 +28,4 @@ proguard/
 .project
 .idea/workspace.xml
 app/app.iml
+.idea/caches/
