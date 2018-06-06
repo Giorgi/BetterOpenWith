@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="June 07, 2018" versionName="1.4.11">
+        <changelogtext>
+            [b]Bug fix![/b] Fixed Chrome appearing twice in popup and settings.
+        </changelogtext>
+        <changelogtext>
+            [b]Bug fix![/b] Fixed multiple small bugs.
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="February 23, 2017" versionName="1.4.10">
         <changelogtext>
             [b]New![/b] Added youtu.be short url support
