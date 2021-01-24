@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="January 25, 2021" versionName="1.4.12">
+        <changelogtext>
+            [b]Bug fix![/b] Fixed Opera appearing twice in popup and settings.
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="June 07, 2018" versionName="1.4.11">
         <changelogtext>
             [b]Bug fix![/b] Fixed Chrome appearing twice in popup and settings.
