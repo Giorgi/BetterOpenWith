@@ -11,8 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Utils {
-    private static final int MATCH_ALL = 131072;
-
     public static String getDeviceInfo(Context context) {
         String text = "Sent from: " + getDeviceName() + System.getProperty("line.separator");
         text = text + "Android version: " + Build.VERSION.RELEASE + System.getProperty("line.separator");
@@ -52,11 +50,12 @@ public class Utils {
     }
 
     public static List<ResolveInfo> resolveIntent(PackageManager packageManager, Intent intent){
-        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, MATCH_ALL);
+        List<ResolveInfo> resInfo = packageManager.queryIntentActivities(intent, PackageManager.MATCH_ALL);
 
         for (Iterator<ResolveInfo> iter = resInfo.listIterator(); iter.hasNext(); ) {
             ResolveInfo current = iter.next();
-            if (current.activityInfo.name.equalsIgnoreCase("com.google.android.apps.chrome.VrIntentDispatcher")) {
+            if (current.activityInfo.name.equalsIgnoreCase("com.google.android.apps.chrome.VrIntentDispatcher")
+             || current.activityInfo.name.equalsIgnoreCase("com.opera.browser.leanplum.LeanplumCatchActivity")) {
                 iter.remove();
             }
         }
