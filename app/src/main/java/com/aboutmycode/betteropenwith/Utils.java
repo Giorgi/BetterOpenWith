@@ -55,7 +55,8 @@ public class Utils {
         for (Iterator<ResolveInfo> iter = resInfo.listIterator(); iter.hasNext(); ) {
             ResolveInfo current = iter.next();
             if (current.activityInfo.name.equalsIgnoreCase("com.google.android.apps.chrome.VrIntentDispatcher")
-             || current.activityInfo.name.equalsIgnoreCase("com.opera.browser.leanplum.LeanplumCatchActivity")) {
+             || current.activityInfo.name.equalsIgnoreCase("com.opera.browser.leanplum.LeanplumCatchActivity")
+             || current.activityInfo.name.equalsIgnoreCase("com.opera.browser.beta.leanplum.LeanplumCatchActivity")) {
                 iter.remove();
             }
         }

@@ -92,4 +92,6 @@
     <string name="toggle_app_visibility">Toggle app visibility</string>
     <string name="app_icon">App icon</string>
     <string name="edit_timeout">Edit Timeout</string>
+    <string name="action_support">Support Developer</string>
+    <string name="support">Thank you for supporting the developer of the app!</string>
 </resources>

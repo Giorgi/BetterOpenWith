@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
+    <changelogversion changeDate="January 31, 2021" versionName="1.4.15">
+        <changelogtext>
+            [b]Bug fix![/b] Fixed Opera Beta appearing twice in popup and settings.
+        </changelogtext>
+    </changelogversion>
+    <changelogversion changeDate="January 27, 2021" versionName="1.4.14">
+        <changelogtext>
+            [b]Bug fix![/b] Fixed a crash that was occurring for some users.
+        </changelogtext>
+    </changelogversion>
+    <changelogversion changeDate="January 26, 2021" versionName="1.4.13">
+        <changelogtext>
+            [b]Bug fix![/b] Updated email address.
+        </changelogtext>
+    </changelogversion>
     <changelogversion changeDate="January 25, 2021" versionName="1.4.12">
         <changelogtext>
             [b]Bug fix![/b] Fixed Opera appearing twice in popup and settings.

@@ -48,7 +48,7 @@ public class AboutActivity extends LocaleAwareActivity {
         Spanned text = Html.fromHtml("    <img src=\"ic_launcher.png\"/>" +
                         "<h3>Better Open With</h3>\n" +
                         String.format(String.format("    <p>%s</p>\n", getString(R.string.version)), version) +
-                        String.format("    <p>%s<sup>©</sup> 2014 <a href=\"mailto:android@aboutmycode.com?subject=Better Open With\">Giorgi Dalakishvili</a>. %s</p>", getString(R.string.copyright),
+                        String.format("    <p>%s<sup>©</sup> 2014 <a href=\"mailto:android@giorgi.dev?subject=Better Open With\">Giorgi Dalakishvili</a>. %s</p>", getString(R.string.copyright),
                                 getString(R.string.rights) +
                                         "<p>" +
                                         creditText +
@@ -113,15 +113,5 @@ public class AboutActivity extends LocaleAwareActivity {
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, getString(R.string.play_store), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public void googlePlus(View view) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/communities/110383670951588070492"));
-        startActivity(browserIntent);
-    }
-
-    public void uservoice(View view) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://betteropenwith.uservoice.com/forums/261986-general"));
-        startActivity(browserIntent);
     }
 }

@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Debug;
+import android.os.StrictMode;
 
 import org.acra.ACRA;
 import org.acra.ReportField;
@@ -14,9 +16,11 @@ import org.acra.collector.CrashReportData;
 import org.acra.sender.EmailIntentSender;
 import org.acra.sender.ReportSenderException;
 
+import java.lang.reflect.Method;
+
 
 @ReportsCrashes(formKey = "", // will not be used
-        mailTo = "android@aboutmycode.com",
+        mailTo = "android@giorgi.dev",
         mode = ReportingInteractionMode.TOAST,
         resToastText = R.string.crashToast)
 public class BetterOpenWithApplication extends Application {
@@ -30,6 +34,15 @@ public class BetterOpenWithApplication extends Application {
         }
 
         super.onCreate();
+
+        if (Build.VERSION.SDK_INT >= 24) {
+            try {
+                Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                m.invoke(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         try {
             // workaround bug in AsyncTask, can show up (for example) when you toast from a service

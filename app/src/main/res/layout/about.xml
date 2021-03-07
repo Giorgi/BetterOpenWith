@@ -14,31 +14,6 @@
         android:gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/googlePlus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/google_plus"
-            android:onClick="googlePlus"/>
-        <ImageButton
-            android:id="@+id/uservoice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/uservoice"
-            android:onClick="uservoice"/>
-    </LinearLayout>
-
     <Button
         android:id="@+id/rateButton"
         android:layout_width="match_parent"

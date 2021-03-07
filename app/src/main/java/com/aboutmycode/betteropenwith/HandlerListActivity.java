@@ -155,6 +155,11 @@ public class HandlerListActivity extends LocaleAwareListActivity implements Load
             return true;
         }
 
+        if (id == R.id.action_support) {
+            showSupport();
+            return true;
+        }
+
         if (id == R.id.action_rate) {
             rateApp();
             return true;
@@ -172,6 +177,19 @@ public class HandlerListActivity extends LocaleAwareListActivity implements Load
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showSupport() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://ko-fi.com/betteropenwith"));
+
+            startActivity(intent);
+
+            Toast.makeText(this, getString(R.string.support), Toast.LENGTH_LONG).show();
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, getString(R.string.play_store), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void allApps() {
@@ -195,7 +213,7 @@ public class HandlerListActivity extends LocaleAwareListActivity implements Load
     }
 
     private void sendFeedbackEmail() {
-        String address = "android@aboutmycode.com";
+        String address = "android@giorgi.dev";
         String subject = "Feedback for Better Open With";
 
         String text = Utils.getDeviceInfo(this);
