@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: org.json:json:20080701@jar">
+  <library name="Gradle: org.json:json:20080701">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20080701/d652f102185530c93b66158b1859f35d45687258/json-20080701.jar!/" />
     </CLASSES>
