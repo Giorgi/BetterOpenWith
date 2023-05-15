@@ -15,7 +15,7 @@
             android:label="@string/app_name" >
             <intent-filter tools:node="removeAll" />
         </activity>
-        <activity
+        <activity android:exported="true"
             android:name=".HandlerListActivity"
             android:label="@string/app_name">
             <intent-filter>
@@ -30,7 +30,7 @@
             android:label="@string/title_activity_file_handler"
             android:theme="@android:style/Theme.Holo.Dialog" />
 
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.PdfFileHandlerActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -61,7 +61,7 @@
                 android:name="id"
                 android:value="1" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.VideoFileHandlerActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -106,7 +106,7 @@
                 android:name="id"
                 android:value="4" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.VideoStreamHandlerActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -124,7 +124,7 @@
                 android:name="id"
                 android:value="5" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.ImageFileHandlerActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -156,7 +156,7 @@
                 android:name="id"
                 android:value="6" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.AudioFileHandlerActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -191,7 +191,7 @@
                 android:name="id"
                 android:value="2" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.AudioStreamHandlerActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -209,7 +209,7 @@
                 android:name="id"
                 android:value="3" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.GeoLocationActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -223,7 +223,7 @@
                 android:name="id"
                 android:value="8" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.EpubActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -237,7 +237,7 @@
                 android:name="id"
                 android:value="9" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.TextActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -251,7 +251,7 @@
                 android:name="id"
                 android:value="10" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.openwith.app.EmailActivity"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -265,7 +265,7 @@
                 android:name="id"
                 android:value="11" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.dialer"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -279,7 +279,7 @@
                 android:name="id"
                 android:value="12" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.calendar"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -294,7 +294,7 @@
                 android:name="id"
                 android:value="13" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.camera"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -305,7 +305,7 @@
                 android:name="id"
                 android:value="14" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.torrent"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -318,7 +318,7 @@
                 android:name="id"
                 android:value="15" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.word"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -332,7 +332,7 @@
                 android:name="id"
                 android:value="16" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.excel"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -346,7 +346,7 @@
                 android:name="id"
                 android:value="17" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.powerpoint"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -360,7 +360,7 @@
                 android:name="id"
                 android:value="18" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.html"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -374,7 +374,7 @@
                 android:name="id"
                 android:value="19" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.xml"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -387,7 +387,7 @@
                 android:name="id"
                 android:value="20" />
         </activity-alias>
-        <activity-alias
+        <activity-alias android:exported="true"
             android:name="com.aboutmycode.betteropenwith.app.zip"
             android:targetActivity=".FileHandlerActivity">
             <intent-filter>
@@ -423,7 +423,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HandlerListActivity" />
         </activity>
-        <activity
+        <activity android:exported="true"
             android:name=".SiteHandlerActivity"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_file_handler"

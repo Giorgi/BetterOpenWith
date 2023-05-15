@@ -1,11 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.gabrielemariotti.changeloglib:library:1.5.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.5.1.aar/ecfda5b849260bc2a54a6013695326c0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.5.1.aar/ecfda5b849260bc2a54a6013695326c0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.5.1.aar/ecfda5b849260bc2a54a6013695326c0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d06d7704f3e389f2bd863fc5505de372/transformed/library-1.5.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d06d7704f3e389f2bd863fc5505de372/transformed/library-1.5.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d06d7704f3e389f2bd863fc5505de372/transformed/library-1.5.1/AndroidManifest.xml" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.gabrielemariotti.changeloglib/library/1.5.1/61ea398ecbc7575bd6e3ada25419c43112c85b43/library-1.5.1-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.gabrielemariotti.changeloglib/library/1.5.1/6e24f3bcb35eb2c50fb8468320fa351896de6bdd/library-1.5.1-sources.jar!/" />
     </SOURCES>

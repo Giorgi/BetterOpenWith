@@ -1,14 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 29
-        versionCode 57
-        versionName "1.4.15"
+        targetSdkVersion 31
+        versionCode 59
+        versionName "1.4.16"
     }
 
     final Console console = System.console();
@@ -46,11 +45,11 @@ android {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'nl.qbusict:cupboard:2.0.1'
-    compile 'ch.acra:acra:4.5.0'
-    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
-    compile 'com.github.gabrielemariotti.changeloglib:library:1.5.1'
-    compile 'com.github.Todd-Davies:ProgressWheel:1.1'
-    compile 'com.robinhood.ticker:ticker:1.1.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'nl.qbusict:cupboard:2.0.1'
+    implementation 'ch.acra:acra:4.5.0'
+    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+    implementation 'com.github.gabrielemariotti.changeloglib:library:1.5.1'
+    implementation 'com.github.Todd-Davies:ProgressWheel:1.1'
+    implementation 'com.robinhood.ticker:ticker:1.1.1'
 }
