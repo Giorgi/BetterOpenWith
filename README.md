@@ -1,3 +1,5 @@
+![alt text](Feature.jpg)
+
 # Better Open With - a better way to open files.
 
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
