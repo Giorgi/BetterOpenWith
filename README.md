@@ -2,6 +2,8 @@
 
 # Better Open With - a better way to open files.
 
+The application is no longer actively developed but I'll happily accept fixes and new features. Feel free to send a PR or [Contact Me](https://www.giorgi.dev/#contact) if you would like to become a maintainer.
+
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
 alt="Get it on Google Play"
 height="80">](https://play.google.com/store/apps/details?id=com.aboutmycode.betteropenwith)
