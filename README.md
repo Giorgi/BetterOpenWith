@@ -12,7 +12,7 @@ height="80">](https://play.google.com/store/apps/details?id=com.aboutmycode.bett
             src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png"
             alt="Buy Me A Coffee"
             style="border-radius: 10px; height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" /></a>
-    
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H73FI8Q)
 
 Thanks to Reddit's oroboros74, who [came up with the idea](https://www.reddit.com/r/Android/comments/24okaq/what_apps_would_you_like_to_have_that_dont_exist/ch96jid/) for this app!
 
