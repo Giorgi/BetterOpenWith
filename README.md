@@ -8,6 +8,12 @@ The application is no longer actively developed but I'll happily accept fixes an
 alt="Get it on Google Play"
 height="80">](https://play.google.com/store/apps/details?id=com.aboutmycode.betteropenwith)
 
+<a href="https://www.buymeacoffee.com/giorgidev" target="_blank"><img
+            src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png"
+            alt="Buy Me A Coffee"
+            style="border-radius: 10px; height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" /></a>
+    
+
 Thanks to Reddit's oroboros74, who [came up with the idea](https://www.reddit.com/r/Android/comments/24okaq/what_apps_would_you_like_to_have_that_dont_exist/ch96jid/) for this app!
 
 - [[New App] "Better Open With" Makes Your Complete Action Dialog Smarter](https://www.androidpolice.com/2014/07/29/new-app-better-open-with-makes-your-complete-action-dialog-smarter/)
